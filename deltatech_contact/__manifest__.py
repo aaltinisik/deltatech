@@ -9,7 +9,7 @@
     "author": "Terrabit,Dorin Hongu",
     "website": "https://www.terrabit.ro",
     "category": "Administration",
-    "depends": ["base","contacts"],
+    "depends": ["base", "contacts"],
     "license": "OPL-1",
     "data": [
         "views/res_partner_view.xml",

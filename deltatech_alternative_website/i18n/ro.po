@@ -43,10 +43,11 @@ msgstr "Categorie publică"
 #. module: deltatech_alternative_website
 #: model:ir.model.fields,help:deltatech_alternative_website.field_product_catalog__public_categ_ids
 msgid "Those categories are used to group similar products for e-commerce."
-msgstr "Aceste categorii sunt folosite pentru a grupa produse similare pentru e-commerce."
+msgstr ""
+"Aceste categorii sunt folosite pentru a grupa produse similare pentru "
+"e-commerce."
 
 #. module: deltatech_alternative_website
 #: model:ir.model,name:deltatech_alternative_website.model_website
 msgid "Website"
 msgstr "Pagină web"
-
