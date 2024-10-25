@@ -5,16 +5,14 @@
 {
     "name": "Deltatech Contacts",
     "summary": "New fields in partner",
-    "version": "17.0.1.4.4",
+    "version": "17.0.1.4.5",
     "author": "Terrabit,Dorin Hongu",
     "website": "https://www.terrabit.ro",
     "category": "Administration",
-    "depends": ["base"],
+    "depends": ["base","contacts"],
     "license": "OPL-1",
     "data": [
         "views/res_partner_view.xml",
-        # 'security/partner_security.xml',
-        # 'security/ir.model.access.csv'
     ],
     "images": ["static/description/main_screenshot.png"],
     "installable": True,

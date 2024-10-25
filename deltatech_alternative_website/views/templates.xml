@@ -32,6 +32,7 @@
         active="True"
         customize_show="True"
         name="Used For"
+        priority="100"
     >
             <xpath expr="//p[@t-field='product.description_sale']" position="after">
                 <t t-if="product.used_for">
