@@ -40,25 +40,15 @@ class ProductTemplate(models.Model):
             code = "; ".join(codes)
             product.alternative_code = code
 
-    # @api.model
-    # def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
-    #     product_ids = super()._name_search(name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
-    #     get_param = self.env["ir.config_parameter"].sudo().get_param
-    #     if name and safe_eval(get_param("alternative.search_name", "False")):
-    #         domain = [("name", operator, name)]
-    #         alternatives = self.env["product.alternative"]._name_search(name, args=domain, operator=operator, limit=limit)
-    #         if alternatives:
-    #             product_ids |= alternatives.mapped("product_tmpl_id")
-    #
-    #     return product_ids
+
 
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.model
-    def _name_search(self, name="", args=None, operator="ilike", limit=100, name_get_uid=None):
-        res = super()._name_search(name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+    def _name_search(self, name, domain=None, operator='ilike', limit=None, order=None):
+        res = super()._name_search(name, domain=domain, operator=operator, limit=limit, order=order)
         get_param = self.env["ir.config_parameter"].sudo().get_param
         res_ids = list(res)
         if name and safe_eval(get_param("alternative.search_name", "False")):
@@ -69,7 +59,7 @@ class ProductProduct(models.Model):
                 product_ids = self._search(
                     [("product_tmpl_id", "in", product_tmpl_ids.ids)],
                     limit=limit,
-                    access_rights_uid=name_get_uid,
+                    order=order,
                 )
                 res_ids.extend(list(product_ids))
 
