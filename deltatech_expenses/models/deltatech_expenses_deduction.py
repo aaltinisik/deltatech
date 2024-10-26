@@ -23,11 +23,7 @@ class DeltatechExpensesDeduction(models.Model):
         if self._context.get("default_journal_id", False):
             return self.env["account.journal"].browse(self._context.get("default_journal_id"))
 
-        company_id = self._context.get("company_id", self.env.user.company_id.id)
-        domain = [
-            ("type", "=", "cash"),
-            ("company_id", "=", company_id),
-        ]
+        domain = [("type", "=", "cash")]
         return self.env["account.journal"].search(domain, limit=1)
 
     @api.model
@@ -138,7 +134,8 @@ class DeltatechExpensesDeduction(models.Model):
     )
 
     move_id = fields.Many2one("account.move", string="Account Entry", readonly=True)
-    move_ids = fields.One2many("account.move.line", related="move_id.line_ids", string="Journal Items", readonly=True)
+    # move_ids = fields.One2many("account.move.line", related="move_id.line_ids", string="Journal Items", readonly=True)
+    move_ids = fields.Many2many("account.move.line", string="Journal Items", readonly=True, compute="_compute_move_ids")
 
     diem = fields.Monetary(
         string="Diem",
@@ -153,6 +150,14 @@ class DeltatechExpensesDeduction(models.Model):
     )
 
     total_diem = fields.Monetary(string="Total Diem", compute="_compute_amount")
+
+    def _compute_move_ids(self):
+        for expenses in self:
+            move_lines = expenses.move_id.line_ids
+            domain = [("expenses_deduction_id", "=", expenses.id)]
+            moves = self.env["account.move"].search(domain)
+            move_lines |= moves.mapped("line_ids")
+            expenses.move_ids = move_lines
 
     @api.onchange("date_advance")
     def onchange_date_advance(self):
@@ -187,6 +192,8 @@ class DeltatechExpensesDeduction(models.Model):
         for expenses in self:
             if expenses.move_id:
                 moves |= expenses.move_id
+            domain = [("expenses_deduction_id", "=", expenses.id)]
+            moves |= self.env["account.move"].search(domain)
 
         self.write({"state": "draft", "move_id": False})
         if moves:
@@ -222,9 +229,9 @@ class DeltatechExpensesDeduction(models.Model):
         #    expenses.line_ids.cancel_voucher()
         #    expenses.line_ids.action_cancel_draft()
 
-        statement_lines = self.env["account.bank.statement.line"].search([("expenses_deduction_id", "=", expenses.id)])
-        if statement_lines:
-            statement_lines.unlink()
+        # statement_lines = self.env["account.bank.statement.line"].search([("expenses_deduction_id", "=", expenses.id)])
+        # if statement_lines:
+        #     statement_lines.unlink()
 
         return True
 
@@ -239,20 +246,43 @@ class DeltatechExpensesDeduction(models.Model):
 
             if expenses.advance:
                 account = expenses.journal_id.account_cash_advances_id
-                statement = self.get_statement(expenses.date_advance)
-                values = {
-                    "amount": -expenses.advance,
-                    "date": expenses.date_advance,
-                    "partner_id": expenses.employee_id.id,
-                    "statement_id": statement.id,
+                # statement = self.get_statement(expenses.date_advance)
+                # values = {
+                #     "amount": -expenses.advance,
+                #     "date": expenses.date_advance,
+                #     "partner_id": expenses.employee_id.id,
+                #     "statement_id": statement.id,
+                #     "journal_id": expenses.journal_id.id,
+                #     "ref": expenses.number,
+                #     "expenses_deduction_id": expenses.id,
+                #     "payment_ref": "Avans",
+                #     "counterpart_account_id": account.id,
+                #     "backup_counterpart_account_id": account.id,
+                # }
+                # self.env["account.bank.statement.line"].with_context(counterpart_account_id=account.id).create(values)
+                value = {
                     "journal_id": expenses.journal_id.id,
+                    "date": expenses.date_advance,
                     "ref": expenses.number,
                     "expenses_deduction_id": expenses.id,
-                    "payment_ref": "Avans",
-                    "counterpart_account_id": account.id,
-                    "backup_counterpart_account_id": account.id,
                 }
-                self.env["account.bank.statement.line"].with_context(counterpart_account_id=account.id).create(values)
+                value_lines = [
+                    {
+                        "partner_id": expenses.employee_id.id,
+                        "account_id": account.id,
+                        "name": _("Avans"),
+                        "debit": expenses.advance,
+                    },
+                    {
+                        "partner_id": expenses.employee_id.id,
+                        "account_id": expenses.journal_id.default_account_id.id,
+                        "name": _("Avans"),
+                        "credit": expenses.advance,
+                    },
+                ]
+                value["line_ids"] = [(0, 0, x) for x in value_lines]
+                move = self.env["account.move"].create(value)
+                move._post()
 
             expenses.write({"state": "advance", "number": name})
 
@@ -333,7 +363,8 @@ class DeltatechExpensesDeduction(models.Model):
                         #     # payment.journal_id.payment_credit_account_id,
                         # ):
                         payment_line.account_id = payment.journal_id.account_cash_advances_id
-            payments.with_context(add_statement_line=False).action_post()
+            # payments.with_context(add_statement_line=False).action_post()
+            payments.with_context().action_post()
 
             move_lines = self.env["account.move.line"]
             for voucher in vouchers:
@@ -356,27 +387,52 @@ class DeltatechExpensesDeduction(models.Model):
 
             if expenses.difference:
                 account = expenses.journal_id.account_cash_advances_id
-                statement = self.get_statement(expenses.date_expense)
-                if expenses.advance:
-                    values = {
-                        "amount": -expenses.difference + expenses.amount_vouchers,
-                        "date": expenses.date_expense,
+                # statement = self.get_statement(expenses.date_expense)
+                # if expenses.advance:
+                #     values = {
+                #         "amount": -expenses.difference + expenses.amount_vouchers,
+                #         "date": expenses.date_expense,
+                #         "partner_id": expenses.employee_id.id,
+                #         "statement_id": statement.id,
+                #         "journal_id": expenses.journal_id.id,
+                #         "ref": expenses.number,
+                #         "expenses_deduction_id": expenses.id,
+                #         "payment_ref": _("Deferenta Avans"),
+                #         "counterpart_account_id": account.id,
+                #         "backup_counterpart_account_id": account.id,
+                #     }
+                #     self.env["account.bank.statement.line"].with_context(counterpart_account_id=account.id).create(
+                #         values
+                #     )
+                amount = -expenses.difference + expenses.amount_vouchers
+
+                value = {
+                    "journal_id": expenses.journal_id.id,
+                    "date": expenses.date_advance,
+                    "ref": expenses.number,
+                    "expenses_deduction_id": expenses.id,
+                }
+                value_lines = [
+                    {
                         "partner_id": expenses.employee_id.id,
-                        "statement_id": statement.id,
-                        "journal_id": expenses.journal_id.id,
-                        "ref": expenses.number,
-                        "expenses_deduction_id": expenses.id,
-                        "payment_ref": _("Deferenta Avans"),
-                        "counterpart_account_id": account.id,
-                        "backup_counterpart_account_id": account.id,
-                    }
-                    self.env["account.bank.statement.line"].with_context(counterpart_account_id=account.id).create(
-                        values
-                    )
+                        "account_id": account.id,
+                        "name": _("Deferenta Avans"),
+                        "credit": amount,
+                    },
+                    {
+                        "partner_id": expenses.employee_id.id,
+                        "account_id": expenses.journal_id.default_account_id.id,
+                        "name": _("Deferenta Avans"),
+                        "debit": amount,
+                    },
+                ]
+                value["line_ids"] = [(0, 0, x) for x in value_lines]
+                move = self.env["account.move"].create(value)
+                move._post()
 
             if expenses.total_diem:
                 move_line_dr = {
-                    "name": "Diurna",
+                    "name": _("Diurna"),
                     "debit": expenses.total_diem,
                     "credit": 0.0,
                     "account_id": expenses.account_diem_id.id,
@@ -386,7 +442,7 @@ class DeltatechExpensesDeduction(models.Model):
                     "date_maturity": expenses.date_expense,
                 }
                 move_line_cr = {
-                    "name": "Diurna",
+                    "name": _("Diurna"),
                     "debit": 0.0,
                     "credit": expenses.total_diem,
                     "account_id": expenses.journal_id.account_cash_advances_id.id,  # 542
@@ -411,27 +467,27 @@ class DeltatechExpensesDeduction(models.Model):
 
             expenses.write(expenses_vals)
 
-    def get_statement(self, date):
-        statement = self.env["account.bank.statement"].search(
-            [("journal_id", "=", self.journal_id.id), ("date", "=", date)], limit=1
-        )
-        if not statement:
-            vals = {
-                "journal_id": self.journal_id.id,
-                # "state": "open",
-                "date": date,
-            }
-            statement = self.env["account.bank.statement"].create(vals)
-
-        # if statement.state != "open":
-        #     raise UserError(
-        #         _(
-        #             "The cash statement of journal %s from date is not in open state, please open it \n"
-        #             'to create the line in  it "%s".'
-        #         )
-        #         % (self.journal_id.name, date)
-        #     )
-        return statement
+    # def get_statement(self, date):
+    #     statement = self.env["account.bank.statement"].search(
+    #         [("journal_id", "=", self.journal_id.id), ("date", "=", date)], limit=1
+    #     )
+    #     if not statement:
+    #         vals = {
+    #             "journal_id": self.journal_id.id,
+    #             # "state": "open",
+    #             "date": date,
+    #         }
+    #         statement = self.env["account.bank.statement"].create(vals)
+    #
+    #     # if statement.state != "open":
+    #     #     raise UserError(
+    #     #         _(
+    #     #             "The cash statement of journal %s from date is not in open state, please open it \n"
+    #     #             'to create the line in  it "%s".'
+    #     #         )
+    #     #         % (self.journal_id.name, date)
+    #     #     )
+    #     return statement
 
     def cancel_expenses(self):
         self.write({"state": "cancel"})
