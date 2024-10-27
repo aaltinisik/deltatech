@@ -143,6 +143,7 @@ addon | version | maintainers | summary | price
 [deltatech_sale_transfer](deltatech_sale_transfer/) | 15.0.1.0.3 | [![danila12](https://github.com/danila12.png?size=30px)](https://github.com/danila12) | Sale Prepare Transfer | Free 
 [deltatech_saleorder_pickup_list](deltatech_saleorder_pickup_list/) | 15.0.1.0.0 |  | Pickup list report from sale order | Free 
 [deltatech_saleorder_search](deltatech_saleorder_search/) | 15.0.1.0.2 | [![danila12](https://github.com/danila12.png?size=30px)](https://github.com/danila12) | Search sale order by partner e-mail, phone, mobile | Free 
+[deltatech_saleorder_type](deltatech_saleorder_type/) | 15.0.1.0.1 |  | Manage multiple sale order types | Free 
 [deltatech_select_journal](deltatech_select_journal/) | 15.0.1.0.8 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Selectie jurnal | Free 
 [deltatech_service](deltatech_service/) | 15.0.2.0.5 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Manage Services Agreement | Free 
 [deltatech_service_agreement](deltatech_service_agreement/) | 15.0.2.0.7 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Manage Services Agreement | Free 
