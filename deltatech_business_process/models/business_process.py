@@ -306,14 +306,13 @@ class BusinessProcess(models.Model):
         return super()._load_records(data_list, update)
 
     @api.model
-    def _name_search(self, name="", args=None, operator="ilike", limit=100, name_get_uid=None):
-        if args is None:
-            args = []
+    def _name_search(self, name, domain=None, operator='ilike', limit=None, order=None):
+        args = domain or []
         project_id = self.env.context.get("default_project_id", False)
-        domain = [("code", "=", name)]
+        local_domain = [("code", "=", name)]
         if project_id:
-            domain.append(("project_id", "=", project_id))
-        ids = list(self._search(domain + args, limit=limit))
+            local_domain.append(("project_id", "=", project_id))
+        ids = list(self._search(local_domain + args, limit=limit, order=order))
 
         search_domain = [("name", operator, name)]
         if ids:
