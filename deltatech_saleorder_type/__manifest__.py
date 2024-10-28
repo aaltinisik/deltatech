@@ -4,7 +4,7 @@
 
 
 {
-    "name": "Terrabit - Sale Order Type",
+    "name": "Terrabit - Sale Order Type Obsolete",
     "summary": "Manage multiple sale order types",
     "version": "15.0.1.0.1",
     "author": "Terrabit, Dan Stoica",
