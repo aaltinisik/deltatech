@@ -174,6 +174,7 @@ addon | version | maintainers | summary | price
 [deltatech_vendor_stock](deltatech_vendor_stock/) | 15.0.1.0.5 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Vendor stock availability | Free 
 [deltatech_warehouse](deltatech_warehouse/) | 15.0.1.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | MRP Warehouse | Free 
 [deltatech_warehouse_access](deltatech_warehouse_access/) | 15.0.1.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Warehouse Access | Free 
+[deltatech_warehouse_arrangement](deltatech_warehouse_arrangement/) | 15.0.0.1.1 |  | Manages warehouse locations, parallel to standard Odoo locations | Free 
 [deltatech_warranty](deltatech_warranty/) | 15.0.1.0.0 | [![danila12](https://github.com/danila12.png?size=30px)](https://github.com/danila12) | Warranty field in product, report for sale order | Free 
 [deltatech_watermark](deltatech_watermark/) | 15.0.3.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Watermark field | Free 
 [deltatech_watermark_report](deltatech_watermark_report/) | 15.0.1.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Watermark in report | Free 
