@@ -41,13 +41,11 @@ class ProductTemplate(models.Model):
             product.alternative_code = code
 
 
-
-
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     @api.model
-    def _name_search(self, name, domain=None, operator='ilike', limit=None, order=None):
+    def _name_search(self, name, domain=None, operator="ilike", limit=None, order=None):
         res = super()._name_search(name, domain=domain, operator=operator, limit=limit, order=order)
         get_param = self.env["ir.config_parameter"].sudo().get_param
         res_ids = list(res)
