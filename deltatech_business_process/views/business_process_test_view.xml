@@ -183,6 +183,12 @@
         <field name="res_model">business.process.test</field>
         <field name="view_mode">tree,form,calendar,pivot,graph</field>
     </record>
+    <record id="business_process_test_action_form" model="ir.actions.act_window">
+        <field name="name">Business Process Test Form</field>
+        <field name="res_model">business.process.test</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_business_process_test_form" />
+    </record>
     <menuitem
         name="Process Tests"
         id="menu_business_process_test"

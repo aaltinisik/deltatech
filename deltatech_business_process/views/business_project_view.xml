@@ -45,6 +45,9 @@
                        <button class="oe_stat_button" type="object" name="action_view_developments" icon="fa-code">
                             <field name="count_developments" widget="statinfo" string="Developments" />
                         </button>
+                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-file-text-o">
+                            <field string="Documents" name="doc_count" widget="statinfo" />
+                        </button>
 
 
                         <button
@@ -67,6 +70,7 @@
                         <group string="Identification">
                             <field name="code" />
                             <field name="customer_id" />
+                            <field name="project_manager_id" />
                             <field name="total_project_duration" widget="float_time" />
                         </group>
 
