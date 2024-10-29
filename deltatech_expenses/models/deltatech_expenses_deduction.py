@@ -23,17 +23,21 @@ class DeltatechExpensesDeduction(models.Model):
         if self._context.get("default_journal_id", False):
             return self.env["account.journal"].browse(self._context.get("default_journal_id"))
 
-        domain = [("type", "=", "cash")]
+        domain = [("type", "=", "cash"), ("company_id", "=", self.env.company.id)]
         return self.env["account.journal"].search(domain, limit=1)
 
     @api.model
     def _default_account_diem(self):
         account_pool = self.env["account.account"]
         try:
-            account_id = account_pool.search([("code", "=ilike", "625%")], limit=1)  # Cheltuieli cu deplasari
+            account_id = account_pool.search(
+                [("code", "=ilike", "625%"), ("company_id", "=", self.env.company.id)], limit=1
+            )  # Cheltuieli cu deplasari
         except Exception:
             try:
-                account_id = account_pool.search([("account_type", "=", "expense")], limit=1)
+                account_id = account_pool.search(
+                    [("account_type", "=", "expense"), ("company_id", "=", self.env.company.id)], limit=1
+                )
             except Exception:
                 account_id = False
         return account_id
