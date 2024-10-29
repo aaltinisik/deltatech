@@ -38,6 +38,11 @@ class BusinessProcess(models.Model):
         copy=True,
     )
 
+    module_ids = fields.Many2many(
+        comodel_name="ir.module.module",
+        string="Modules",
+    )
+
     responsible_id = fields.Many2one(
         string="Implementation Responsible",
         domain="[('is_company', '=', False)]",
