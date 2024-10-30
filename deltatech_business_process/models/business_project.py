@@ -48,9 +48,9 @@ class BusinessProject(models.Model):
     )
     project_manager_id = fields.Many2one(
         string="Project Manager",
-        comodel_name="res.users",
-        domain="[('is_company', '=', False)]",
+        comodel_name="res.partner",
     )
+    project_type = fields.Selection([("remote", "Remote"), ("local", "Local")], string="Project Type", default="remote")
 
     @api.model
     def create(self, vals):

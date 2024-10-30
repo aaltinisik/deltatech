@@ -2,6 +2,7 @@
 # See README.rst file on addons root folder for license details
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class BusinessProcess(models.Model):
@@ -333,14 +334,23 @@ class BusinessProcess(models.Model):
             domain = [("process_id", "=", process.id), ("scope", "=", scope)]
             test = self.env["business.process.test"].search(domain, limit=1)
             if not test:
-                test = self.env["business.process.test"].create(
-                    {
-                        "name": _("Test %s") % process.code if process.code else process.name,
-                        "process_id": process.id,
-                        "tester_id": self.env.user.partner_id.id,
-                        "scope": scope,
-                    }
-                )
+                if scope == "internal":
+                    test = self.env["business.process.test"].create(
+                        {
+                            "name": _("Internal Test %s") % process.code if process.code else process.name,
+                            "process_id": process.id,
+                            "tester_id": self.responsible_id.id,
+                            "scope": scope,
+                        }
+                    )
+                else:
+                    test = self.env["business.process.test"].create(
+                        {
+                            "name": _("Test %s") % process.code if process.code else process.name,
+                            "process_id": process.id,
+                            "scope": scope,
+                        }
+                    )
                 test._onchange_process_id()
 
     def _add_followers(self):
@@ -391,3 +401,39 @@ class BusinessProcess(models.Model):
 
     def start_user_acceptance_test(self):
         self._start_test("user_acceptance")
+
+    def button_install_modules(self):
+        found_modules = False
+        for record in self:
+            if record.project_id.project_type != "local":
+                raise UserError(_("Only local projects can install modules"))
+            modules_to_install = record.module_ids.filtered(lambda m: m.state != "installed")
+            if not modules_to_install:
+                continue
+            for module in modules_to_install:
+                found_modules = True
+                module.button_immediate_install()
+        if not found_modules:
+            notification = {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": _("Warning"),
+                    "type": "warning",
+                    "message": "No modules to install found",
+                    "sticky": False,
+                },
+            }
+            return notification
+        else:
+            notification = {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": _("Success"),
+                    "type": "success",
+                    "message": "Modules installed successfully",
+                    "sticky": False,
+                },
+            }
+            return notification

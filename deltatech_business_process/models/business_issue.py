@@ -1,6 +1,8 @@
 # ©  2023 Deltatech
 # See README.rst file on addons root folder for license details
 
+from datetime import date
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -136,7 +138,14 @@ class BusinessIssue(models.Model):
         if not vals.get("code", False):
             vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
         result = super().create(vals)
+        result.send_mail()
         return result
+
+    def send_mail(self):
+        today = date.today().strftime("%Y-%m-%d")
+        self.sudo().message_post(body=f"Date of approval: {today}")
+        template = self.env.ref("deltatech_business_process.email_template_issue_submitted")
+        self.env["mail.template"].browse(template.id).send_mail(self.id, force_send=True)
 
     def name_get(self):
         self.browse(self.ids).read(["name", "code"])
