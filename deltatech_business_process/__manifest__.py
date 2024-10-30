@@ -5,7 +5,7 @@
 {
     "name": "Business process",
     "summary": "Business process",
-    "version": "17.0.1.2.7",
+    "version": "17.0.1.2.8",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
     "license": "OPL-1",
@@ -29,6 +29,7 @@
         "report/business_process_report_view.xml",
         "report/business_process_test_report_view.xml",
         "data/ir_sequence_data.xml",
+        "data/email_templates.xml",
         "wizard/export_business_process_view.xml",
         "wizard/import_business_process_view.xml",
     ],
