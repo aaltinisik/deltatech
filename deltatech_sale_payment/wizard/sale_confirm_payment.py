@@ -12,7 +12,7 @@ class SaleConfirmPayment(models.TransientModel):
     _description = "Sale Confirm Payment"
 
     transaction_id = fields.Many2one("payment.transaction", readonly=True)
-    acquirer_id = fields.Many2one("payment.provider", required=True)
+    provider_id = fields.Many2one("payment.provider", required=True)
     amount = fields.Monetary(string="Amount", required=True)
     currency_id = fields.Many2one("res.currency")
     payment_date = fields.Date(string="Payment Date", required=True, default=fields.Date.context_today)
@@ -48,7 +48,7 @@ class SaleConfirmPayment(models.TransientModel):
             transaction = self.env["payment.transaction"].create(
                 {
                     "amount": self.amount,
-                    "acquirer_id": self.acquirer_id.id,
+                    "provider_id": self.provider_id.id,
                     "acquirer_reference": order.name,
                     "partner_id": order.partner_id.id,
                     "sale_order_ids": [(4, order.id, False)],
