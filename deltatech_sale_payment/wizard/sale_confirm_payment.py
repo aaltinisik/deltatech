@@ -45,11 +45,13 @@ class SaleConfirmPayment(models.TransientModel):
         if self.transaction_id and self.transaction_id.amount == self.amount:
             transaction = self.transaction_id
         else:
+            payment_method = self.provider_id.payment_method_ids[0].id
             transaction = self.env["payment.transaction"].create(
                 {
                     "amount": self.amount,
                     "provider_id": self.provider_id.id,
                     "provider_reference": order.name,
+                    "payment_method_id": payment_method,
                     "partner_id": order.partner_id.id,
                     "sale_order_ids": [(4, order.id, False)],
                     "currency_id": self.currency_id.id,
