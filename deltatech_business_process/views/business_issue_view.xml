@@ -89,10 +89,10 @@
                             <field name="closed_by_id" />
                         </group>
                         <group string="Description">
-                            <field name="description" nolabel="1" placeholder="Description" />
+                            <field name="description" nolabel="1" placeholder="Description" colspan="2" />
                         </group>
                         <group string="Solution">
-                            <field name="solution" nolabel="1" placeholder="Solution" />
+                            <field name="solution" nolabel="1" placeholder="Solution" colspan="2" />
                         </group>
                     </group>
                 </sheet>
