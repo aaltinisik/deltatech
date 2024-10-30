@@ -72,6 +72,7 @@
                             <field name="customer_id" />
                             <field name="project_manager_id" />
                             <field name="total_project_duration" widget="float_time" />
+                            <field name="project_type" groups="base.group_system" />
                         </group>
 
                         <group string="Dates">
