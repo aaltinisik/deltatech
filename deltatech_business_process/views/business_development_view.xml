@@ -88,7 +88,7 @@
                         </group>
 
                     </group>
-                    <label for="note" string="note" />
+                    <label for="note" string="Note" />
                     <field name="note" />
                 </sheet>
                 <div class="oe_chatter">
