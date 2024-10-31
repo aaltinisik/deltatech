@@ -1532,10 +1532,6 @@ msgstr "Neînceput"
 
 #. module: deltatech_business_process
 #: model:ir.model.fields,field_description:deltatech_business_process.field_business_development__note
-msgid "Note"
-msgstr ""
-
-#. module: deltatech_business_process
 #: model_terms:ir.ui.view,arch_db:deltatech_business_process.view_business_development_form
 msgid "Note"
 msgstr "Nota"
