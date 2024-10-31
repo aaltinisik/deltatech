@@ -64,7 +64,7 @@
                 <filter
                     string="Payment initiated"
                     name="payment_initiated"
-                    domain="[('payment_status', '=', 'initiated')]"
+                    domain="[('transaction_ids.status', '=', 'initiated')]"
                 />
             </filter>
         </field>
