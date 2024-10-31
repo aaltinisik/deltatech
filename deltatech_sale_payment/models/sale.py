@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    acquirer_id = fields.Many2one("payment.provider", compute="_compute_payment")
+    provider_id = fields.Many2one("payment.provider", compute="_compute_payment")
     payment_amount = fields.Monetary(string="Amount Payment", compute="_compute_payment")
 
     payment_status = fields.Selection(
@@ -77,4 +77,4 @@ class SaleOrder(models.Model):
                         for transaction in authorized_transaction_ids:
                             acquirer = transaction.provider_id
 
-            order.acquirer_id = acquirer
+            order.provider_id = acquirer
