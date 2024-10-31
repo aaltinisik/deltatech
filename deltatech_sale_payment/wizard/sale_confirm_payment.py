@@ -12,7 +12,7 @@ class SaleConfirmPayment(models.TransientModel):
     _description = "Sale Confirm Payment"
 
     transaction_id = fields.Many2one("payment.transaction", readonly=True)
-    provider_id = fields.Many2one("payment.provider", required=True, domain=[('state', '!=', 'disabled')])
+    provider_id = fields.Many2one("payment.provider", required=True, domain=[("state", "!=", "disabled")])
     amount = fields.Monetary(string="Amount", required=True)
     currency_id = fields.Many2one("res.currency")
     payment_date = fields.Date(string="Payment Date", required=True, default=fields.Date.context_today)
@@ -50,7 +50,7 @@ class SaleConfirmPayment(models.TransientModel):
         if self.amount <= 0:
             raise UserError(_("Then amount must be positive"))
 
-        if self.transaction_id :
+        if self.transaction_id:
             self.update_transaction()
 
         if self.transaction_id:
@@ -78,17 +78,16 @@ class SaleConfirmPayment(models.TransientModel):
         if not self.transaction_id:
             return
         if self.transaction_id.state in ["pending", "draft"]:
-            self.transaction_id.write({
-                "amount": self.amount,
-                "provider_id": self.provider_id.id,
-                "payment_method_id": self.payment_method_id.id,
-            })
+            self.transaction_id.write(
+                {
+                    "amount": self.amount,
+                    "provider_id": self.provider_id.id,
+                    "payment_method_id": self.payment_method_id.id,
+                }
+            )
         else:
             self.transaction_id.sudo()._set_canceled()
             self.transaction_id = False
-
-
-
 
     def do_confirm(self):
         self.do_add_payment()
@@ -97,7 +96,7 @@ class SaleConfirmPayment(models.TransientModel):
             transaction = transaction.with_context(payment_date=self.payment_date)
             transaction._set_pending()
             transaction._set_done()
-            if transaction.provider_id.code not in ['none','custom']:
+            if transaction.provider_id.code not in ["none", "custom"]:
                 transaction._finalize_post_processing()
 
             # transaction._reconcile_after_transaction_done()

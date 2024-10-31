@@ -20,7 +20,7 @@
                 <footer>
                     <button name="do_confirm" string="Confirm" type="object" class="oe_highlight" />
                     or
-                    <button name="do_add_payment" string="Add" type="object"  />
+                    <button name="do_add_payment" string="Add" type="object" />
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
