@@ -28,9 +28,13 @@ class ProductTemplate(models.Model):
             name_terms = list(set(names))
             good_terms = [term for term in name_terms if term is not False]
             search_index = " ".join(good_terms)
-
+            search_index = search_index or ""
             if product.default_code:
                 search_index = product.default_code + " " + search_index
+
+            name = product.name or ""
+            if name not in search_index:
+                search_index += name + " " + search_index
 
             terms = []
             if product.seller_ids:
@@ -38,10 +42,9 @@ class ProductTemplate(models.Model):
             if product.alternative_ids:
                 terms += [a.name for a in product.alternative_ids if a.name]
 
-            terms = list(set(terms))
-            search_index += " " + " ".join(terms)
-            terms = search_index.upper().split(" ")
-            search_index = " ".join(sorted(list(set(terms))))
+            terms = " ".join(terms)
+            terms = terms.upper().split(" ")
+            search_index += " " + " ".join(sorted(list(set(terms))))
             product.search_index = search_index.upper()
 
     def _inverse_alternative_code(self):
