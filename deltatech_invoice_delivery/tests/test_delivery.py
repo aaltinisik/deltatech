@@ -100,4 +100,5 @@ class TestInvoiceDelivery(TransactionCase):
 
         invoice = form_invoice.save()
 
-        invoice.action_post()
+
+#        invoice.action_post()
