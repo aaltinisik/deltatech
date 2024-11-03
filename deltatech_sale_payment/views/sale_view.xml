@@ -43,7 +43,7 @@
                 <label for="payment_amount" string="Payment" />
                 <div class="o_row">
                     <field name="payment_amount" />
-                    <field name="aprovider_id" />
+                    <field name="provider_id" />
                 </div>
 
                 <field name="payment_status" />
