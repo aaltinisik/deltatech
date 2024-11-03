@@ -19,7 +19,7 @@ class SaleOrder(models.Model):
             ("done", "Done"),
         ],
         default="without",
-        compute="_compute_payment",
+        compute="_compute_payment_status",
         store=True,
     )
 
@@ -43,6 +43,11 @@ class SaleOrder(models.Model):
         }
 
     @api.depends("transaction_ids", "transaction_ids.state", "invoice_ids.payment_state")
+    def _compute_payment_status(self):
+        self._compute_payment()
+
+
+    @api.depends("transaction_ids", "transaction_ids.state")
     def _compute_payment(self):
         for order in self:
             amount = 0
