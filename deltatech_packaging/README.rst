@@ -1,5 +1,5 @@
 =========
-packaging
+Packaging
 =========
 
 .. 
