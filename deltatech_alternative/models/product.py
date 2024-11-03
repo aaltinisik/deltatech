@@ -69,6 +69,11 @@ class ProductTemplate(models.Model):
 
     @api.model
     def _name_search(self, name, args=None, operator="ilike", limit=100, name_get_uid=None):
+
+        disable_search_alternative = self.env.context.get("disable_search_alternative", False)
+        if disable_search_alternative:
+            return super()._name_search(name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+
         args = args or []
         get_param = self.env["ir.config_parameter"].sudo().get_param
         use_SQL = safe_eval(get_param("deltatech_alternative_website.use_sql", "False"))
@@ -137,6 +142,11 @@ class ProductProduct(models.Model):
 
     @api.model
     def _name_search(self, name, args=None, operator="ilike", limit=100, name_get_uid=None):
+
+        disable_search_alternative = self.env.context.get("disable_search_alternative", False)
+        if disable_search_alternative:
+            return super()._name_search(name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+
         args = args or []
         get_param = self.env["ir.config_parameter"].sudo().get_param
         use_SQL = safe_eval(get_param("deltatech_alternative_website.use_sql", "False"))
