@@ -165,7 +165,9 @@ class BusinessProcess(models.Model):
     implementation_stage = fields.Selection(
         [("first_stage", "First stage"), ("second_stage", "Second stage")], string="Implementation stage"
     )
-    module_type = fields.Selection([("standard", "Standard"), ("custom", "Custom")], string="Module type")
+    module_type = fields.Selection(
+        [("standard", "Standard"), ("custom", "Custom"), ("implementor", "Implementor")], string="Module type"
+    )
 
     @api.model
     def create(self, vals):
