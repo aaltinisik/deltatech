@@ -91,7 +91,7 @@ class TestSaleOrderPayment(TransactionCase):
                 .with_context(active_id=self.sale_order.id)
                 .create(
                     {
-                        "acquirer_id": self.env["payment.provider"].create({"name": "Test Provider"}).id,
+                        "provider_id": self.env["payment.provider"].create({"name": "Test Provider"}).id,
                         "amount": -100.0,
                         "currency_id": self.env.ref("base.USD").id,
                         "payment_date": date.today(),
