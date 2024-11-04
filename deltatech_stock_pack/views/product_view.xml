@@ -13,6 +13,7 @@
             <field name="weight_net" position="after">
                <field name="pack_items" />
                <field name="pack_weight" />
+               <field name="pack_weight_neto" />
             </field>
          </field>
       </record>

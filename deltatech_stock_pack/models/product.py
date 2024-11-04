@@ -40,6 +40,7 @@ class product_template(models.Model):
     
     pack_items = fields.Integer(string="Items per package",default=1)
     pack_weight = fields.Float('Package Gross Weight', digits=dp.get_precision('Stock Weight'), help="The gross weight per package in Kg.")
+    pack_weight_neto = fields.Float('Package Net Weight', digits=dp.get_precision('Stock Weight'), help="The net weight per package in Kg.")
 
 
 

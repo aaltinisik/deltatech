@@ -22,7 +22,7 @@
 
 {
     "name": "Stock Pack",
-    "version": "2.1",
+    "version": "2.2",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
 
