@@ -1,5 +1,6 @@
 /** @odoo-module **/
-import config from "web.config";
+
+
 import {download} from "@web/core/network/download";
 import {registry} from "@web/core/registry";
 
