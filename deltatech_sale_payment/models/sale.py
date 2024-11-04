@@ -46,7 +46,6 @@ class SaleOrder(models.Model):
     def _compute_payment_status(self):
         self._compute_payment()
 
-
     @api.depends("transaction_ids", "transaction_ids.state")
     def _compute_payment(self):
         for order in self:
