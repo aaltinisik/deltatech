@@ -92,25 +92,29 @@
                                                 <field
                                         name="name"
                                         string="Contact Name"
-                                        attrs="{'required' : [('type', '=', 'contact')]}"
+                                        required="type == 'contact'"
+
                                     />
                                                 <field
                                         name="title"
                                         options="{'no_open': True}"
                                         placeholder="e.g. Mr."
-                                        attrs="{'invisible': [('type','!=', 'contact')]}"
+                                        invisible="type != 'contact'"
+
                                     />
                                                 <field
                                         name="function"
                                         placeholder="e.g. Sales Director"
-                                        attrs="{'invisible': [('type','!=', 'contact')]}"
+                                         invisible="type != 'contact'"
+
                                     />
                                                 <label
                                         for="street"
                                         string="Address"
-                                        attrs="{'invisible': [('type','=', 'contact')]}"
+                                        invisible="type == 'contact'"
+
                                     />
-                                                <div attrs="{'invisible': [('type','=', 'contact')]}">
+                                                <div invisible="type == 'contact'">
                                                     <div class="o_address_format" name="div_address">
                                                         <field
                                                 name="street"

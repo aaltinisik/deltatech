@@ -10,7 +10,7 @@
                 <div class="alert alert-danger" role="alert">
                     Please enter only your personal data. Do not enter your company name.
                     <br />
-                    The billing data (company name, address and VAT) can be enetered when placing an order.
+                    The billing data (company name, address and VAT) can be entered when placing an order.
                 </div>
             </xpath>
         </field>
