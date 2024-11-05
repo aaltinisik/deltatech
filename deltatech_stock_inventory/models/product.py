@@ -35,7 +35,7 @@ class ProductTemplate(models.Model):
     loc_case = fields.Char("Case", size=16, compute="_compute_loc", inverse="_inverse_loc")
 
     warehouse_loc_ids = fields.One2many("product.warehouse.location", "product_id")
-    # is_inventory_ok = fields.Boolean("Inventory OK", tracking=True)
+    is_inventory_ok = fields.Boolean("Inventory OK", tracking=True)
     warehouse_stock = fields.Text(string="Stock/WH", compute="_compute_warehouse_stocks")
 
     def _compute_warehouse_stocks(self):
@@ -104,7 +104,7 @@ class ProductTemplate(models.Model):
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
-    # is_inventory_ok = fields.Boolean("Inventory OK")
+    is_inventory_ok = fields.Boolean("Inventory OK")
 
     @api.model
     def get_theoretical_quantity(
