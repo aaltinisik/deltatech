@@ -283,7 +283,7 @@ msgstr "Status"
 #: model:ir.model,name:deltatech_mrp_simple.model_stock_picking
 #: model_terms:ir.ui.view,arch_db:deltatech_mrp_simple.view_mrp_simple_form
 msgid "Transfer"
-msgstr ""
+msgstr "Transfer"
 
 #. module: deltatech_mrp_simple
 #: model:ir.model.fields,field_description:deltatech_mrp_simple.field_mrp_simple_line_in__price_unit
