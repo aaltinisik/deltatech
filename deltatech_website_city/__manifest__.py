@@ -5,14 +5,14 @@
     "name": "Website City",
     "category": "Website/Website",
     "summary": "City extension",
-    "version": "17.0.1.0.4",
+    "version": "17.0.1.0.5",
     "author": "Terrabit, Dorin Hongu",
     "license": "LGPL-3",
     "website": "https://www.terrabit.ro",
     "depends": ["portal", "website_sale", "base_address_extended"],
     "data": [
         "views/portal.xml",
-        #     "views/assets.xml"
+        "views/wesbite_address.xml",
     ],
     "price": 5.00,
     "currency": "EUR",
