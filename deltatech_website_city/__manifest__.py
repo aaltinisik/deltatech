@@ -12,7 +12,7 @@
     "depends": ["portal", "website_sale", "base_address_extended"],
     "data": [
         "views/portal.xml",
-        "views/wesbite_address.xml",
+        "views/website_address.xml",
     ],
     "price": 5.00,
     "currency": "EUR",
