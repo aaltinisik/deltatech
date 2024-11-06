@@ -5,7 +5,7 @@
 {
     "name": "Stock Date - Obsolete",
     "summary": "Obsolete use l10n_ro_stock_account_date",
-    "version": "17.0.1.0.9",
+    "version": "17.0.1.1.0",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
     "category": "Warehouse",
