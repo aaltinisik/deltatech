@@ -4,7 +4,7 @@
 {
     "name": "Base pricelist on cost with vat",
     "summary": "Base pricelist on cost with vat",
-    "version": "15.0.0.0.0",
+    "version": "15.0.0.0.1",
     "author": "Terrabit, Voicu Stefan",
     "website": "https://www.terrabit.ro",
     "category": "Generic Modules",
