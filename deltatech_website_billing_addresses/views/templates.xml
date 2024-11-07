@@ -93,15 +93,15 @@
 
     <template id="checkout" inherit_id="website_sale.checkout">
 
-        <xpath expr="//div/div/div/h3[hasclass('o_page_header')]" position="replace">
+<!--        <xpath expr="//div/div/div/h3[hasclass('o_page_header')]" position="replace">
             <h3 class="o_page_header mt8">Address</h3>
-        </xpath>
+        </xpath>-->
 
-        <xpath expr="//div[hasclass('oe_cart')]/div" position="replace">
+<!--        <xpath expr="//div[hasclass('oe_cart')]/div" position="replace">
 
-        </xpath>
+        </xpath>-->
 
-        <xpath expr="//t[@groups='sale.group_delivery_invoice_address']" position="before">
+<!--        <xpath expr="//t[@groups='sale.group_delivery_invoice_address']" position="before">
             <div class="row">
                 <div class="col-lg-12">
                     <h3 class="o_page_header mt16 mb4">Billing Addresses</h3>
@@ -165,7 +165,7 @@
                                                     <t t-set='edit_billing' t-value="bool(billing==order.partner_id)" />
                                                     <t t-set="allow_edit" t-value="True" />
                                                     <input type="hidden" name="field_required" t-att-value="''" />
-                                                    <!--                                       t-value="not order.partner_id or (billing.id in order.partner_id.child_ids.ids)" />-->
+                                                    &lt;!&ndash;                                       t-value="not order.partner_id or (billing.id in order.partner_id.child_ids.ids)" />&ndash;&gt;
                                                 </t>
                                             </div>
                                         </t>
@@ -211,7 +211,7 @@
                                                     <t t-set='edit_billing' t-value="bool(billing==order.partner_id)" />
                                                     <t t-set="allow_edit" t-value="True" />
 
-                                                    <!--                                       t-value="not order.partner_id or (billing.id in order.partner_id.child_ids.ids)" />-->
+                                                    &lt;!&ndash;                                       t-value="not order.partner_id or (billing.id in order.partner_id.child_ids.ids)" />&ndash;&gt;
                                                 </t>
                                             </div>
                                         </t>
@@ -242,10 +242,10 @@
                     </div>
                 </div>
             </div>
-        </xpath>
+        </xpath>-->
 
-        <xpath expr="//div[hasclass('all_shipping')]//div[hasclass('one_kanban')]" position="replace" />
-        <xpath expr="//div[hasclass('all_shipping')]" position="replace">
+<!--        <xpath expr="//div[hasclass('all_shipping')]//div[hasclass('one_kanban')]" position="replace" />-->
+<!--        <xpath expr="//div[hasclass('all_shipping')]" position="replace">
             <div class="row all_shipping">
                 <div class="col-lg-12">
                     <div class="row mt8">
@@ -268,7 +268,7 @@
                     </div>
                 </div>
             </div>
-        </xpath>
+        </xpath>-->
 <!--        <xpath expr="//t[@t-foreach='shippings']" position="replace">-->
 <!--            <t t-foreach="shippings" t-as="ship">-->
 <!--                <t t-if="1">-->
@@ -282,17 +282,17 @@
 <!--            </t>-->
 <!--        </xpath>-->
 
-        <xpath expr="//div[hasclass('all_shipping')]//t" position="after">
-            <div class="col-md-12 col-lg-6 one_kanban">
-                <form action="/shop/address" method="post" class="">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
-                    <a role="button" href="#" class="a-submit btn btn-secondary mb-2 btn-block add-button">
-                        <i class="fa fa-plus-square" />
-                        <span>Add a delivery address</span>
-                    </a>
-                </form>
-            </div>
-        </xpath>
+<!--        <xpath expr="//div[hasclass('all_shipping')]//t" position="after">-->
+<!--            <div class="col-md-12 col-lg-6 one_kanban">-->
+<!--                <form action="/shop/address" method="post" class="">-->
+<!--                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />-->
+<!--                    <a role="button" href="#" class="a-submit btn btn-secondary mb-2 btn-block add-button">-->
+<!--                        <i class="fa fa-plus-square" />-->
+<!--                        <span>Add a delivery address</span>-->
+<!--                    </a>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </xpath>-->
     </template>
 
 
@@ -337,7 +337,7 @@
 
     <template id="confirmation" inherit_id="website_sale.confirmation">
 
-        <xpath expr="//t[@t-set='same_shipping']/parent::div" position="replace">
+<!--        <xpath expr="//t[@t-set='same_shipping']/parent::div" position="replace">
             <div class="card-body" id="shipping_and_billing">
                 <a class='float-right no-decoration' href='/shop/checkout'>
                     <i class="fa fa-edit" />
@@ -366,7 +366,7 @@
                     />
                 </div>
             </div>
-        </xpath>
+        </xpath>-->
     </template>
 
 
@@ -386,16 +386,15 @@
             </t>
         </input>
 
-        <t t-if="mode == ('new', 'billing')" position="before">
+<!--        <t t-if="mode == ('new', 'billing')" position="before">
             <t t-if="type == 'invoice'">
                 <h2 class="o_page_header mt8">Billing Address</h2>
             </t>
             <t t-set="mode_backup" t-value="mode" />
             <t t-set="mode" t-value="('new', 'billing_address')" />
-        </t>
-        <t t-if="mode[1] == 'shipping'" position="after">
+-        <t t-if="mode[1] == 'shipping'" position="after">
             <t t-set="mode" t-value="mode_backup" />
-        </t>
+        </t>-->
 
     </template>
 
