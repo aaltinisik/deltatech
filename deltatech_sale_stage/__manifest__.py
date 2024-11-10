@@ -4,8 +4,8 @@
 
 
 {
-    "name": "Deltatech Sale Order Stage",
-    "version": "16.0.1.1.3",
+    "name": "Deltatech Sale Order Phase",
+    "version": "16.0.1.2.0",
     "author": "Terrabit, Dorin Hongu",
     "license": "OPL-1",
     "website": "https://www.terrabit.ro",
