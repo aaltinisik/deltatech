@@ -38,6 +38,13 @@ class StockPicking(models.Model):
                 # new_picking.action_assign()
                 # new_picking.do_unreserve()
                 self.second_transfer_created = True
+
+                message = _("This transfer was generated from %s.") % picking.name
+                new_picking.message_post(body=message)
+                message = _("Transfer %s was generated.") % new_picking.name
+
+                picking.message_post(body=message)
+
                 return new_picking
 
     def copy_move_lines(self, source_picking, target_picking):
