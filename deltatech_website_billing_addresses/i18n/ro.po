@@ -148,7 +148,7 @@ msgstr "Companie"
 #: model:ir.model,name:deltatech_website_billing_addresses.model_res_partner
 #: model:ir.model.fields.selection,name:deltatech_website_billing_addresses.selection__res_partner__contact_type__contact
 msgid "Contact"
-msgstr "Contact"
+msgstr ""
 
 #. module: deltatech_website_billing_addresses
 #: model_terms:ir.ui.view,arch_db:deltatech_website_billing_addresses.view_partner_form

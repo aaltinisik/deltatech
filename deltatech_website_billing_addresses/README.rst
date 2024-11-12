@@ -17,16 +17,20 @@ Website Billing Addresses
     :target: https://www.odoo.com/documentation/master/legal/licenses.html
     :alt: License: OPL-1
 .. |badge3| image:: https://img.shields.io/badge/github-dhongu%2Fdeltatech-lightgray.png?logo=github
-    :target: https://github.com/dhongu/deltatech/tree/16.0/deltatech_website_billing_addresses
+    :target: https://github.com/dhongu/deltatech/tree/17.0/deltatech_website_billing_addresses
     :alt: dhongu/deltatech
 
 |badge1| |badge2| |badge3|
 
 Features:
- - Separate billing adresses in person/company adresses
- - Frontend users can create billing addresses connected to an existing partner
- - Wizard to create billing address for a user from an existing partner (backend)
- - Adress type field in partner (Contact, Company, Billing address, Shipping address)
+
+-  Separate billing adresses in person/company adresses
+-  Frontend users can create billing addresses connected to an existing
+   partner
+-  Wizard to create billing address for a user from an existing partner
+   (backend)
+-  Adress type field in partner (Contact, Company, Billing address,
+   Shipping address)
 
 **Table of contents**
 
@@ -45,13 +49,13 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Terrabit
 * Dorin Hongu
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 .. |maintainer-dhongu| image:: https://github.com/dhongu.png?size=40px
     :target: https://github.com/dhongu
@@ -61,6 +65,6 @@ Current maintainer:
 
 |maintainer-dhongu| 
 
-This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/16.0/deltatech_website_billing_addresses>`_ project on GitHub.
+This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/17.0/deltatech_website_billing_addresses>`_ project on GitHub.
 
 You are welcome to contribute.

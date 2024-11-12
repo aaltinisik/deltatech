@@ -89,31 +89,19 @@
                                         <group>
                                             <group>
                                                 <field name="parent_id" />
-                                                <field
-                                        name="name"
-                                        string="Contact Name"
-                                        required="type == 'contact'"
-
-                                    />
+                                                <field name="name" string="Contact Name" required="type == 'contact'" />
                                                 <field
                                         name="title"
                                         options="{'no_open': True}"
                                         placeholder="e.g. Mr."
                                         invisible="type != 'contact'"
-
                                     />
                                                 <field
                                         name="function"
                                         placeholder="e.g. Sales Director"
-                                         invisible="type != 'contact'"
-
+                                        invisible="type != 'contact'"
                                     />
-                                                <label
-                                        for="street"
-                                        string="Address"
-                                        invisible="type == 'contact'"
-
-                                    />
+                                                <label for="street" string="Address" invisible="type == 'contact'" />
                                                 <div invisible="type == 'contact'">
                                                     <div class="o_address_format" name="div_address">
                                                         <field

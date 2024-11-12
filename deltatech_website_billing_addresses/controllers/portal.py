@@ -52,7 +52,7 @@ class CustomerPortal(portal.CustomerPortal):
         search_in="all",
         groupby="none",
         filterby=None,
-        **kw
+        **kw,
     ):
         values = self._prepare_portal_layout_values()
 
@@ -126,7 +126,7 @@ class CustomerPortal(portal.CustomerPortal):
         search_in="all",
         groupby="none",
         filterby=None,
-        **kw
+        **kw,
     ):
         values = self._prepare_portal_layout_values()
 
