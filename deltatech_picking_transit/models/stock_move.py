@@ -14,4 +14,3 @@ class StockMove(models.Model):
     #             )
     #     res = super().create(vals)
     #     return res
-

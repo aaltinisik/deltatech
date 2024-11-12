@@ -45,7 +45,6 @@ class StockPicking(models.Model):
 
                 picking.message_post(body=message)
 
-
                 return new_picking
 
     def copy_move_lines(self, source_picking, target_picking):
