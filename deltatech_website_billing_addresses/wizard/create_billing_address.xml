@@ -12,8 +12,7 @@
                     <field name="from_partner" readonly="1" />
                     <field name="user_id" />
                     <field name="update_vat" />
-                    <field name="vat"
-                           readonly="not update_vat" />
+                    <field name="vat" readonly="not update_vat" />
                 </group>
                 <footer>
                     <button name="create_address" string="Create" type="object" class="oe_highlight" />
