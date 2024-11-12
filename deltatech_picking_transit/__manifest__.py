@@ -13,6 +13,7 @@
         "wizard/stock_picking_transfer_wizard_views.xml",
         "views/stock_picking_type_view.xml",
     ],
+    "images": ["static/description/main_screenshot.png"],
     "development_status": "Beta",
     "maintainers": ["VoicuStefan2001"],
 }
