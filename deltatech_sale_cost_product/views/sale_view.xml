@@ -11,6 +11,7 @@
                     widget="monetary"
                     decoration-bf="1"
                     optional="show"
+                    groups="deltatech_sale_cost_product.group_view_cost_on_sale"
                 />
 
             </xpath>
@@ -30,6 +31,7 @@
                     widget="monetary"
                     decoration-bf="1"
                     optional="show"
+                    groups="deltatech_sale_cost_product.group_view_cost_on_sale"
                 />
 
             </xpath>
