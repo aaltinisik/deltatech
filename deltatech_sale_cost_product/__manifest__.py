@@ -5,14 +5,14 @@
 
 {
     "name": "Deltatech Sale Cost on Order",
-    "version": "16.0.0.0.1",
+    "version": "16.0.0.0.2",
     "author": "Terrabit, Voicu Stefan",
     "license": "OPL-1",
     "website": "https://www.terrabit.ro",
     "summary": "Sale Cost on Order",
     "category": "Sales",
     "depends": ["sale", "product"],
-    "data": ["views/sale_view.xml", "data/server_action.xml"],
+    "data": ["security/security.xml", "views/sale_view.xml", "data/server_action.xml"],
     "images": ["static/description/main_screenshot.png"],
     "development_status": "Production/Stable",
     "maintainers": ["dhongu"],
