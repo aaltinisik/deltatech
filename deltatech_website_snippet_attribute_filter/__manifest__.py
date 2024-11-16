@@ -12,9 +12,9 @@
     "depends": ["website", "website_sale"],
     "data": ["views/snippets.xml"],
     "assets": {
-        "web.assets_frontend": ["deltatech_website_snippet_attribute_filter/static/src/js/attribute_filter.js"],
+        "web.assets_frontend": ["deltatech_website_snippet_attribute_filter/static/src/js/attribute_filter.esm.js"],
         "website.assets_wysiwyg": [
-            "deltatech_website_snippet_attribute_filter/static/src/js/attribute_filter_editor.js"
+            "deltatech_website_snippet_attribute_filter/static/src/js/attribute_filter_editor.esm.js"
         ],
     },
     "qweb": ["static/src/xml/*.xml"],

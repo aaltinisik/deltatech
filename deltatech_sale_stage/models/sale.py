@@ -13,7 +13,7 @@ class SaleOrder(models.Model):
     phase_id = fields.Many2one("sale.order.phase", string="Phase", copy=False, tracking=True)
     phase_ids = fields.Many2many(
         "sale.order.phase",
-        string="phases",
+        string="Phases",
         readonly=False,
         compute="_compute_phase_ids",
         inverse="_inverse_phase_ids",

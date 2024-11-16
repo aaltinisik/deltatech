@@ -46,9 +46,7 @@ WebsiteSale.include({
         }
         const state = this.elementState.value;
         const rpcRoute = `/shop/state_infos/${state}`;
-        return this.autoFormat.length
-            ? this._changeOption(state, rpcRoute, "cities", this.elementCities) // .then(() => this._onChangeCity())
-            : undefined;
+        return this.autoFormat.length ? this._changeOption(state, rpcRoute, "cities", this.elementCities) : undefined;
     },
 
     _onChangeCity: function () {
@@ -64,7 +62,7 @@ WebsiteSale.include({
                 cityInput.value = "";
             }
             this.cityBlock.classList.add("d-none");
-            return this._onChangeState(); // .then(() => {            this._onChangeCity();            });
+            return this._onChangeState();
         });
     },
 });

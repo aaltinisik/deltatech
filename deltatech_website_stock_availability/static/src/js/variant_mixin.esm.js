@@ -1,9 +1,9 @@
 /** @odoo-module **/
 
+import "@website_sale/js/website_sale";
 import VariantMixin from "@website_sale/js/sale_variant_mixin";
 import publicWidget from "@web/legacy/js/public/public_widget";
 import {renderToFragment} from "@web/core/utils/render";
-import "@website_sale/js/website_sale";
 
 VariantMixin._onChangeLeadTimeMessage = function (ev, $parent, combination) {
     let product_id = 0;
