@@ -8,7 +8,7 @@ class TestAccountMoveLineColorTrigger(TransactionCase):
         self.product_product = self.env["product.product"].create(
             {
                 "name": "Test Product",
-                "type": "product",
+                "is_storable": True,
             }
         )
         self.product_service = self.env["product.product"].create(

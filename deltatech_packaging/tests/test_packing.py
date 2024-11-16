@@ -24,7 +24,7 @@ class TestStockPicking(TransactionCase):
         self.product = self.env["product.product"].create(
             {
                 "name": "Test Product",
-                "type": "product",
+                "is_storable": True,
                 "uom_id": self.env.ref("uom.product_uom_unit").id,
                 "uom_po_id": self.env.ref("uom.product_uom_unit").id,
                 "company_id": self.company.id,
