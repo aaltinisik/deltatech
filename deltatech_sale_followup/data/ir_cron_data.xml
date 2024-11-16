@@ -5,7 +5,7 @@
             <field name="name">Sale followup</field>
             <field name="model_id" ref="model_sale_order" />
             <field name="state">code</field>
-            <field name="numbercall">-1</field>
+
             <field name="code">
                 model.cron_send_followup()
             </field>
