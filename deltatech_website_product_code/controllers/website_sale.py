@@ -84,7 +84,9 @@ class WebsiteSaleAlternativeLink(WebsiteSale):
 
         for product in filtred_products:
             if product.is_published:
-                combination_info = product.with_context(display_default_code=False, pricelist=pricelist)._get_combination_info(
+                combination_info = product.with_context(
+                    display_default_code=False, pricelist=pricelist
+                )._get_combination_info(
                     # pricelist=pricelist
                 )
                 values = {

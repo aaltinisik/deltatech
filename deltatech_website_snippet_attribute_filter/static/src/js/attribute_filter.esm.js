@@ -3,10 +3,13 @@
 import publicWidget from "web.public.widget";
 
 class AttributeFilterItem extends publicWidget.Widget {
-    selector = ".s_attribute_filter_item";
-    events = {
-        "change select": "_onChange",
-    };
+    constructor() {
+        super(...arguments);
+        this.selector = ".s_attribute_filter_item";
+        this.events = {
+            "change select": this._onChange.bind(this),
+        };
+    }
 
     async start() {
         const def = await super.start();
@@ -48,13 +51,13 @@ class AttributeFilterItem extends publicWidget.Widget {
         let link = "/shop?";
         $items.each((index, element) => {
             const $item = $(element);
-            const attributeId = $item.data("attribute-id");
+            const itemAttributeId = $item.data("attribute-id");
             $item.data("attribute-value-ids", attributeValueIds);
             $item.attr("data-attribute-value-ids", attributeValueIds);
-            const attributeValueId = $(element).data("attribute-value-id");
-            if (attributeValueId > 0) {
-                attributeValueIds.push(attributeValueId);
-                link += `&attrib=${attributeId}-${attributeValueId}`;
+            const itemAttributeValueId = $(element).data("attribute-value-id");
+            if (itemAttributeValueId > 0) {
+                attributeValueIds.push(itemAttributeValueId);
+                link += `&attrib=${itemAttributeId}-${itemAttributeValueId}`;
             }
             if (index > position) {
                 this._readDataFromOdoo($item);
