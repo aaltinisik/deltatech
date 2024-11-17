@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+
     <record id="report_product_product_label" model="ir.actions.report">
         <field name="name">Product Label - etichete PDF</field>
         <field name="model">product.product.label</field>

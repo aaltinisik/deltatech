@@ -18,14 +18,13 @@
                     </group>
                     <group name="location">
                         <field name="use_location" />
-                        <field name="location_id" invisible="use_location == False" />
+                        <field name="location_id" attrs="{'invisible': [('use_location', '=', False)]}" />
                     </group>
                 </group>
                 <field name="label_lines">
                     <tree editable="bottom">
                         <field name="product_id" />
                         <field name="quantity" />
-                        <field name="lot" optional="hide" />
                     </tree>
                 </field>
                 <footer>
@@ -90,15 +89,7 @@
         <field name="binding_type">report</field>
         <field name="binding_view_types">list,form</field>
     </record>
-<!--    <act_window-->
-<!--        id="action_action_sale_order_product_label"-->
-<!--        name="Product Labels"-->
-<!--        res_model="product.product.label"-->
-<!--        binding_model="sale.order"-->
-<!--        binding_type="report"-->
-<!--        view_mode="form"-->
-<!--        target="new"-->
-<!--    />-->
+
     <record id="action_action_sale_order_product_label" model="ir.actions.act_window">
         <field name="name">Product Labels</field>
         <field name="res_model">product.product.label</field>
@@ -108,15 +99,7 @@
         <field name="binding_type">report</field>
         <field name="binding_view_types">list,form</field>
     </record>
-<!--    <act_window-->
-<!--        id="action_action_stock_picking_product_label"-->
-<!--        name="Product Labels"-->
-<!--        res_model="product.product.label"-->
-<!--        binding_model="stock.picking"-->
-<!--        binding_type="report"-->
-<!--        view_mode="form"-->
-<!--        target="new"-->
-<!--    />-->
+
     <record id="action_action_stock_picking_product_label" model="ir.actions.act_window">
         <field name="name">Product Labels</field>
         <field name="res_model">product.product.label</field>

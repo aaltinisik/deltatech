@@ -127,7 +127,7 @@ class ProductProductLabel(models.TransientModel):
             for line in picking.move_line_ids:
                 product_list[line.product_id.id] = {
                     "product_id": line.product_id.id,
-                    "quantity": line.quantity,
+                    "quantity": line.qty_done,
                     "lot": line.lot_id.name if line.lot_id else "",
                 }
         return product_list
@@ -145,30 +145,26 @@ class ProductProductLabel(models.TransientModel):
             model = self.env.context.get("active_model", False)
             if model == "product.template":
                 label_list = self.get_product_template_lines(active_ids, True)
-                vals = []
                 for label in label_list:
-                    vals.append(
+                    self.label_lines.create(
                         {
+                            "label_id": self.id,
                             "product_id": label[2]["product_id"],
                             "quantity": 1,
                             "lot": label[2]["lot"],
                         }
                     )
-                lines = self.env["product.product.label.line"].create(vals)
-                self.write({"label_lines": [(4, line_id) for line_id in lines.ids]})
             if model == "product.product":
                 label_list = self.get_product_lines(active_ids, True)
-                vals = []
                 for label in label_list:
-                    vals.append(
+                    self.label_lines.create(
                         {
+                            "label_id": self.id,
                             "product_id": label[2]["product_id"],
                             "quantity": 1,
                             "lot": label[2]["lot"],
                         }
                     )
-                lines = self.env["product.product.label.line"].create(vals)
-                self.write({"label_lines": [(4, line_id) for line_id in lines.ids]})
             if model == "sale.order":
                 return False
 
