@@ -22,7 +22,7 @@ class StockQuant(models.Model):
             allow_negative=allow_negative,
         )
         company = self.company_id or self.env.company
-        if not company.company.no_negative_stock:
+        if not company.no_negative_stock:
             return res
 
         if location_id and not location_id.allow_negative_stock and res < 0.0 and location_id.usage == "internal":
