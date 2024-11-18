@@ -11,8 +11,9 @@ class StockPicking(models.Model):
             vals_list_here = [vals_list]
         for vals in vals_list_here:
             picking_type = self.env["stock.picking.type"].browse(vals.get("picking_type_id"))
+            group = self.env.ref("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit")
             if picking_type.code in ["incoming", "outgoing"]:
-                if not vals.get("origin"):
+                if not vals.get("origin") and group not in self.env.user.groups_id:
                     raise UserError(
                         _("You can't create a receipt/delivery picking without a purchase/sale source document.")
                     )
