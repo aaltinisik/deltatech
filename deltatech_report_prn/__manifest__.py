@@ -8,7 +8,7 @@
     "category": "Stock",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
-    "depends": ["web"],
+    "depends": ["base", "web"],
     "license": "LGPL-3",
     "data": [
         # "views/assets.xml"
