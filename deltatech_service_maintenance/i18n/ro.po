@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 12:21+0000\n"
-"PO-Revision-Date: 2024-08-13 12:21+0000\n"
+"POT-Creation-Date: 2024-11-21 09:24+0000\n"
+"PO-Revision-Date: 2024-11-21 09:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -399,6 +399,7 @@ msgstr ""
 
 #. module: deltatech_service_maintenance
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_notification__state__done
+#: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__rec_state__done
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__state__done
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_notification_filter
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_notification_form
@@ -579,6 +580,7 @@ msgstr ""
 #. module: deltatech_service_maintenance
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_notification__state__progress
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_order__state__progress
+#: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__rec_state__progress
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__state__progress
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_notification_filter
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_warranty_filter
@@ -759,6 +761,7 @@ msgstr ""
 
 #. module: deltatech_service_maintenance
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_notification__state__new
+#: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__rec_state__new
 #: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__state__new
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_notification_filter
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_warranty_filter
@@ -1137,6 +1140,17 @@ msgid "Reasons"
 msgstr "Motive"
 
 #. module: deltatech_service_maintenance
+#: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__type__recondition
+msgid "Recondition"
+msgstr "Recondiționare"
+
+#. module: deltatech_service_maintenance
+#: model:ir.actions.act_window,name:deltatech_service_maintenance.action_service_recondition
+#: model:ir.ui.menu,name:deltatech_service_maintenance.menu_service_recondition
+msgid "Reconditions"
+msgstr "Recondiționări"
+
+#. module: deltatech_service_maintenance
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_notification__name
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_order__name
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_plan__name
@@ -1264,6 +1278,11 @@ msgstr "Trimis"
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_warranty_item__sequence
 msgid "Sequence"
 msgstr "Secvență"
+
+#. module: deltatech_service_maintenance
+#: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_warranty_filter
+msgid "Serial Number"
+msgstr "Serial"
 
 #. module: deltatech_service_maintenance
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_notification__agreement_id
@@ -1462,6 +1481,7 @@ msgstr "Stare"
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_notification__state
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_order__state
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_plan__state
+#: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_warranty__rec_state
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_warranty__state
 msgid "Status"
 msgstr "Stare"
@@ -1554,6 +1574,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_notification_type__scope
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_order__type_id
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_order_type__name
+#: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_warranty__type
 msgid "Type"
 msgstr "Tip"
 
@@ -1646,6 +1667,7 @@ msgstr "Sesizări garanție pentru serial %s"
 #: model:ir.model,name:deltatech_service_maintenance.model_service_warranty
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_service_warranty_item__warranty_id
 #: model:ir.model.fields,field_description:deltatech_service_maintenance.field_stock_picking__warranty_id
+#: model:ir.model.fields.selection,name:deltatech_service_maintenance.selection__service_warranty__type__warranty
 #: model:ir.ui.menu,name:deltatech_service_maintenance.menu_service_warranty
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_warranty_filter
 #: model_terms:ir.ui.view,arch_db:deltatech_service_maintenance.view_service_warranty_form
