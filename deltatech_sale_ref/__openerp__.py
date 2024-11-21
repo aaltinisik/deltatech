@@ -46,6 +46,7 @@ Functionalitati:
         "stock_view.xml",
         "wizard/pack_export_csv.xml",
         "data/ir_sequence.xml",
+        "report/pack_operations.xml",
     ],
 
     "active": False,
