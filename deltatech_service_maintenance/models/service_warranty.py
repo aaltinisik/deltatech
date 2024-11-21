@@ -73,7 +73,7 @@ class ServiceWarranty(models.Model):
             .search([("name", "=", "deltatech_service_agreement"), ("state", "=", "installed")])
         )
         for warranty in self:
-            if not agreements_installed:
+            if not agreements_installed or not warranty.partner_id:
                 warranty.has_agreement = False
             else:
                 query = """

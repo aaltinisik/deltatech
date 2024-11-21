@@ -113,7 +113,7 @@
                     <group>
                         <group>
                             <field name="create_date" readonly="1" />
-                            <field name="date" />
+                            <field name="date" attrs="{'invisible': [('type','!=','warranty')]}" />
                             <field
                                 name="equipment_id"
                                 attrs="{'readonly': [('state', 'not in', ['new', 'assigned'])]}"
@@ -131,8 +131,8 @@
                                 attrs="{'readonly': [('state','not in', ['new', 'assigned'])]}"
                             />
                         </group>
-                        <group name="partner">
-                            <field name="partner_id" required="1" />
+                        <group name="partner" attrs="{'invisible': [('type','!=','warranty')]}">
+                            <field name="partner_id" attrs="{'required': [('type','=','warranty')]}" />
                             <field name="has_agreement" />
                         </group>
                         <group>
