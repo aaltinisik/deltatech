@@ -179,7 +179,7 @@
                <t t-set="delivery_date_year" t-value="o.min_date[0:4]"/>
                <t t-set="delivery_date_month" t-value="o.min_date[5:7]"/>
                <t t-set="delivery_date_day" t-value="o.min_date[8:10]"/>
-               <t t-set="margin" t-value="39" />
+               <t t-set="margin" t-value="20" />
                <t t-foreach="o.pack_operation_ids" t-as="pack_operation">
                    <t t-translation="off">
 ^XA
@@ -251,12 +251,12 @@ No. OF BOX FROM ORDER:
 ^FO<t t-esc="margin" />,820^FD
 No. OF BOX:
 ^FS
-^FO<t t-esc="margin+340" />,820^FD
+^FO<t t-esc="margin+260" />,820^FD
 <t t-esc="pack_operation.label_sequence"/>
 ^FS
 
 ^BY3,3,90
-^FO<t t-esc="margin+60" />,1000^BC^FD
+^FO<t t-esc="margin" />,1000^BC^FD
 <t t-esc="pack_operation.label_sequence"/>
 ^FS
 
