@@ -1,10 +1,10 @@
 /** @odoo-module **/
-// import config from "web.config";
 import {download} from "@web/core/network/download";
+import {isMobileOS} from "@web/core/browser/feature_detection";
 import {registry} from "@web/core/registry";
 
 async function prnReportHandler(action, options, env) {
-    if (config.device.isMobile) {
+    if (isMobileOS()) {
         return;
     }
     if (action.device_id) {
