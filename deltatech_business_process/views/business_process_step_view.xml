@@ -90,6 +90,7 @@
                 </searchpanel>
             </search>
         </field>
+
     </record>
 
     <record id="action_business_process_step" model="ir.actions.act_window">

@@ -15,9 +15,10 @@
                 <field
                     name="state"
                     widget="badge"
-                    decoration-success="state == 'production'"
+                    decoration-danger="state == 'draft'"
                     decoration-info="state == 'design'"
                     decoration-warning="state == 'test'"
+                    decoration-success="state in ['ready','production']"
                 />
 
                 <field name="date_start_bbp" optional="hide" />
@@ -32,21 +33,30 @@
                     name="status_internal_test"
                     widget="badge"
                     optional="hide"
-                    decoration-success="state == 'done'"
+                    decoration-danger="status_internal_test == 'draft'"
+                    decoration-info="status_internal_test == 'run'"
+                    decoration-warning="status_internal_test == 'wait'"
+                    decoration-success="status_internal_test == 'done'"
                 />
                 <field
                     name="status_integration_test"
                     widget="badge"
                     optional="hide"
-                    decoration-success="state == 'done'"
+                    decoration-danger="status_integration_test == 'draft'"
+                    decoration-info="status_integration_test == 'run'"
+                    decoration-warning="status_integration_test == 'wait'"
+                    decoration-success="status_integration_test == 'done'"
                 />
                 <field
                     name="status_user_acceptance_test"
                     widget="badge"
                     optional="hide"
-                    decoration-success="state == 'done'"
+                    decoration-danger="status_user_acceptance_test == 'draft'"
+                    decoration-info="status_user_acceptance_test == 'run'"
+                    decoration-warning="status_user_acceptance_test == 'wait'"
+                    decoration-success="status_user_acceptance_test == 'done'"
                 />
-
+                <field name="implementation_stage" optional="hide" />
 
             </tree>
         </field>
@@ -83,7 +93,12 @@
                     />
                     <button name="button_go_live" type="object" string="Go live" class="oe_highlight" states="ready" />
                     <button name="button_draft" type="object" string="Reset to Draft" states="design,test,ready" />
-                    <field name="state" widget="statusbar" statusbar_visible="draft,design,test,ready,production" />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,design,test,ready,production"
+                        statusbar_colors='{"draft":"red","test":"green","production":"green"}'
+                    />
 
                 </header>
                 <sheet>
@@ -93,6 +108,14 @@
                         </button>
                         <button class="oe_stat_button" type="object" name="action_view_tests" icon="fa-stethoscope">
                             <field name="count_tests" widget="statinfo" string="Tests" />
+                        </button>
+                        <button
+                            class="oe_start_button"
+                            type="object"
+                            name="action_view_acceptance_tests"
+                            icon="fa-stethoscope"
+                        >
+                            <field name="count_acceptance_tests" widget="statinfo" string="Acceptance Tests" />
                         </button>
                         <button class="oe_stat_button" type="object" name="action_view_developments" icon="fa-code">
                             <field name="count_developments" widget="statinfo" string="Developments" />
@@ -104,9 +127,9 @@
                     </div>
 
 
-                    <div class="oe_title">
-                        <h1>
-                            <field name="name" default_focus="1" placeholder="Name" class="oe_inline" />
+                    <div>
+                        <h1 class="col-12">
+                            <field name="name" default_focus="1" placeholder="Name" />
                         </h1>
                     </div>
 
@@ -115,16 +138,8 @@
                             <field name="code" />
                             <field name="project_id" />
                         </group>
-                        <group string="Responsible">
-                            <field name="responsible_id" />
-                            <field name="customer_id" />
-                            <field name="approved_id" />
-                        </group>
-                        <group string="Business Blueprint">
-                            <field name="date_start_bbp" />
-                            <field name="date_end_bbp" />
-                            <field name="completion_bbp" widget="progressbar" options="{'editable': true}" />
-                        </group>
+
+
                         <group string="Business process">
                             <field name="area_id" />
                             <field name="process_group_id" />
@@ -134,11 +149,29 @@
                                                     <field name="status_integration_test" />
                                                     <field name="status_user_acceptance_test" />
                                                 </group>-->
-                        <group string="Duration of process">
-                            <field name="configuration_duration" widget="float_time" />
-                            <field name="instructing_duration" widget="float_time" />
-                            <field name="data_migration_duration" widget="float_time" />
-                            <field name="testing_duration" widget="float_time" />
+
+                        <group string="Implementation">
+                            <field name="implementation_stage" />
+                            <field name="module_type" />
+                        </group>
+
+                        <group string="Status">
+                            <field
+                                name="state"
+                                widget="badge"
+                                decoration-danger="state == 'draft'"
+                                decoration-info="state == 'design'"
+                                decoration-warning="state == 'test'"
+                                decoration-success="state in ['ready','production']"
+                            />
+                            <field
+                                name="status_user_acceptance_test"
+                                widget="badge"
+                                decoration-danger="status_user_acceptance_test == 'draft'"
+                                decoration-info="status_user_acceptance_test == 'run'"
+                                decoration-warning="status_user_acceptance_test == 'wait'"
+                                decoration-success="status_user_acceptance_test == 'done'"
+                            />
                         </group>
                     </group>
                     <notebook>
@@ -154,13 +187,53 @@
                                     <field name="transaction_type" optional="hide" />
                                     <field name="responsible_id" />
                                     <field name="development_ids" widget="many2many_tags" optional="hide" />
-
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Modules" name="modules">
+                            <field name="module_ids">
+                                <tree editable="bottom">
+                                    <field name="shortdesc" />
+                                    <field name="name" />
+                                    <field name="installed_version" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-muted="state == 'uninstallable'"
+                                        decoration-info="state  == 'uninstalled'"
+                                        decoration-success="state == 'installed'"
+                                    />
                                 </tree>
                             </field>
                         </page>
                         <page string="Description" name="description">
                             <label for="description" string="Description" />
                             <field name="description" />
+                        </page>
+                        <page string="Responsible">
+                            <group>
+                                <group string="Responsible">
+                                    <field name="responsible_id" />
+                                    <field name="support_id" />
+                                    <field name="customer_id" />
+                                    <field name="approved_id" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Duration">
+                            <group>
+                                <group string="Business Blueprint">
+                                    <field name="date_start_bbp" />
+                                    <field name="date_end_bbp" />
+                                    <field name="completion_bbp" widget="progressbar" options="{'editable': true}" />
+                                </group>
+                                <group string="Duration of process">
+                                    <field name="configuration_duration" widget="float_time" />
+                                    <field name="instructing_duration" widget="float_time" />
+                                    <field name="data_migration_duration" widget="float_time" />
+                                    <field name="testing_duration" widget="float_time" />
+                                </group>
+                            </group>
                         </page>
                         <page string="Sources  &amp; Destinations">
                             <separator string="Source process" />
@@ -200,17 +273,31 @@
                 <field name="project_id" />
                 <field name="area_id" />
                 <field name="responsible_id" />
+                <field name="implementation_stage" />
+                <field name="module_type" />
                 <group>
                     <filter name="group_area" string="Area" domain="[]" context="{'group_by':'area_id'}" />
+                    <filter
+                        name="group_process_group"
+                        string="Process Group"
+                        domain="[]"
+                        context="{'group_by':'process_group_id'}"
+                    />
                     <filter
                         name="group_responsible"
                         string="Responsible"
                         domain="[]"
                         context="{'group_by':'responsible_id'}"
                     />
+                    <filter
+                        name="group_state"
+                        string="Implementation state"
+                        domain="[]"
+                        context="{'group_by':'state'}"
+                    />
                 </group>
                 <searchpanel>
-                        <field name="area_id" select="one" enable_counters="1" />
+                    <field name="area_id" select="one" enable_counters="1" />
                 </searchpanel>
             </search>
         </field>
@@ -309,6 +396,15 @@
         <field name="state">code</field>
         <field name="code">action = records.start_user_acceptance_test()</field>
         <field name="binding_model_id" ref="model_business_process" />
+    </record>
+
+    <record id="action_install_modules_for_selected" model="ir.actions.server">
+        <field name="name">Install Modules for Selected Processes</field>
+        <field name="model_id" ref="model_business_process" />
+        <field name="state">code</field>
+        <field name="code">action = records.button_install_modules()</field>
+        <field name="binding_model_id" ref="model_business_process" />
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]" />
     </record>
 
 </odoo>

@@ -16,7 +16,7 @@ class BusinessProcessStepTest(models.Model):
     process_id = fields.Many2one(
         string="Process", comodel_name="business.process", related="step_id.process_id", store=True
     )
-
+    test_started = fields.Boolean(string="Test started", default=False)
     sequence = fields.Integer(string="Sequence", related="step_id.sequence", store=True)
     name = fields.Char(string="Name", related="step_id.name", store=True)
     description = fields.Text(string="Description", related="step_id.description", store=True)
@@ -42,7 +42,7 @@ class BusinessProcessStepTest(models.Model):
     data_used = fields.Text(string="Data used")
     data_result = fields.Text(string="Data result")
 
-    date_start = fields.Date(string="Date start")
+    date_start = fields.Date(string="Date start", default=fields.Date.today)
     date_end = fields.Date(string="Date end")
     observation = fields.Text(string="Observation")
 
@@ -76,3 +76,8 @@ class BusinessProcessStepTest(models.Model):
         }
         action.update({"domain": domain, "context": context})
         return action
+
+    @api.onchange("result")
+    def _onchange_result(self):
+        if self.result == "passed":
+            self.date_end = fields.Date.today()

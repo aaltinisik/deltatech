@@ -18,6 +18,10 @@ class BusinessProcessExport(models.TransientModel):
     include_responsible = fields.Boolean(string="Include Responsible?")
     include_customer_responsible = fields.Boolean(string="Include Customer Responsible?")
     include_approved_by = fields.Boolean(string="Include Approved By?")
+    include_support = fields.Boolean(string="Include Support?")
+    include_durations = fields.Boolean(string="Include Durations?")
+    include_process_state = fields.Boolean(string="Include Process State?")
+    include_modules = fields.Boolean(string="Include Modules?")
     state = fields.Selection([("choose", "choose"), ("get", "get")], default="choose")  # choose period  # get the file
 
     def do_export(self):
@@ -35,20 +39,40 @@ class BusinessProcessExport(models.TransientModel):
                 "process_group": process.process_group_id.name,
                 "steps": [],
                 "include_tests": self.include_tests,
+                "include_durations": self.include_durations,
+                "include_modules": self.include_modules,
                 "tests": [],
                 "responsible": "",
                 "customer": "",
                 "approved": "",
+                "support": "",
+                "configuration_duration": "",
+                "instructing_duration": "",
+                "data_migration_duration": "",
+                "testing_duration": "",
+                "duration_for_completion": "",
                 "date_start_bbp": process.date_start_bbp,
                 "date_end_bbp": process.date_end_bbp,
-                "state": process.state,
+                "state": (process.state if self.include_process_state else "draft"),
+                "module_type": process.module_type,
+                "implementation_stage": process.implementation_stage,
             }
+            if self.include_durations:
+                process_data["configuration_duration"] = process.configuration_duration
+                process_data["instructing_duration"] = process.instructing_duration
+                process_data["data_migration_duration"] = process.data_migration_duration
+                process_data["testing_duration"] = process.testing_duration
+                process_data["duration_for_completion"] = process.duration_for_completion
             if self.include_responsible:
                 process_data["responsible"] = process.responsible_id.name
             if self.include_customer_responsible:
                 process_data["customer"] = process.customer_id.name
             if self.include_approved_by:
                 process_data["approved"] = process.approved_id.name
+            if self.include_support:
+                process_data["support"] = process.support_id.name
+            if self.include_modules:
+                process_data["modules"] = [module.name for module in process.module_ids]
             for step in process.step_ids:
                 step_data = {
                     "name": step.name,
@@ -61,6 +85,9 @@ class BusinessProcessExport(models.TransientModel):
                 }
                 process_data["steps"].append(step_data)
             if self.include_tests:
+                process_data["status_internal_test"] = process.status_internal_test
+                process_data["status_integration_test"] = process.status_integration_test
+                process_data["status_user_acceptance_test"] = process.status_user_acceptance_test
                 for test in process.test_ids:
                     test_data = {
                         "name": test.name,
@@ -79,6 +106,9 @@ class BusinessProcessExport(models.TransientModel):
                             "transaction": test_step.transaction_id.name,
                             "step": test_step.step_id.name,
                             "test": test_step.process_test_id.name,
+                            "result": test_step.result,
+                            "test_started": test_step.test_started,
+                            "responsible": test_step.responsible_id.name,
                         }
                         test_data["test_steps"].append(test_step_data)
 
