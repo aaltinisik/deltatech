@@ -91,7 +91,8 @@
                                     <field name="responsible_id" />
                                     <field name="date_start" optional="show" />
                                     <field name="date_end" optional="show" />
-                                    <field name="result" />
+                                    <field name="test_started" invisible="1" />
+                                    <field name="result" attrs="{'invisible': [('test_started', '=', False)]}" />
 
                                      <button
                                         name="action_view_issue"
@@ -168,6 +169,10 @@
                 <field name="tester_id" />
                 <field name="state" />
                 <field name="scope" />
+                <group>
+                    <filter name="group_state" string="state" domain="[]" context="{'group_by':'state'}" />
+                    <filter name="group_scope" string="scope" domain="[]" context="{'group_by':'scope'}" />
+                </group>
             </search>
         </field>
     </record>
@@ -177,6 +182,12 @@
         <field name="name">Process Tests</field>
         <field name="res_model">business.process.test</field>
         <field name="view_mode">tree,form,calendar,pivot,graph</field>
+    </record>
+    <record id="business_process_test_action_form" model="ir.actions.act_window">
+        <field name="name">Business Process Test Form</field>
+        <field name="res_model">business.process.test</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_business_process_test_form" />
     </record>
     <menuitem
         name="Process Tests"

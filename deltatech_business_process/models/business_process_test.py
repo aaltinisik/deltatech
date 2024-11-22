@@ -22,7 +22,7 @@ class BusinessProcessTest(models.Model):
         domain="[('is_company', '=', False)]",
         states={"done": [("readonly", True)]},
     )
-    date_start = fields.Date(string="Date start", states={"done": [("readonly", True)]})
+    date_start = fields.Date(string="Date start", states={"done": [("readonly", True)]}, default=fields.Date.today)
     date_end = fields.Date(string="Date end", states={"done": [("readonly", True)]})
     state = fields.Selection(
         [("draft", "Draft"), ("run", "Run"), ("wait", "Waiting"), ("done", "Done")],
@@ -131,7 +131,16 @@ class BusinessProcessTest(models.Model):
         self.write({"state": "run"})
         self._add_followers()
         for test in self:
-            date_start = min(test.test_step_ids.mapped("date_start")) or fields.Date.today()
+            if not test.date_start:
+                test.date_start = fields.Date.today()
+            if not test.test_step_ids:
+                date_start = fields.Date.today()
+            else:
+                for step in test.test_step_ids:
+                    if not step.date_start:
+                        step.date_start = fields.Date.today()
+                date_start = min(test.test_step_ids.mapped("date_start") or fields.Date.today())
+
             date_start = min(date_start, test.date_start or fields.Date.today())
             test_step_ids = test.test_step_ids.filtered(lambda x: not x.date_start)
             test_step_ids.write({"date_start": date_start})
@@ -142,6 +151,13 @@ class BusinessProcessTest(models.Model):
                 test.process_id.write({"status_integration_test": "in_progress"})
             elif test.scope == "user_acceptance":
                 test.process_id.write({"status_user_acceptance_test": "in_progress"})
+            if not self.tester_id:
+                self.tester_id = self.env.user.partner_id
+            for step in self.test_step_ids:
+                if not step.responsible_id:
+                    step.responsible_id = self.tester_id
+            for steps in self.test_step_ids:
+                steps.write({"test_started": True})
 
     def action_wait(self):
         self.ensure_one()
@@ -151,7 +167,12 @@ class BusinessProcessTest(models.Model):
         self.ensure_one()
         self.write({"state": "done"})
         for test in self:
-            date_end = max(test.test_step_ids.mapped("date_end")) or fields.Date.today()
+            if not test.date_end:
+                test.date_start = fields.Date.today()
+            if not test.test_step_ids:
+                date_end = fields.Date.today()
+            else:
+                date_end = max(test.test_step_ids.mapped("date_end")) or fields.Date.today()
             date_end = max(date_end, test.date_end or fields.Date.today())
             test_step_ids = test.test_step_ids.filtered(lambda x: not x.date_end)
             test_step_ids.write({"date_end": date_end})
@@ -166,6 +187,19 @@ class BusinessProcessTest(models.Model):
             elif test.scope == "user_acceptance":
                 test.process_id.write({"status_user_acceptance_test": "done"})
 
+        # verifica daca toate testele sunt done
+        for process in self.mapped("process_id"):
+            if (
+                process.status_internal_test == "done"
+                and process.status_integration_test == "done"
+                and process.status_user_acceptance_test == "done"
+            ):
+                process.write({"state": "ready"})
+            else:
+                tests = process.test_ids.filtered(lambda x: x.state != "done")
+                if not tests:
+                    process.write({"state": "ready"})
+
     def action_draft(self):
         self.ensure_one()
         self.write({"state": "draft"})
@@ -179,3 +213,8 @@ class BusinessProcessTest(models.Model):
                 if step.responsible_id not in process.message_partner_ids:
                     followers |= step.responsible_id
             process.message_subscribe(followers.ids)
+
+    @api.onchange("completion_test")
+    def _onchange_completion_test(self):
+        if self.completion_test == 100.0:
+            self.action_done()
