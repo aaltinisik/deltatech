@@ -1,6 +1,6 @@
 {
     "name": "Price List add Category",
-    "version": "15.0.0.0.0",
+    "version": "15.0.0.0.1",
     "author": "cojocariudaniel1, Terrabit",
     "website": "https://www.terrabit.ro",
     "summary": "You can add a public category to the products in price list",
