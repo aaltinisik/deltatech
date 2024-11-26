@@ -92,11 +92,7 @@ class ServiceAgreement(models.Model):
                 equipment._compute_readings_status()
                 if equipment.last_reading < limit_date:
                     self.meter_reading_status = False
-                    message = "Device {}/{} (serial:{}): no reads older than 7 days ".format(
-                        equipment.name,
-                        equipment.address_id.name,
-                        equipment.serial_id.name,
-                    )
+                    message = f"Device {equipment.name}/{equipment.address_id.name} (serial:{equipment.serial_id.name}): no reads older than 7 days "
                     return {
                         "warning": {
                             "title": "Warning",

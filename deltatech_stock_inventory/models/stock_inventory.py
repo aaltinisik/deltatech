@@ -440,10 +440,7 @@ class InventoryLine(models.Model):
         if self.env.context.get("active_model") == "stock.inventory":
             inventory = self.env["stock.inventory"].browse(self.env.context.get("active_id"))
             if inventory.exists() and inventory.location_ids:
-                return (
-                    "[('company_id', '=', company_id), ('usage', 'in', ['internal', 'transit']), ('id', 'child_of', %s)]"
-                    % inventory.location_ids.ids
-                )
+                return f"[('company_id', '=', company_id), ('usage', 'in', ['internal', 'transit']), ('id', 'child_of', {inventory.location_ids.ids})]"
         return "[('company_id', '=', company_id), ('usage', 'in', ['internal', 'transit'])]"
 
     @api.model
@@ -451,10 +448,7 @@ class InventoryLine(models.Model):
         if self.env.context.get("active_model") == "stock.inventory":
             inventory = self.env["stock.inventory"].browse(self.env.context.get("active_id"))
             if inventory.exists() and len(inventory.product_ids) > 1:
-                return (
-                    "[('type', '=', 'product'), '|', ('company_id', '=', False), ('company_id', '=', company_id), ('id', 'in', %s)]"
-                    % inventory.product_ids.ids
-                )
+                return f"[('type', '=', 'product'), '|', ('company_id', '=', False), ('company_id', '=', company_id), ('id', 'in', {inventory.product_ids.ids})]"
         return "[('type', '=', 'product'), '|', ('company_id', '=', False), ('company_id', '=', company_id)]"
 
     is_editable = fields.Boolean(help="Technical field to restrict editing.")

@@ -131,7 +131,7 @@ class BusinessIssue(models.Model):
     def _compute_display_name(self):
         for issue in self:
             issue.display_name = "{}{}".format(
-                issue.code and "[%s] " % issue.code or "",
+                issue.code and f"[{issue.code}] " or "",
                 issue.name,
             )
 

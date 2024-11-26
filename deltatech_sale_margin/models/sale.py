@@ -149,7 +149,7 @@ class SaleOrderLine(models.Model):
             if price_unit:
                 if price_unit < line.purchase_price:
                     if not self.env["res.users"].has_group("deltatech_sale_margin.group_sale_below_purchase_price"):
-                        raise UserError(_("You can not sell below the purchase price: %s." % self[0].product_id.name))
+                        raise UserError(_(f"You can not sell below the purchase price: {self[0].product_id.name}."))
                     else:
                         message = _("Sale %s under the purchase price.") % line.product_id.name
                         line.order_id.message_post(body=message)

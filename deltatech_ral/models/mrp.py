@@ -25,7 +25,7 @@ class MrpProduction(models.Model):
             color = attribute_values_ids.filtered(lambda x: x.attribute_id.display_type == "color")
             if color:
                 color = color[0]
-                ral = self.env["product.product"].search([("default_code", "like", "RAL %s" % color.name)], limit=1)
+                ral = self.env["product.product"].search([("default_code", "like", f"RAL {color.name}")], limit=1)
                 if ral:
                     self.ral_id = ral
         return res

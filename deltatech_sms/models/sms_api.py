@@ -34,7 +34,7 @@ class SmsApi(BaseSmsApi):
                 response = result.content.decode("utf-8")
 
                 if "OK" not in response:
-                    _logger.error("SMS: %s" % response)
+                    _logger.error(f"SMS: {response}")
                     res_value["state"] = "server_error"
                 res += [res_value]
 

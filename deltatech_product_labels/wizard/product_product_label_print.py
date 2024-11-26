@@ -214,12 +214,12 @@ class ProductProductLabelLine(models.TransientModel):
                     code = line.product_id.default_code
 
                 barcode_image.save(["svg"], fnRoot=code, outDir="/tmp")
-                filename = "/tmp/%s.svg" % code
+                filename = f"/tmp/{code}.svg"
                 with open(filename) as f:
                     barcode_image = f.read()
 
                 barcode_image = base64.b64encode(barcode_image.encode())
-                line.barcode_image = "data:image/svg+xml;base64,%s" % barcode_image.decode()
+                line.barcode_image = f"data:image/svg+xml;base64,{barcode_image.decode()}"
 
     def get_label_data(self):
         return {

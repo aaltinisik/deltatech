@@ -221,7 +221,7 @@ class ServiceEquiOperation(models.TransientModel):
         self.equipment_id.write({"agreement_id": self.agreement_id})
 
         action = {
-            "domain": "[('id','=',%s)]" % self.agreement_id.id,
+            "domain": f"[('id','=',{self.agreement_id.id})]",
             "name": _("Service Agreement"),
             "view_type": "form",
             "view_mode": "form",

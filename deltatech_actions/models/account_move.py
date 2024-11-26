@@ -50,6 +50,6 @@ class AccountMove(models.Model):
                         total_attachments += len(attachments)
                         attachments.unlink()
                     except Exception as e:
-                        _logger.info("Cannot delete attachments: %s" % e)
+                        _logger.info(f"Cannot delete attachments: {e}")
 
-        _logger.info("Deleted %s attachments." % total_attachments)
+        _logger.info(f"Deleted {total_attachments} attachments.")

@@ -91,7 +91,7 @@ class WebsiteSaleAlternativeLink(WebsiteSale):
                 )
                 values = {
                     "name": combination_info["display_name"],
-                    "default_code": product.default_code or "ID_%s" % product.id,
+                    "default_code": product.default_code or f"ID_{product.id}",
                     "categories": [],
                     "price": combination_info["price"],
                     "list_price": combination_info["list_price"],

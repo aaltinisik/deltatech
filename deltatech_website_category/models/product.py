@@ -26,4 +26,4 @@ class ProductPublicCategory(models.Model):
     @api.depends_context("lang")
     def _compute_website_url(self):
         for category in self:
-            category.website_url = "/shop/category/%s" % slug(category)
+            category.website_url = f"/shop/category/{slug(category)}"

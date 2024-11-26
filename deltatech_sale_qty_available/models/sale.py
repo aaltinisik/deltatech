@@ -98,13 +98,13 @@ class SaleOrderLine(models.Model):
             outgoing_qty, incoming_qty = product.outgoing_qty, product.incoming_qty
 
             if qty_available or virtual_available or outgoing_qty or incoming_qty:
-                qty_available_text = "%s = " % virtual_available
+                qty_available_text = f"{virtual_available} = "
                 if qty_available:
-                    qty_available_text += " %s " % qty_available
+                    qty_available_text += f" {qty_available} "
                 if outgoing_qty:
-                    qty_available_text += " -%s " % outgoing_qty
+                    qty_available_text += f" -{outgoing_qty} "
                 if incoming_qty:
-                    qty_available_text += " +%s " % incoming_qty
+                    qty_available_text += f" +{incoming_qty} "
 
             line.qty_available_text = qty_available_text
 

@@ -59,7 +59,7 @@ class StockPicking(models.Model):
                     )
                     if not agreement_type_consumable:
                         error = (
-                            "Nu a fost gasita in tipul de contract o linie cu consumabilul %s !" % line.product_id.name
+                            f"Nu a fost gasita in tipul de contract o linie cu consumabilul {line.product_id.name} !"
                         )
                         return error
                     else:
