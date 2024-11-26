@@ -15,6 +15,7 @@
         "report/deltatech_mrp_report.xml",
         "views/product_view.xml",
         "security/ir.model.access.csv",
+        "security/security.xml",
     ],
     "images": ["images/main_screenshot.png"],
     "installable": True,

@@ -117,7 +117,7 @@ msgstr "Grupează după..."
 #: model:ir.model.fields,field_description:deltatech_mrp.field_deltatech_cost_detail__id
 #: model:ir.model.fields,field_description:deltatech_mrp.field_deltatech_mrp_report__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: deltatech_mrp
 #: selection:deltatech.mrp.report,state:0
