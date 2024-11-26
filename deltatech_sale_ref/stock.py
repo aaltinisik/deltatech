@@ -98,6 +98,18 @@ class stock_transfer_details(models.TransientModel):
 
         return True
 
+    @api.model
+    def default_get(self, fields):
+        defaults = super(stock_transfer_details, self).default_get(fields)
+        if "item_ids" in fields:
+            item_ids = defaults["item_ids"]
+            for item in item_ids:
+                if item["packop_id"]:
+                    packop_id = self.env['stock.pack.operation'].browse(item["packop_id"])
+                    if packop_id:
+                        item["ref"] = packop_id.ref.split("-")[0]
+        return defaults
+
 
 class stock_pack_operation(models.Model):
     _inherit = "stock.pack.operation"

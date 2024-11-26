@@ -223,10 +223,12 @@ NET WEIGHT:
 KG  <t t-esc="pack_operation.product_id.pack_weight_neto"/>
 ^FS
 
+^CF0,40
 ^FO<t t-esc="margin" />,500^FD
 <t t-esc="pack_operation.product_id.name" />
 ^FS
 
+^CF0,50
 ^FO<t t-esc="margin" />,580^FD
 DATE:
 ^FS
