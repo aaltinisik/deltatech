@@ -45,7 +45,8 @@ class ServiceEquiOperation(models.TransientModel):
             defaults["partner_id"] = equipment.partner_id.id
             defaults["address_id"] = equipment.address_id.id
             defaults["emplacement"] = equipment.emplacement
-            agreement = self.env["service.agreement"].search([("partner_id", "=", equipment.partner_id.id)], limit=1)
+            domain = [("partner_id", "=", equipment.partner_id.id)]
+            agreement = self.env["service.agreement"].search(domain, limit=1)
             if agreement:
                 defaults["agreement_id"] = agreement.id
         else:
@@ -86,7 +87,8 @@ class ServiceEquiOperation(models.TransientModel):
         if self.state == "ins":
             emplacement = self.emplacement or ""
             message = _(
-                "Equipment installation at %(partner_name)s, address %(address_name)s, emplacement %(emplacement)s.\r\rMeters: %(counters)s"
+                "Equipment installation at %(partner_name)s, address %(address_name)s, "
+                "emplacement %(emplacement)s.\r\rMeters: %(counters)s"
             ) % {
                 "partner_name": self.partner_id.name,
                 "address_name": self.address_id.name,
@@ -134,7 +136,8 @@ class ServiceEquiOperation(models.TransientModel):
                 raise UserError(_("You must bill consumption before uninstalling"))
             emplacement = self.equipment_id.emplacement or ""
             message = _(
-                "Uninstalling equipment from %(partner_name)s, address %(address_name)s, emplacement %(emplacement)s.\r\rMeters: %(counters)s"
+                "Uninstalling equipment from %(partner_name)s, address %(address_name)s,"
+                " emplacement %(emplacement)s.\r\rMeters: %(counters)s"
             ) % {
                 "partner_name": self.partner_id.name,
                 "address_name": self.address_id.name,
