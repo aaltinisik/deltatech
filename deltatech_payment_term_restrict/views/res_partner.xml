@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <odoo>
-    <data>
+
         <record id="view_partner_property_form_term" model="ir.ui.view">
             <field name="name">res.partner.property.form.term</field>
             <field name="model">res.partner</field>
@@ -13,12 +13,12 @@
                 </field>
                 <field name="property_payment_term_id" position="after">
                     <field
-                        name="property_payment_term_id"
-                        options="{'no_open': True, 'no_create': True}"
-                        groups="deltatech_payment_term_restrict.group_payment_term"
-                    />
+                    name="property_payment_term_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="deltatech_payment_term_restrict.group_payment_term"
+                />
                 </field>
             </field>
         </record>
-    </data>
+
 </odoo>
