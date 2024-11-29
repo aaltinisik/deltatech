@@ -68,6 +68,7 @@ class BusinessProcess(models.Model):
             ("test", "Test"),
             ("ready", "Ready"),
             ("production", "Production"),
+            ("abandoned", "Abandoned"),
         ],
         string="State",
         default="draft",
@@ -170,14 +171,16 @@ class BusinessProcess(models.Model):
         [("standard", "Standard"), ("custom", "Custom"), ("implementor", "Implementor")], string="Module type"
     )
 
-    @api.model
-    def create(self, vals):
-        if not vals.get("code", False):
-            vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
-        result = super().create(vals)
-        if result.area_id.responsible_id and not result.responsible_id:
-            result.responsible_id = result.area_id.responsible_id
-        return result
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("code", False):
+                vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
+        results = super().create(vals_list)
+        for result in results:
+            if result.area_id.responsible_id and not result.responsible_id:
+                result.responsible_id = result.area_id.responsible_id
+        return results
 
     def _compute_display_name(self):
         for process in self:
@@ -392,6 +395,9 @@ class BusinessProcess(models.Model):
 
     def button_draft(self):
         self.write({"state": "draft"})
+
+    def button_abandon(self):
+        self.write({"state": "abandoned"})
 
     def start_internal_test(self):
         self._start_test("internal")
