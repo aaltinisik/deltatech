@@ -4,7 +4,7 @@
     <record id="view_order_form_term" model="ir.ui.view">
         <field name="name">sale.order.form.payment.term</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="sale.view_order_form" />
         <field name="priority">100</field>
         <field name="arch" type="xml">
             <field name="payment_term_id" position="attributes">
