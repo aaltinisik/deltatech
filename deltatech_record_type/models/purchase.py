@@ -2,6 +2,7 @@
 
 
 from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
 
 
 class SaleOrder(models.Model):
@@ -10,13 +11,6 @@ class SaleOrder(models.Model):
     po_type = fields.Many2one("record.type", string="Type", tracking=True)
 
     @api.onchange("po_type")
-    def _check_po_type(self):
-        po_type_selected = self.env["record.type"].search([("id", "=", self.po_type.id), ("model", "=", "purchase")])
-        if po_type_selected:
-            for default_value in po_type_selected.default_values_ids:
-                if default_value.field_type == "id":
-                    self[default_value.field_name] = int(default_value.field_value)
-                if default_value.field_type == "char":
-                    self[default_value.field_name] = default_value.field_value
-                if default_value.field_type == "boolean":
-                    self[default_value.field_name] = default_value.field_value == "True"
+    def _onchange_po_type(self):
+        for default_value in self.po_type.default_values_ids:
+            self[default_value.field_name] = safe_eval(default_value.field_value)

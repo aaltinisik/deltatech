@@ -6,25 +6,26 @@
         <field name="inherit_id" ref="purchase.purchase_order_form" />
         <field name="arch" type="xml">
             <field name="currency_id" position="after">
-                <field name="po_type" options="{'no_create':True}" domain="[('model', '=', 'purchase')]" />
+                <field name="po_type" options="{'no_create':True}" domain="[('model', '=', 'purchase.order')]" />
             </field>
         </field>
     </record>
 
 
-<!--    <menuitem-->
-<!--        id="menu_purchaseorder_type"-->
-<!--        name="Record Types"-->
-<!--        parent="purchase.menu_purchase_config"-->
-<!--        sequence="200"-->
-<!--        action="action_record_type"-->
-<!--    />-->
+    <record model="ir.actions.act_window" id="action_purchase_order_type">
+        <field name="name">Order Types</field>
+        <field name="res_model">record.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_model':'purchase.order'}</field>
+        <field name="domain">[('model', '=', 'purchase.order')]</field>
+    </record>
 
-<!--    <menuitem-->
-<!--        id="menu_saleorder_type"-->
-<!--        name="Record Types"-->
-<!--        parent="sale.menu_sale_config"-->
-<!--        sequence="200"-->
-<!--        action="action_record_type"-->
-<!--    />-->
+     <menuitem
+        id="menu_sale_order_type"
+        name="Order Types"
+        parent="purchase.menu_purchase_config"
+        action="action_purchase_order_type"
+    />
+
+
 </odoo>
