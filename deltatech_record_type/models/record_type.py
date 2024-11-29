@@ -1,5 +1,9 @@
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class SaleOrderType(models.Model):
@@ -63,7 +67,8 @@ class SaleOrderTypeDefaultValues(models.Model):
                         ref = self.env[item.field_id.relation].search([], limit=1)
                         item.field_value = ref.id
                     item.value_ref = f"{item.field_id.relation},{item.field_value or 0}"
-                except:
+                except Exception:
+                    _logger.error("Error while computing resource ref", exc_info=True)
                     item.value_ref = None
             else:
                 item.value_ref = None
