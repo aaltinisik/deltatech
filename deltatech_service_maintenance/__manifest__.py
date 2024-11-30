@@ -31,7 +31,7 @@
         "views/report_order.xml",
         "views/service_work_center_view.xml",
         "views/service_warranty_view.xml",
-        "views/res_config_view.xml",
+        # "views/res_config_view.xml",
         "security/ir.model.access.csv",
     ],
     "images": ["static/description/main_screenshot.png"],
