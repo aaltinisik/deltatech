@@ -25,13 +25,13 @@
                     </group>
 
                     <field name="items" nolabel="1">
-                        <tree editable="bottom" create="0" delete="0">
+                        <list editable="bottom" create="0" delete="0">
                             <field name="equipment_id" readonly="1" force_save="1" />
                             <field name="meter_id" readonly="1" force_save="1" />
                             <field name="prev_value" readonly="1" />
                             <field name="counter_value" />
                             <field name="estimated" />
-                        </tree>
+                        </list>
                     </field>
                     <field name="note" />
                 </group>

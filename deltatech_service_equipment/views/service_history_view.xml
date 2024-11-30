@@ -22,13 +22,13 @@
         <record id="service_history_tree" model="ir.ui.view">
             <field name="model">service.history</field>
             <field name="arch" type="xml">
-                <tree>
+                <list>
                     <field name="name" string="Type" />
                     <field name="date" />
                     <field name="equipment_id" />
                     <field name="agreement_id" />
                     <field name="description" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -56,7 +56,7 @@
             <field name="name">History</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">service.history</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
 
         <!-- service history menu-->

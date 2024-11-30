@@ -6,9 +6,9 @@
         <field name="model">service.equipment</field>
         <field name="inherit_id" ref="deltatech_service_equipment_base.view_service_equipment_tree" />
         <field name="arch" type="xml">
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="decoration-bf">agreement_id!=False</attribute>
-            </tree>
+            </list>
 
             <field name="partner_id" position="after">
 

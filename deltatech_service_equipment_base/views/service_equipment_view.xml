@@ -5,7 +5,7 @@
         <field name="name">Services equipment</field>
         <field name="model">service.equipment</field>
         <field name="arch" type="xml">
-            <tree sample="1">
+            <list sample="1">
                 <field name="name" />
                 <field name="service_location_id" optional="show" />
                 <field name="partner_id" />
@@ -16,7 +16,7 @@
                 <field name="serial_id" optional="show" />
                 <field name="activity_ids" widget="list_activity" optional="hide" />
 <!--                <field name="message_unread" invisible="1" />-->
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -61,14 +61,14 @@
                     <notebook>
                         <page id='meters' string="Meters">
 
-                            <field name="meter_ids" mode="kanban,tree">
-                                <tree editable="bottom">
+                            <field name="meter_ids" mode="kanban,list">
+                                <list editable="bottom">
                                     <field name="name" />
                                     <field name="meter_categ_id" />
                                     <field name="uom_id" />
                                     <field name="total_counter_value" />
                                     <field name="estimated_value" optional="show" />
-                                </tree>
+                                </list>
                                 <kanban class="o_kanban">
                                     <field name="name" />
                                     <field name="meter_categ_id" />
@@ -160,7 +160,7 @@
     <record id="action_service_equipment" model="ir.actions.act_window">
         <field name="name">Equipments</field>
         <field name="res_model">service.equipment</field>
-        <field name="view_mode">tree,form,kanban,pivot,activity</field>
+        <field name="view_mode">list,form,kanban,pivot,activity</field>
     </record>
 
     <menuitem

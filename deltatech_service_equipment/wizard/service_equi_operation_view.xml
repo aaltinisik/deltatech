@@ -64,11 +64,11 @@
                     </div>
 
                     <field name="items" nolabel="1">
-                        <tree editable="bottom" create="0" delete="0">
+                        <list editable="bottom" create="0" delete="0">
                             <field name="equipment_id" invisible="1" readonly="1" force_save="1" />
                             <field name="meter_id" readonly="1" force_save="1" />
                             <field name="counter_value" />
-                        </tree>
+                        </list>
                     </field>
                     <field name="note" />
                 </group>

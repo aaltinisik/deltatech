@@ -2,7 +2,7 @@
 <odoo>
 <!--
     <record id="view_payment_term_line_tree" model="ir.ui.view">
-        <field name="name">account.payment.term.line.tree</field>
+        <field name="name">account.payment.term.line.list</field>
         <field name="model">account.payment.term.line</field>
         <field name="inherit_id" ref="account.view_payment_term_line_tree" />
         <field name="arch" type="xml">

@@ -71,7 +71,7 @@ class ServiceBillingPreparation(models.TransientModel):
         return {
             "domain": domain,
             "name": _("Service Consumption"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "service.consumption",
             "view_id": False,
             "type": "ir.actions.act_window",

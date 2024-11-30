@@ -277,7 +277,7 @@ class ServiceEquipment(models.Model):
             "domain": [("id", "in", self.common_history_ids.ids)],
             "name": "History",
             "view_type": "form",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "service.history",
             "view_id": False,
             "type": "ir.actions.act_window",

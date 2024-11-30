@@ -4,7 +4,7 @@
         <field name="name">Services Agreements</field>
         <field name="model">service.agreement</field>
         <field name="arch" type="xml">
-            <tree sample="1">
+            <list sample="1">
                 <field name="name" decoration-bf="1" />
                 <field name="date_agreement" />
                 <field name="partner_id" />
@@ -19,7 +19,7 @@
                 <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" />
                 <field name="last_date_invoice" />
                 <field name="next_date_invoice" optional="hide" widget="remaining_days" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_service_agreement_form" model="ir.ui.view">
@@ -144,11 +144,11 @@
                     </group>
                     <field
                         name="agreement_line"
-                        mode="tree,kanban"
+                        mode="list,kanban"
                         context="{'default_currency_id':currency_id}"
                         readonly="state!='draft'"
                     >
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="sequence" widget="handle" />
                             <field name="product_id" context="{'default_type':'service'}" />
                             <field name="invoice_description" optional="hide" />
@@ -161,7 +161,7 @@
                             <field name="has_free_cycles" readonly="quantity_free &gt; 0" optional="hide" />
                             <field name="cycles_free" readonly="quantity_free &gt; 0" optional="hide" />
                             <field name="analytic_account_id" optional="hide" />
-                        </tree>
+                        </list>
                         <kanban class="o_kanban_mobile">
                             <field name="product_id" />
                             <field name="quantity" />
@@ -246,7 +246,7 @@
     <record id="action_service_agreement" model="ir.actions.act_window">
         <field name="name">Services Agreements</field>
         <field name="res_model">service.agreement</field>
-        <field name="view_mode">tree,form,pivot,activity</field>
+        <field name="view_mode">list,form,pivot,activity</field>
     </record>
     <menuitem
         name="Services Agreements"
@@ -274,7 +274,7 @@
     <record id="action_service_agreement_type" model="ir.actions.act_window">
         <field name="name">Services Agreements Type</field>
         <field name="res_model">service.agreement.type</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem
         name="Services Agreement Type"
@@ -287,7 +287,7 @@
     <record id="action_service_agreement_group" model="ir.actions.act_window">
         <field name="name">Services Group</field>
         <field name="res_model">service.agreement.group</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem
         name="Service Group"

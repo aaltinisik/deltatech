@@ -28,7 +28,7 @@ class ServiceAgreement(models.Model):
             "domain": "[('id','in', [" + ",".join(map(str, pickings.ids)) + "])]",
             "name": _("Delivery for service"),
             "view_type": "form",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.picking",
             "view_id": False,
             "context": context,

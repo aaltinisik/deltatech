@@ -37,7 +37,7 @@ class ServiceChangeInvoiceDate(models.TransientModel):
             "domain": "[('id','in', [" + ",".join(map(str, [rec.id for rec in consumptions])) + "])]",
             "name": _("Service Consumption"),
             "view_type": "form",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "service.consumption",
             "view_id": False,
             "type": "ir.actions.act_window",
