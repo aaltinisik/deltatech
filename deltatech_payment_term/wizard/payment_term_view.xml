@@ -58,12 +58,12 @@
                 <xpath expr="//form/sheet" position="before">
                     <header>
                         <button
-                            name="%(action_account_payment_term_rate_wizard)d"
-                            string="Create Rate"
-                            type="action"
-                            class="oe_edit_only"
-                            groups="base.group_user"
-                        />
+                        name="%(action_account_payment_term_rate_wizard)d"
+                        string="Create Rate"
+                        type="action"
+                        class="oe_edit_only"
+                        groups="base.group_user"
+                    />
                     </header>
                 </xpath>
             </field>
