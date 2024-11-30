@@ -266,7 +266,7 @@ class ServiceMeterReading(models.Model):
         compute="_compute_previous_counter_value",
         store=True,
     )
-    counter_value = fields.Float(string="Counter Value", digits="Meter Value", group_operator="max")
+    counter_value = fields.Float(string="Counter Value", digits="Meter Value", aggregator="max")
     estimated = fields.Boolean(string="Estimated")
     difference = fields.Float(
         string="Difference",
