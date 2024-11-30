@@ -175,6 +175,7 @@ addon | version | maintainers | summary | price
 [deltatech_stock_location](deltatech_stock_location/) | 16.0.1.0.3 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Generate route, picking operation for location | Free 
 [deltatech_stock_negative](deltatech_stock_negative/) | 16.0.2.0.2 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Negative stocks are not allowed | Free 
 [deltatech_stock_report](deltatech_stock_report/) | 16.0.1.0.3 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Report with positions from picking lists | Free 
+[deltatech_stock_reseller](deltatech_stock_reseller/) | 16.0.1.0.1 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Report report reseller | Free 
 [deltatech_stock_sn](deltatech_stock_sn/) | 16.0.1.0.0 |  | Stock Serial Number | Free 
 [deltatech_test_system](deltatech_test_system/) | 16.0.0.0.3 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Utils | Free 
 [deltatech_transfer_product_to_product](deltatech_transfer_product_to_product/) | 16.0.0.0.1 | [![VoicuStefan2001](https://github.com/VoicuStefan2001.png?size=30px)](https://github.com/VoicuStefan2001) | Helps to transfer x quantity of product A and replace it with product B | Free 
