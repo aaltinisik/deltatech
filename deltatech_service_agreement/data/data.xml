@@ -44,7 +44,6 @@
         <field name="name">Billing automation</field>
         <field name="model_id" ref="model_service_agreement" />
         <field name="state">code</field>
-        <field name="numbercall">-1</field>
         <field name="code">model.make_billing_automation()</field>
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>

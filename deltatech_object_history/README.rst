@@ -17,7 +17,7 @@ Deltatech Object History
     :target: https://www.odoo.com/documentation/master/legal/licenses.html
     :alt: License: OPL-1
 .. |badge3| image:: https://img.shields.io/badge/github-dhongu%2Fdeltatech-lightgray.png?logo=github
-    :target: https://github.com/dhongu/deltatech/tree/17.0/deltatech_object_history
+    :target: https://github.com/dhongu/deltatech/tree/18.0/deltatech_object_history
     :alt: dhongu/deltatech
 
 |badge1| |badge2| |badge3|
@@ -63,6 +63,6 @@ Current maintainer:
 
 |maintainer-danila12| 
 
-This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/17.0/deltatech_object_history>`_ project on GitHub.
+This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/18.0/deltatech_object_history>`_ project on GitHub.
 
 You are welcome to contribute.
