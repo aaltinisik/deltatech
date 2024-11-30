@@ -41,6 +41,6 @@ class AccountMove(models.Model):
     def write(self, vals):
         res = super().write(vals)
         if vals.get("state"):
-            self.invalidate_cache()
+            self._invalidate_cache()
             self.recompute_valuation()
         return res
