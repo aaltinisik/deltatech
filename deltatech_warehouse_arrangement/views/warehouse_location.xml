@@ -1,11 +1,11 @@
 <odoo>
-    <data>
+
         <!-- STOREHOUSE -->
         <record id="view_storehouse_tree" model="ir.ui.view">
             <field name="name">view.storehouse.tree</field>
             <field name="model">warehouse.location.storehouse</field>
             <field name="arch" type="xml">
-                <tree string="Storehouse">
+                <tree>
                     <field name="sequence" widget="handle" />
                     <field name="name" />
                     <field name="location_id" />
@@ -43,7 +43,7 @@
             <field name="name">view.zone.tree</field>
             <field name="model">warehouse.location.zone</field>
             <field name="arch" type="xml">
-                <tree string="Zone">
+                <tree>
                     <field name="sequence" widget="handle" />
                     <field name="name" />
                     <field name="storehouse_id" />
@@ -80,7 +80,7 @@
             <field name="name">view.shelf.tree</field>
             <field name="model">warehouse.location.shelf</field>
             <field name="arch" type="xml">
-                <tree string="Shelf">
+                <tree>
                     <field name="sequence" widget="handle" />
                     <field name="name" />
                     <field name="zone_id" />
@@ -117,7 +117,7 @@
             <field name="name">view.section.tree</field>
             <field name="model">warehouse.location.section</field>
             <field name="arch" type="xml">
-                <tree string="Section">
+                <tree>
                     <field name="sequence" widget="handle" />
                     <field name="name" />
                     <field name="shelf_id" />
@@ -154,7 +154,7 @@
             <field name="name">view.rack.tree</field>
             <field name="model">warehouse.location.rack</field>
             <field name="arch" type="xml">
-                <tree string="Rack">
+                <tree>
                     <field name="sequence" widget="handle" />
                     <field name="name" />
                     <field name="section_id" />
@@ -189,15 +189,15 @@
 
         <menuitem id="menu_locations" name="Locations" parent="stock.menu_stock_root" sequence="200" />
         <menuitem
-            id="menu_storehouse"
-            name="Storehouse"
-            action="action_storehouse"
-            sequence="10"
-            parent="menu_locations"
-        />
+        id="menu_storehouse"
+        name="Storehouse"
+        action="action_storehouse"
+        sequence="10"
+        parent="menu_locations"
+    />
         <menuitem id="menu_zone" name="Zone" action="action_zone" sequence="20" parent="menu_locations" />
         <menuitem id="menu_shelf" name="Shelf" action="action_shelf" sequence="30" parent="menu_locations" />
         <menuitem id="menu_section" name="Section" action="action_section" sequence="40" parent="menu_locations" />
         <menuitem id="menu_rack" name="Rack" action="action_rack" sequence="50" parent="menu_locations" />
-    </data>
+
 </odoo>
