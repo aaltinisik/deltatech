@@ -127,9 +127,9 @@
             <field name="inherit_id" ref="base.view_res_partner_filter" />
             <field name="arch" type="xml">
                 <filter name="type_company" position="after">
-                    <separator/>
-                    <filter string="Delivery" name="type_delivery" domain="[('type', '=', 'delivery')]"/>
-                    <filter string="Invoice" name="type_invoice" domain="[('type', '=', 'invoice')]"/>
+                    <separator />
+                    <filter string="Delivery" name="type_delivery" domain="[('type', '=', 'delivery')]" />
+                    <filter string="Invoice" name="type_invoice" domain="[('type', '=', 'invoice')]" />
                 </filter>
                 <filter name="type_person" position="attributes">
                     <attribute name="domain">[('is_company', '=', False),('parent_id','=',False)]</attribute>
