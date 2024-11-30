@@ -65,7 +65,7 @@ class ServiceEquiOperation(models.TransientModel):
         can_remove = True
         # check if equipment has lines with meters
         agreement_lines = self.agreement_id.agreement_line.filtered(
-            lambda l: l.equipment_id == self.equipment_id and l.meter_id
+            lambda li, equipment_id=self.equipment_id: li.equipment_id == equipment_id and li.meter_id
         )
         if agreement_lines:
             for reading in self.items:
@@ -178,7 +178,8 @@ class ServiceEquiOperation(models.TransientModel):
                 counters += str(meter.uom_id.name) + ": " + str(meter.total_counter_value) + "\r\n"
         emplacement = self.equipment_id.emplacement or ""
         message = _(
-            "Add to contract %(agreement_name)s, partner %(partner_name)s, address %(address_name)s, emplacement %(emplacement)s."
+            "Add to contract %(agreement_name)s, partner %(partner_name)s,"
+            " address %(address_name)s, emplacement %(emplacement)s."
         ) % {
             "agreement_name": self.agreement_id.name,
             "partner_name": self.equipment_id.partner_id.name,

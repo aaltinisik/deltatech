@@ -335,7 +335,9 @@ class ServiceOrder(models.Model):
             sale_order = self.env["sale.order"].browse(action["res_id"])
 
             for item in self.component_ids:
-                sale_line = sale_order.order_line.filtered(lambda l: l.product_id == item.product_id)
+                sale_line = sale_order.order_line.filtered(
+                    lambda li, product_id=item.product_id: li.product_id == product_id
+                )
                 if not sale_line:
                     value = {
                         "product_id": item.product_id.id,
@@ -350,7 +352,9 @@ class ServiceOrder(models.Model):
 
             for item in self.operation_ids:
                 sale_line = sale_order.order_line.filtered(
-                    lambda l: l.product_id == item.operation_id.product_id and l.name == item.operation_id.name
+                    lambda li, product_id=item.operation_id.product_id, name=item.operation_id.name: li.product_id
+                    == product_id
+                    and li.name == name
                 )
                 if not sale_line:
                     value = {
