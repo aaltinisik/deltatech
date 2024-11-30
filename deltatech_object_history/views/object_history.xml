@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="object_history_tree" model="ir.ui.view">
-        <field name="name">object.history.tree</field>
+        <field name="name">object.history.list</field>
         <field name="model">object.history</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="create_date" />
                 <field name="create_uid" />
                 <field name="name" />
                 <field name="description" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -58,7 +58,7 @@
     <record id="action_object_history" model="ir.actions.act_window">
         <field name="name">History</field>
         <field name="res_model">object.history</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem
         id="menu_object_history_root"
