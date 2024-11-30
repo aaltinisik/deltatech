@@ -8,7 +8,7 @@ from odoo.tools import float_is_zero
 
 
 class StockLot(models.Model):
-    _inherit = "stock.production.lot"
+    _inherit = "stock.lot"
 
     loc_storehouse_id = fields.Many2one("warehouse.location.storehouse", string="Storehouse")
     loc_zone_id = fields.Many2one("warehouse.location.zone", string="Zone")

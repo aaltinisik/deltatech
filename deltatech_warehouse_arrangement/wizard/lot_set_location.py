@@ -12,12 +12,12 @@ class LotChangeLocation(models.TransientModel):
     _description = "Lot Change Location Wizard"
     _inherit = ["barcodes.barcode_events_mixin"]
 
-    lot_id = fields.Many2one("stock.production.lot")
+    lot_id = fields.Many2one("stock.lot")
     rack_id = fields.Many2one("warehouse.location.rack")
     lot_scanned = fields.Boolean()
 
     def on_barcode_scanned(self, barcode):
-        lot_id = self.env["stock.production.lot"].search([("name", "=", barcode)])
+        lot_id = self.env["stock.lot"].search([("name", "=", barcode)])
         if lot_id:
             if len(lot_id) > 1:
                 # error, multiple lots found
