@@ -51,7 +51,6 @@
                         class="oe_highlight"
                         string="New transfer"
                         invisible="state != 'approved' or picking_id"
-
                     />
                     <button
                         name="set_new"
@@ -59,7 +58,6 @@
                         class="oe_highlight"
                         string="Set new"
                         invisible="state != 'assigned'"
-
                     />
                     <button
                         name="set_in_progress"
@@ -74,7 +72,6 @@
                         class="oe_highlight"
                         string="Request approval"
                         invisible="state != 'progress'"
-
                     />
                     <button
                         name="approve"
@@ -82,7 +79,6 @@
                         class="oe_highlight"
                         string="Approve"
                         invisible="state != 'approval_requested'"
-
                         groups="deltatech_service_base.group_warranty_manager"
                     />
                     <button
@@ -91,7 +87,6 @@
                         class="oe_highlight"
                         string="Set done"
                         invisible="state != 'approved'"
-
                     />
                     <field name="type" invisible="1" />
                     <field
@@ -99,21 +94,18 @@
                         widget="statusbar"
                         options="{'clickable': '1'}"
                         invisible="type != 'warranty'"
-
                     />
                     <field
                         name="rec_state"
                         widget="statusbar"
                         options="{'clickable': '1'}"
                         invisible="type != 'recondition'"
-
                     />
                 </header>
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name"
-                                   invisible="name == '/'"  readonly="1" />
+                            <field name="name" invisible="name == '/'" readonly="1" />
                         </h1>
                     </div>
 
@@ -121,22 +113,15 @@
                     <group>
                         <group>
                             <field name="create_date" readonly="1" />
-                            <field name="date"
-                                   invisible="type != 'warranty'" />
+                            <field name="date" invisible="type != 'warranty'" />
 
                             />
-                            <field
-                                name="equipment_id"
-                                readonly="state not in ('new','assigned')"
-
-                            />
+                            <field name="equipment_id" readonly="state not in ('new','assigned')" />
                         </group>
                         <group>
-                            <field name="sale_order_id"
-                                   invisible="type != 'warranty'" />
+                            <field name="sale_order_id" invisible="type != 'warranty'" />
 
-                            <field name="invoice_id"
-                                   invisible="type != 'warranty'" />
+                            <field name="invoice_id" invisible="type != 'warranty'" />
 
                         </group>
                         <group name="responsible">
@@ -145,28 +130,22 @@
                                 domain="[('share', '=', False)]"
                                 widget="many2one_avatar_user"
                                 readonly="state not in ('new','assigned')"
-
                             />
                         </group>
                         <group name="partner" invisible="type != 'warranty'">
 
-                            <field name="partner_id"
-                                   required="type == 'warranty'" />
+                            <field name="partner_id" required="type == 'warranty'" />
 
                             <field name="has_agreement" />
                             <field name="state" groups="deltatech_service_base.group_warranty_manager" />
                         </group>
                         <group>
-                            <field name="picking_id" readonly="1"
-                                   invisible="type != 'warranty'" />
+                            <field name="picking_id" readonly="1" invisible="type != 'warranty'" />
                                    />
                         </group>
                         <group name="clarifications">
-                            <field
-                                name="clarifications_state"
-                                invisible="state != 'approval_requested'"
+                            <field name="clarifications_state" invisible="state != 'approval_requested'" />
 
-                            />
                         </group>
                         <group colspan="2">
                             <field
