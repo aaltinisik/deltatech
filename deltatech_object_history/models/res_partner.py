@@ -14,7 +14,7 @@ class Partner(models.Model):
             "res_model": "object.history",
             "target": "current",
             "type": "ir.actions.act_window",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "name": _("History"),
             "domain": [["res_id", "=", self.id], ["res_model", "=", "res.partner"]],
         }
