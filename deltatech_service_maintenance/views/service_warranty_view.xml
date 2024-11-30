@@ -6,7 +6,7 @@
         <field name="model">service.warranty</field>
         <field name="arch" type="xml">
             <tree
-                string="Warranty"
+
                 default_order="create_date desc"
                 sample="1"
                 decoration-info="state == 'new'"
