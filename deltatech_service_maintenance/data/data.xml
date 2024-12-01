@@ -8,6 +8,14 @@
             <field name="number_next">1</field>
             <field name="number_increment">1</field>
         </record>
+        <record id="sequence_warranty" model="ir.sequence">
+            <field name="name">Warranty</field>
+            <field name="code">service.warranty</field>
+            <field name="prefix">W/%(year)s/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
         <record id="sequence_order" model="ir.sequence">
             <field name="name">Service Order</field>
             <field name="code">service.order</field>
@@ -29,6 +37,18 @@
         </record>
         <record id="equi_not_work" model="service.operating.parameter">
             <field name="name">the equipment not works</field>
+        </record>
+
+        <record id="action_clear_clarifications" model="ir.actions.server">
+            <field name="name">Clear clarifications status</field>
+            <field name="model_id" ref="model_service_warranty" />
+            <field name="binding_model_id" ref="model_service_warranty" />
+            <field name="groups_id" eval="[(4, ref('deltatech_service_base.group_warranty_manager'))]" />
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                records.write({"clarifications_state": False})
+            </field>
         </record>
 
 </odoo>
