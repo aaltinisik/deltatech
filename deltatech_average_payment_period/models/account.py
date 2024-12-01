@@ -57,4 +57,4 @@ class AccountMoveLine(models.Model):
                             diff = payment_date - aml.date
                             aml.payment_days_simple = diff.days
             except Exception as e:
-                _logger.info("Compute payment days failed for id {}: {}".format(aml.move_id.id, e))
+                _logger.info(f"Compute payment days failed for id {aml.move_id.id}: {e}")
