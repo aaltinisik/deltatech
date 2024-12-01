@@ -63,7 +63,9 @@ class StockPicking(models.Model):
                     value = 0.0
                     for layer in move.stock_valuation_layer_ids:
                         value = +layer.value
-                    line = picking.warranty_id.item_ids.filtered(lambda p: p.product_id == move.product_id)
+                    line = picking.warranty_id.item_ids.filtered(
+                        lambda p, product_id=move.product_id: p.product_id == product_id
+                    )
                     if not line or len(line) > 1:
                         raise UserError(_("No lines or multiple lines in linked warranty found"))
                     else:
