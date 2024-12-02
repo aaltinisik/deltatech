@@ -10,7 +10,7 @@
     "category": "Sales",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
-    "depends": ["sale", "contacts", "deltatech_contact"],
+    "depends": ["sale", "contacts", "deltatech_contact", "account"],
     "license": "OPL-1",
     "data": [
         'views/res_partner_view.xml',

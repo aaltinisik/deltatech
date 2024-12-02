@@ -11,6 +11,8 @@ class Partner(models.Model):
     _inherit = "res.partner"
 
     contact_default = fields.Boolean(string="Contact Default", default=False)
+    print_green_invoice = fields.Boolean("Green Invoice", default=False, help="If checked, the invoice will not be printed.")
+
 
     def address_get(self, adr_pref=None):
         res  = super().address_get(adr_pref)
