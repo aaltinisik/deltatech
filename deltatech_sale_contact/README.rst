@@ -1,6 +1,6 @@
-==========
-Sale Phone
-==========
+============
+Sale Contact
+============
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -17,14 +17,14 @@ Sale Phone
     :target: https://www.odoo.com/documentation/master/legal/licenses.html
     :alt: License: OPL-1
 .. |badge3| image:: https://img.shields.io/badge/github-dhongu%2Fdeltatech-lightgray.png?logo=github
-    :target: https://github.com/dhongu/deltatech/tree/17.0/deltatech_sale_phone
+    :target: https://github.com/dhongu/deltatech/tree/17.0/deltatech_sale_contact
     :alt: dhongu/deltatech
 
 |badge1| |badge2| |badge3|
 
 -  Features:
 
-   -  add phone number in sales order
+   -  Limitare selectare contacte
 
 **Table of contents**
 
@@ -59,6 +59,6 @@ Current maintainer:
 
 |maintainer-dhongu| 
 
-This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/17.0/deltatech_sale_phone>`_ project on GitHub.
+This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/17.0/deltatech_sale_contact>`_ project on GitHub.
 
 You are welcome to contribute.

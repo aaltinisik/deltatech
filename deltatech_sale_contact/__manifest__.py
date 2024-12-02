@@ -13,7 +13,7 @@
     "depends": ["sale", "contacts", "deltatech_contact", "account"],
     "license": "OPL-1",
     "data": [
-        'views/res_partner_view.xml',
+        "views/res_partner_view.xml",
     ],
     "development_status": "Beta",
     "images": ["static/description/main_screenshot.png"],

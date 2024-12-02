@@ -4,10 +4,9 @@
 
 from odoo import models
 
+
 class AccountMoveSend(models.TransientModel):
-    _inherit = 'account.move.send'
-
-
+    _inherit = "account.move.send"
 
     # def _compute_enable_download(self):
     #     res = super()._compute_enable_download()
@@ -20,11 +19,10 @@ class AccountMoveSend(models.TransientModel):
     #                     break
     #     return res
 
-
     def _compute_checkbox_download(self):
         res = super()._compute_checkbox_download()
         for wizard in self:
-            if wizard.checkbox_download  and wizard.mode == 'invoice_single':
+            if wizard.checkbox_download and wizard.mode == "invoice_single":
                 for move in wizard.move_ids:
                     if move.partner_id.print_green_invoice:
                         wizard.checkbox_download = False
