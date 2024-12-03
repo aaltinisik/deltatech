@@ -17,14 +17,14 @@ class StockPicking(models.Model):
                 raise UserError(_("Not all products are available."))
 
             for move in picking.move_ids:
-                if move.product_uom_qty > 0 and move.quantity_done == 0:
+                if move.product_uom_qty > 0 and move.quantity == 0:
                     # check if move has multiple move lines. You cannot set quantity_done if so
                     move_line_ids = move._get_move_lines()
                     if len(move_line_ids) > 1:
                         for stock_move_line in move_line_ids:
                             stock_move_line.write({"quantity": stock_move_line.product_uom_qty})
                     else:
-                        move.write({"quantity_done": move.product_uom_qty})
+                        move.write({"quantity": move.product_uom_qty})
                 else:
                     move.unlink()
             picking._action_done()

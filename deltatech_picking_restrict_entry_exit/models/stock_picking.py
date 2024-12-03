@@ -5,11 +5,9 @@ from odoo.exceptions import UserError
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals_list):
-        if isinstance(vals_list, dict):
-            vals_list_here = [vals_list]
-        for vals in vals_list_here:
+        for vals in vals_list:
             picking_type = self.env["stock.picking.type"].browse(vals.get("picking_type_id"))
             group = self.env.ref("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit")
             if picking_type.code in ["incoming", "outgoing"]:
