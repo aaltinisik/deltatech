@@ -8,15 +8,18 @@ class StockPicking(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            picking_type = self.env["stock.picking.type"].browse(vals.get("picking_type_id"))
-            group = self.env.ref("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit")
-            if picking_type.code in ["incoming", "outgoing"]:
-                if not vals.get("origin") and group not in self.env.user.groups_id:
-                    raise UserError(
-                        _("You can't create a receipt/delivery picking without a purchase/sale source document.")
-                    )
+            if not self.env.user.has_group("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit"):
+                picking_type = self.env["stock.picking.type"].browse(vals.get("picking_type_id"))
+                if picking_type.code =="outgoing":
+                    if not vals.get("sale_id"):
+                        raise UserError(_("You cannot create an outgoing picking without a source sale order."))
+                elif picking_type.code == "incoming":
+                    if not vals.get("purchase_id"):
+                        raise UserError(_("You cannot create an incoming picking without a source purchase order."))
+
         return super().create(vals_list)
 
+    # self.env.user.has_group("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit")
     def button_validate(self):
         for picking in self:
             if picking.picking_type_id.code in ["incoming", "outgoing"]:

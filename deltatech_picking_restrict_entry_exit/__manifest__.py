@@ -3,7 +3,7 @@
 {
     "name": "Picking Validation Restrict Entry Exit",
     "summary": "You can't create entry/exit picking if there are no purchase/sale atached",
-    "version": "17.0.0.0.2",
+    "version": "17.0.0.0.3",
     "author": "Terrabit, Voicu Stefan",
     "website": "https://www.terrabit.ro",
     "category": "Warehouse",
