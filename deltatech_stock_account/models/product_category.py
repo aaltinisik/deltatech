@@ -46,7 +46,7 @@ class ProductCategory(models.Model):
 
     @api.onchange("parent_id")
     def _onchange_parent_id(self):
-        res = super()._onchange_parent_id()
+
         if self.parent_id:
             self.property_stock_valuation_account_id = self.parent_id.property_stock_valuation_account_id
             self.property_account_expense_categ_id = self.parent_id.property_account_expense_categ_id
