@@ -12,10 +12,10 @@ class ProductWarehouseLocation(models.Model):
 
     product_id = fields.Many2one("product.template", index=True)
     warehouse_id = fields.Many2one("stock.warehouse", index=True)
-    loc_rack = fields.Char("Rack", size=16)
-    loc_row = fields.Char("Row", size=16)
-    loc_shelf = fields.Char("Shelf", size=16)
-    loc_case = fields.Char("Case", size=16)
+    loc_rack = fields.Char("Rack Name", size=16)
+    loc_row = fields.Char("Row Name", size=16)
+    loc_shelf = fields.Char("Shelf Name", size=16)
+    loc_case = fields.Char("Case Name", size=16)
 
     _sql_constraints = [
         (

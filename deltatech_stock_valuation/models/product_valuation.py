@@ -457,7 +457,7 @@ class ProductValuationHistory(models.Model):
         """
         self.env.cr.execute(sql, params)
         # invalidate chashed fields
-        self.invalidate_cache()
+        self._invalidate_cache()
         self._compute_final()
 
     def recompute_all_amount(self):
