@@ -58,4 +58,4 @@ class ProductCategory(models.Model):
             self.property_cost_method = self.parent_id.property_cost_method
             self.property_valuation = self.parent_id.property_valuation
 
-        return res
+
