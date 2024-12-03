@@ -11,7 +11,7 @@ class SaleOrderPhase(models.Model):
     _description = "SaleOrderPhase"
     _order = "sequence, name"
 
-    name = fields.Char()
+    name = fields.Char(translate=True, required=True)
     color = fields.Integer()
     code = fields.Char()
 
