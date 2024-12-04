@@ -1,7 +1,6 @@
 # ©  2008-2018 Fekete Mihai <mihai.fekete@forbiom.eu>
 #              Dorin Hongu <dhongu(@)gmail(.)com
 # See README.rst file on addons root folder for license details
-from typing import Dict, List
 
 from odoo import api, models
 
@@ -46,16 +45,15 @@ class ProductCategory(models.Model):
 
     @api.onchange("parent_id")
     def _onchange_parent_id(self):
-
         if self.parent_id:
             self.property_stock_valuation_account_id = self.parent_id.property_stock_valuation_account_id
             self.property_account_expense_categ_id = self.parent_id.property_account_expense_categ_id
             self.property_account_income_categ_id = self.parent_id.property_account_income_categ_id
             self.property_stock_account_input_categ_id = self.parent_id.property_stock_account_input_categ_id
             self.property_stock_account_output_categ_id = self.parent_id.property_stock_account_output_categ_id
-            self.property_account_creditor_price_difference_categ = self.parent_id.property_account_creditor_price_difference_categ
+            self.property_account_creditor_price_difference_categ = (
+                self.parent_id.property_account_creditor_price_difference_categ
+            )
             self.property_stock_journal = self.parent_id.property_stock_journal
             self.property_cost_method = self.parent_id.property_cost_method
             self.property_valuation = self.parent_id.property_valuation
-
-

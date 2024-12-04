@@ -10,7 +10,7 @@ class StockPicking(models.Model):
         for vals in vals_list:
             if not self.env.user.has_group("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit"):
                 picking_type = self.env["stock.picking.type"].browse(vals.get("picking_type_id"))
-                if picking_type.code =="outgoing":
+                if picking_type.code == "outgoing":
                     if not vals.get("sale_id"):
                         raise UserError(_("You cannot create an outgoing picking without a source sale order."))
                 elif picking_type.code == "incoming":
