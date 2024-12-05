@@ -10,6 +10,7 @@ class StockPicking(models.Model):
     is_transit_transfer = fields.Boolean(default=False, compute="_compute_is_transit_transfer")
     sub_location_existent = fields.Boolean(default=False, compute="_compute_sub_location_existent")
     second_transfer_created = fields.Boolean(default=False)
+    source_transfer_id = fields.Many2one("stock.picking")
 
     def open_transfer_wizard(self):
         if self.second_transfer_created:
@@ -41,6 +42,7 @@ class StockPicking(models.Model):
 
                 message = _("This transfer was generated from %s.") % picking.name
                 new_picking.message_post(body=message)
+                new_picking.source_transfer_id = picking.id
                 message = _("Transfer %s was generated.") % new_picking.name
 
                 picking.message_post(body=message)
@@ -102,3 +104,14 @@ class StockPicking(models.Model):
             # record.immediate_transfer = False
             else:
                 record.is_transit_transfer = False
+
+    def button_validate(self):
+        for picking in self:
+            if picking.source_transfer_id:
+                for move in picking.move_ids_without_package:
+                    other_moves = picking.source_transfer_id.move_ids_without_package.filtered(
+                        lambda x: x.product_id == move.product_id
+                    )
+                    if not other_moves:
+                        raise UserError(_("You cannot validate the picking because the product %s is not from the source picking") % move.product_id.display_name)
+        return super().button_validate()
