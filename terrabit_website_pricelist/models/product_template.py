@@ -33,7 +33,7 @@ class ProductTemplate(models.Model):
             public_pricelist = self.env["product.pricelist"].search([("selectable", "=", True)])
             if len(public_pricelist) > 1:
                 public_pricelist = public_pricelist[0]
-            list_price = public_pricelist.get_product_price(product, add_qty, False)
+            list_price = public_pricelist._get_product_price(product, add_qty, False)
             if pricelist.currency_id != public_pricelist.currency_id:
                 list_price = public_pricelist.currency_id._convert(
                     from_amount=list_price,
