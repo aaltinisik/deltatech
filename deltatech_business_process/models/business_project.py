@@ -5,6 +5,7 @@ import xlsxwriter
 from odoo import _, api, fields, models
 import base64
 from odoo.exceptions import UserError
+# from odoo.tools import date_utils
 
 
 class BusinessProject(models.Model):
@@ -182,7 +183,7 @@ class BusinessProject(models.Model):
         headers = ['Code', 'Name', 'Configuration Duration', 'Training duration', 'Data Migration Duration', 'Total Duration']
         for col_num, header in enumerate(headers):
             worksheet.write(0, col_num, header, header_format)
-            worksheet.set_column(col_num, col_num, len(header) + 2)  # Set column width to fit the header text
+            worksheet.set_column(col_num, col_num, len(header) + 2)
 
         area_processes = {}
         for process in self.process_ids:
@@ -197,7 +198,6 @@ class BusinessProject(models.Model):
         instructing_duration = 0
         data_migration_duration= 0
         duration_for_completion = 0
-        # Sort processes in each area by process code
         for area in sorted(area_processes.keys(), key=lambda a: a.name):
             processes = area_processes[area]
             processes.sort(key=lambda p: p.code)
@@ -229,7 +229,7 @@ class BusinessProject(models.Model):
         #     worksheet.write(row, 4, project.date_start and project.date_start.strftime('%Y-%m-%d') or '')
         #     worksheet.write(row, 5, project.date_go_live and project.date_go_live.strftime('%Y-%m-%d') or '')
         #     row += 1
-        worksheet.autofit()
+        # worksheet.autofit()
 
         workbook.close()
         output.seek(0)
