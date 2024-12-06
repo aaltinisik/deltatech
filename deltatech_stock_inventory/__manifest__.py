@@ -5,12 +5,12 @@
 {
     "name": "Stock Inventory",
     "summary": "Inventory Old Method",
-    "version": "16.0.2.2.7",
+    "version": "16.0.2.2.8",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
     "category": "Warehouse",
     "depends": [
-        # "deltatech_stock_date",
+        # "deltatech_stock_date",  # de ce trebuie asta?
         "stock",
         "stock_account",
     ],
@@ -28,6 +28,7 @@
         # "wizard/stock_change_product_qty_view.xml",
         "views/product_kanban_view.xml",
         "wizard/stock_inventory_merge.xml",
+        "wizard/product_replenish_views.xml",
     ],
     "images": ["images/main_screenshot.png"],
     "installable": True,
