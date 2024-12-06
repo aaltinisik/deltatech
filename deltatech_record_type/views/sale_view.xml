@@ -25,7 +25,7 @@
         <field name="inherit_id" ref="sale.view_sales_order_filter" />
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <field name="so_type" required="1"/>
+                <field name="so_type"/>
             </field>
             <xpath expr="//group" position="inside">
                 <filter name='group_by_type' string="Type" domain="[]" context="{'group_by':'so_type'}" />
