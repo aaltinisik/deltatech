@@ -27,3 +27,13 @@ class Partner(models.Model):
                     if child_id.contact_default:
                         res["invoice"] = child_id.id
         return res
+
+    def write(self, vals):
+        res = super().write(vals)
+        if vals.get("contact_default", False):
+            for partner in self:
+                if partner.parent_id:
+                    partner.parent_id.child_ids.filtered(
+                        lambda x: x.type == partner.type and x.id != partner.id
+                    ).write({"contact_default": False})
+        return res
