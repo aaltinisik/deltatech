@@ -69,6 +69,7 @@ class StockInventoryLine(models.Model):
 
     categ_id = fields.Many2one("product.category", string="Category", related="product_id.categ_id", store=True)
     standard_price = fields.Float(string="Price")
+
     loc_rack = fields.Char("Rack Name", size=16, compute="_compute_loc", store=True)
     loc_row = fields.Char("Row Name", size=16, compute="_compute_loc", store=True)
     loc_case = fields.Char("Case Name", size=16, compute="_compute_loc", store=True)
@@ -87,8 +88,12 @@ class StockInventoryLine(models.Model):
     def create(self, vals_list):
         for values in vals_list:
             if "standard_price" not in values:
-                product = self.env["product.product"].browse(values["product_id"])
-                values["standard_price"] = product.standard_price
+                if "product_id" in values:
+                    product = self.env["product.product"].browse(values["product_id"])
+                    values["standard_price"] = product.standard_price
+                elif self.env.context.get("default_product_id", False):
+                    product = self.env["product.product"].browse(self.env.context.get("default_product_id", False))
+                    values["standard_price"] = product.standard_price
         return super().create(vals_list)
 
     @api.onchange(
@@ -124,7 +129,10 @@ class StockInventoryLine(models.Model):
         for inventory_line in self:
             if (
                 not inventory_line.theoretical_qty
-                or inventory_line.product_id.cost_method == "fifo"
+                or (
+                    inventory_line.product_id.cost_method == "fifo"
+                    or inventory_line.product_id.cost_method == "average"
+                )
                 and use_inventory_price
             ):
                 inventory_line.product_id.with_context(disable_auto_svl=True).write(
