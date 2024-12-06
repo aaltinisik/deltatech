@@ -5,7 +5,6 @@ import xlsxwriter
 from odoo import _, api, fields, models
 import base64
 from odoo.exceptions import UserError
-from odoo.tools import date_utils
 
 
 class BusinessProject(models.Model):
