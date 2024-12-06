@@ -25,7 +25,7 @@
     "css": ["static/src/scss/override.scss"],
     "assets": {
         "web.assets_frontend": [
-            "deltatech_website_billing_addresses/static/src/js/billing_addresses.js",
+            # "deltatech_website_billing_addresses/static/src/js/billing_addresses.js",
         ],
     },
     "development_status": "Beta",
