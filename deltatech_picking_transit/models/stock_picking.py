@@ -113,5 +113,8 @@ class StockPicking(models.Model):
                         lambda x: x.product_id == move.product_id
                     )
                     if not other_moves:
-                        raise UserError(_("You cannot validate the picking because the product %s is not from the source picking") % move.product_id.display_name)
+                        raise UserError(
+                            _("You cannot validate the picking because the product %s is not from the source picking")
+                            % move.product_id.display_name
+                        )
         return super().button_validate()
