@@ -10,7 +10,7 @@ from odoo.exceptions import UserError
 class BusinessIssue(models.Model):
     _name = "business.issue"
     _description = "Business Issue"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ['portal.mixin',"mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(
         string="Name",

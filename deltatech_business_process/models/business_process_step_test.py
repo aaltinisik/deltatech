@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class BusinessProcessStepTest(models.Model):
     _name = "business.process.step.test"
+    _inherit = ["portal.mixin"]
     _description = "Business Process Step Test"
 
     process_test_id = fields.Many2one(

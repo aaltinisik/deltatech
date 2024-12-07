@@ -59,7 +59,7 @@
                             <field name="count_issues" widget="statinfo" string="Issues" />
                         </button>
                     </div>
-                    <field name="logo" widget="image" class="oe_avatar" />
+                    <field name="logo" widget="image" class="oe_avatar" groups="base.group_user"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" default_focus="1" placeholder="Name" class="oe_inline" />
@@ -83,11 +83,7 @@
 
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="activity_ids" widget="mail_activity" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <div class="oe_chatter"/>
             </form>
         </field>
     </record>
@@ -190,5 +186,24 @@
         parent="menu_business_process_main"
         sequence="10"
     />
+    <record
+        id="action_business_project_sharing_form_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Business project</field>
+        <field name="res_model">business.project</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_business_project_form" />
+        <field name="search_view_id" ref="view_business_project_filter" />
+        <field name="context">{
+            'default_business_project_id': active_id,
+            'default_res_model': 'business.project',
+            'default_res_id': active_id,
+            'delete': 0,
+            'active_id_chatter': active_id,
+            'business_project_sharing_id': active_id,
+            'res_model': 'business.project',
+        }</field>
+    </record>
 
 </odoo>

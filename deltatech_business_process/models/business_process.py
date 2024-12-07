@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class BusinessProcess(models.Model):
     _name = "business.process"
     _description = "Business process"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ['portal.mixin',"mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(
         string="Name",

@@ -9,7 +9,7 @@ from odoo import api, fields, models
 class BusinessDevelopment(models.Model):
     _name = "business.development"
     _description = "Business Development"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ['portal.mixin',"mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code")

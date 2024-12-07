@@ -9,7 +9,7 @@ from odoo import _, api, fields, models
 class BusinessProcessTest(models.Model):
     _name = "business.process.test"
     _description = "Business process Test"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ['portal.mixin',"mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="Name", required=True, readonly=False, states={"done": [("readonly", True)]})
     process_id = fields.Many2one(
