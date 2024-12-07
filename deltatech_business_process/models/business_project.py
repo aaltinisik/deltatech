@@ -166,6 +166,8 @@ class BusinessProject(models.Model):
     def float_to_time(self, float_hours):
         hours = int(float_hours)
         minutes = int((float_hours - hours) * 60)
+        if minutes % 5 != 0:
+            minutes = round(minutes / 5) * 5
         if minutes < 10:
             minutes = f"0{minutes}"
         if hours < 10:
@@ -180,7 +182,7 @@ class BusinessProject(models.Model):
         red_text_format = workbook.add_format({'font_color': 'red'})
 
         # Add headers
-        headers = ['Code', 'Name', 'Configuration Duration', 'Training duration', 'Data Migration Duration', 'Total Duration']
+        headers = ['Code', 'Name', 'Configuration Duration', 'Training duration','Testing duration' ,'Data Migration Duration', 'Total Duration']
         for col_num, header in enumerate(headers):
             worksheet.write(0, col_num, header, header_format)
             worksheet.set_column(col_num, col_num, len(header) + 2)
@@ -198,10 +200,11 @@ class BusinessProject(models.Model):
         instructing_duration = 0
         data_migration_duration= 0
         duration_for_completion = 0
+        duration_for_testing = 0
         for area in sorted(area_processes.keys(), key=lambda a: a.name):
             processes = area_processes[area]
             processes.sort(key=lambda p: p.code)
-            worksheet.merge_range(row, 0, row, 5, f"{area.name} - {len(processes)}", area_format)
+            worksheet.merge_range(row, 0, row, 6, f"{area.name} - {len(processes)}", area_format)
             row += 1
             for process in processes:
                 format_to_use = red_text_format if process.duration_for_completion == 0 else None
@@ -213,14 +216,17 @@ class BusinessProject(models.Model):
                 instructing_duration += process.instructing_duration
                 worksheet.write(row, 4, self.float_to_time(process.data_migration_duration), format_to_use)
                 data_migration_duration += process.data_migration_duration
-                worksheet.write(row, 5, self.float_to_time(process.duration_for_completion), format_to_use)
+                worksheet.write(row, 5, self.float_to_time(process.testing_duration), format_to_use)
+                duration_for_testing += process.testing_duration
+                worksheet.write(row, 6, self.float_to_time(process.duration_for_completion), format_to_use)
                 duration_for_completion += process.duration_for_completion
                 row += 1
         worksheet.write(row, 1, 'Total', header_format)
         worksheet.write(row, 2, self.float_to_time(configuration_duration), header_format)
         worksheet.write(row, 3, self.float_to_time(instructing_duration), header_format)
         worksheet.write(row, 4, self.float_to_time(data_migration_duration), header_format)
-        worksheet.write(row, 5, self.float_to_time(duration_for_completion), header_format)
+        worksheet.write(row, 5, self.float_to_time(duration_for_testing), header_format)
+        worksheet.write(row, 6, self.float_to_time(duration_for_completion), header_format)
         # for project in self:
         #     worksheet.write(row, 0, project.code)
         #     worksheet.write(row, 1, project.name)
