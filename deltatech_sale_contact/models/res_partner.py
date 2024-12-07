@@ -33,7 +33,7 @@ class Partner(models.Model):
         if vals.get("contact_default", False):
             for partner in self:
                 if partner.parent_id:
-                    partner.parent_id.child_ids.filtered(
-                        lambda x: x.type == partner.type and x.id != partner.id
-                    ).write({"contact_default": False})
+                    partner.parent_id.child_ids.filtered(lambda x: x.type == partner.type and x.id != partner.id).write(
+                        {"contact_default": False}
+                    )
         return res

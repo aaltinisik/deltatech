@@ -51,8 +51,6 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-
-
     # def get_price_unit_w_taxes(self):
     #     # check if price_unit is with taxes
     #     if not self.display_type:
@@ -168,5 +166,3 @@ class SaleOrderLine(models.Model):
                     else:
                         message = _("Sale %s below margin.") % line.product_id.name
                         line.order_id.message_post(body=message)
-
-

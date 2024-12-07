@@ -1,10 +1,13 @@
 # ©  2023 Deltatech
 # See README.rst file on addons root folder for license details
-import io
-import xlsxwriter
-from odoo import _, api, fields, models
 import base64
+import io
+
+import xlsxwriter
+
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
 # from odoo.tools import date_utils
 
 
@@ -176,13 +179,21 @@ class BusinessProject(models.Model):
 
     def generate_excel_report(self):
         output = io.BytesIO()
-        workbook = xlsxwriter.Workbook(output, {'in_memory': True})
+        workbook = xlsxwriter.Workbook(output, {"in_memory": True})
         worksheet = workbook.add_worksheet()
-        header_format = workbook.add_format({'bg_color': '#D0F0C0', 'bold': True})
-        red_text_format = workbook.add_format({'font_color': 'red'})
+        header_format = workbook.add_format({"bg_color": "#D0F0C0", "bold": True})
+        red_text_format = workbook.add_format({"font_color": "red"})
 
         # Add headers
-        headers = ['Code', 'Name', 'Configuration Duration', 'Training duration','Testing duration' ,'Data Migration Duration', 'Total Duration']
+        headers = [
+            "Code",
+            "Name",
+            "Configuration Duration",
+            "Training duration",
+            "Testing duration",
+            "Data Migration Duration",
+            "Total Duration",
+        ]
         for col_num, header in enumerate(headers):
             worksheet.write(0, col_num, header, header_format)
             worksheet.set_column(col_num, col_num, len(header) + 2)
@@ -193,12 +204,12 @@ class BusinessProject(models.Model):
                 if process.area_id not in area_processes:
                     area_processes[process.area_id] = []
                 area_processes[process.area_id].append(process)
-        area_format = workbook.add_format({'bg_color': '#FFFF99', 'bold': True, 'align': 'center'})
+        area_format = workbook.add_format({"bg_color": "#FFFF99", "bold": True, "align": "center"})
 
         row = 1
         configuration_duration = 0
         instructing_duration = 0
-        data_migration_duration= 0
+        data_migration_duration = 0
         duration_for_completion = 0
         duration_for_testing = 0
         for area in sorted(area_processes.keys(), key=lambda a: a.name):
@@ -221,7 +232,7 @@ class BusinessProject(models.Model):
                 worksheet.write(row, 6, self.float_to_time(process.duration_for_completion), format_to_use)
                 duration_for_completion += process.duration_for_completion
                 row += 1
-        worksheet.write(row, 1, 'Total', header_format)
+        worksheet.write(row, 1, "Total", header_format)
         worksheet.write(row, 2, self.float_to_time(configuration_duration), header_format)
         worksheet.write(row, 3, self.float_to_time(instructing_duration), header_format)
         worksheet.write(row, 4, self.float_to_time(data_migration_duration), header_format)
@@ -242,23 +253,25 @@ class BusinessProject(models.Model):
         return output.read()
 
     def action_download_excel_report(self):
-        active_id = self.env.context.get('active_id')
+        active_id = self.env.context.get("active_id")
         if not active_id:
             raise UserError(_("No active project found."))
 
         project = self.browse(active_id)
         excel_data = project.generate_excel_report()
 
-        attachment = self.env['ir.attachment'].create({
-            'name': 'Project_Report.xlsx',
-            'type': 'binary',
-            'datas': base64.b64encode(excel_data),
-            'store_fname': 'Project_Report.xlsx',
-            'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        })
+        attachment = self.env["ir.attachment"].create(
+            {
+                "name": "Project_Report.xlsx",
+                "type": "binary",
+                "datas": base64.b64encode(excel_data),
+                "store_fname": "Project_Report.xlsx",
+                "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            }
+        )
 
         return {
-            'type': 'ir.actions.act_url',
-            'url': f'/web/content/{attachment.id}?download=true',
-            'target': 'self',
+            "type": "ir.actions.act_url",
+            "url": f"/web/content/{attachment.id}?download=true",
+            "target": "self",
         }
