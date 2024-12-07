@@ -14,6 +14,7 @@
                 </div>
             </xpath>
         </template>
+
         <template id="product_code" inherit_id="website_sale.product" name="Internal code" customize_show="True">
             <xpath expr="//h1[@t-field='product.name']" position="after">
                 <div t-if="product.default_code">
