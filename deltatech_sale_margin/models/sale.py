@@ -12,6 +12,11 @@ class SaleOrder(models.Model):
 
     price_warning_message = fields.Char(compute="_compute_price_warning_message")
 
+    can_change_price = fields.Boolean(compute="_compute_can_change_price")
+
+    def _compute_can_change_price(self):
+        self.can_change_price = not self.env.user.has_group("deltatech_sale_margin.group_sale_no_change_price")
+
     def _compute_price_warning_message(self):
         self.price_warning_message = False
         for order in self.filtered(lambda o: o.state in ["draft", "sent"]):
@@ -45,6 +50,8 @@ class SaleOrder(models.Model):
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
+
+
 
     # def get_price_unit_w_taxes(self):
     #     # check if price_unit is with taxes
@@ -161,3 +168,5 @@ class SaleOrderLine(models.Model):
                     else:
                         message = _("Sale %s below margin.") % line.product_id.name
                         line.order_id.message_post(body=message)
+
+
