@@ -52,4 +52,11 @@ class QueueJob(models.Model):
             if job_count >= limit_jobs:
                 if job:
                     job._ensure_cron_trigger()
+                    job._cron_trigger()
                 break
+        _logger.info("Job runner finished")
+
+    @api.model
+    def _cron_trigger(self, at=None):
+        _logger.info("CRON Trigger")
+        return super()._cron_trigger(at=at)
