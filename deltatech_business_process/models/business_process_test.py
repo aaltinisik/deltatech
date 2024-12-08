@@ -170,6 +170,8 @@ class BusinessProcessTest(models.Model):
         self.sudo().with_user(self.env.user).write({"state": "done"})
         for test in self:
             process = test.process_id.sudo()
+            # verifica daca toate testele sunt completate
+            # altfel da eroare cad vrea sa calculeze date_end
             if test.test_step_ids.filtered(lambda x: x.result == "draft"):
                 raise UserError(_("All test steps must be completed."))
             if test.test_step_ids.filtered(lambda x: x.result == "failed"):
