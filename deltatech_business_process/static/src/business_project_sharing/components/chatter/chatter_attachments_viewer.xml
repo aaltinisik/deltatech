@@ -9,9 +9,7 @@
                     t-key="attachment.id"
                     class="col-lg-3 col-md-4 col-sm-6"
                 >
-                    <div
-                        class="o_portal_chatter_attachment mb-2 position-relative text-center"
-                    >
+                    <div class="o_portal_chatter_attachment mb-2 position-relative text-center">
                         <button
                             t-if="props.canDelete and attachment.state == 'pending'"
                             class="btn btn-sm btn-outline-danger"

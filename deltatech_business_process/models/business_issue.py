@@ -10,7 +10,7 @@ from odoo.exceptions import UserError
 class BusinessIssue(models.Model):
     _name = "business.issue"
     _description = "Business Issue"
-    _inherit = ['portal.mixin',"mail.thread", "mail.activity.mixin"]
+    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(
         string="Name",
@@ -133,15 +133,20 @@ class BusinessIssue(models.Model):
         string="Closed by", comodel_name="res.partner", readonly=True, states={"in_test": [("readonly", False)]}
     )
 
-    @api.model
-    def create(self, vals):
-        if not vals.get("code", False):
-            vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
-        result = super().create(vals)
-        result.send_mail()
-        return result
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("code", False):
+                vals["code"] = self.env["ir.sequence"].sudo().next_by_code(self._name)
+        records = super().create(vals_list)
+        for record in records:
+            if self.env.user.has_group("base.group_portal"):
+                record = record.sudo()
+            record.send_mail()
+        return records
 
     def send_mail(self):
+        self.ensure_one()
         today = date.today().strftime("%Y-%m-%d")
         self.sudo().message_post(body=f"Date of approval: {today}")
         template = self.env.ref("deltatech_business_process.email_template_issue_submitted")
@@ -186,6 +191,8 @@ class BusinessIssue(models.Model):
             if issue.step_test_id:
                 issue.step_test_id.write({"result": "failed"})
 
+        if self.env.user.has_group("base.group_portal"):
+            self = self.sudo()
         self._add_followers()
         # trimite email la responsible
 

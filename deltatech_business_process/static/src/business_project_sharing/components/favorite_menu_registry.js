@@ -10,9 +10,7 @@ import {registry} from "@web/core/registry";
  */
 export function prepareFavoriteMenuRegister() {
     let customFavoriteItemKey = "favorite-generator-menu";
-    const keys = FavoriteMenuLegacy.registry
-        .keys()
-        .filter((key) => key !== customFavoriteItemKey);
+    const keys = FavoriteMenuLegacy.registry.keys().filter((key) => key !== customFavoriteItemKey);
     FavoriteMenuLegacy.registry = Object.assign(FavoriteMenuLegacy.registry, {
         map: {},
         _scoreMapping: {},

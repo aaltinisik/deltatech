@@ -121,7 +121,13 @@
                             <field name="count_developments" widget="statinfo" string="Developments" />
                         </button>
 
-                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-file-text-o">
+                        <button
+                            class="oe_stat_button"
+                            name="attachment_tree_view"
+                            type="object"
+                            icon="fa-file-text-o"
+                            groups="base.group_user"
+                        >
                             <field string="Documents" name="doc_count" widget="statinfo" />
                         </button>
                     </div>
@@ -243,7 +249,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter"/>
+                <div class="oe_chatter" />
             </form>
         </field>
     </record>

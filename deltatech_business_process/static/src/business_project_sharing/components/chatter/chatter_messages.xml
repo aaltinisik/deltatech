@@ -4,17 +4,10 @@
         <div class="o_portal_chatter_messages">
             <t t-foreach="props.messages" t-as="message" t-key="message.id">
                 <div class="d-flex o_portal_chatter_message">
-                    <img
-                        class="o_portal_chatter_avatar"
-                        t-att-src="message.author_avatar_url"
-                        alt="avatar"
-                    />
+                    <img class="o_portal_chatter_avatar" t-att-src="message.author_avatar_url" alt="avatar" />
                     <div class="flex-grow-1">
                         <t t-if="props.isUserEmployee">
-                            <div
-                                t-if="message.is_message_subtype_note"
-                                class="float-end"
-                            >
+                            <div t-if="message.is_message_subtype_note" class="float-end">
                                 <button
                                     class="btn btn-secondary"
                                     title="Internal notes are only displayed to internal users."
@@ -42,15 +35,11 @@
                         </t>
                         <div class="o_portal_chatter_message_title">
                             <h5 class='mb-1'><t t-out="message.author_id[1]" /></h5>
-                            <p class="o_portal_chatter_puslished_date"><t
-                                    t-out="message.published_date_str"
-                                /></p>
+                            <p class="o_portal_chatter_puslished_date"><t t-out="message.published_date_str" /></p>
                         </div>
                         <t t-out="message.body" />
                         <div class="o_portal_chatter_attachments">
-                            <ChatterAttachmentsViewer
-                                attachments="message.attachment_ids"
-                            />
+                            <ChatterAttachmentsViewer attachments="message.attachment_ids" />
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
 /** @odoo-module **/
-import { useBus, useService } from '@web/core/utils/hooks';
-import { ActionContainer } from '@web/webclient/actions/action_container';
-import { MainComponentsContainer } from "@web/core/main_components_container";
-import { useOwnDebugContext } from "@web/core/debug/debug_context";
-import { session } from '@web/session';
+import {useBus, useService} from "@web/core/utils/hooks";
+import {ActionContainer} from "@web/webclient/actions/action_container";
+import {MainComponentsContainer} from "@web/core/main_components_container";
+import {useOwnDebugContext} from "@web/core/debug/debug_context";
+import {session} from "@web/session";
 
 const {Component, useEffect, useExternalListener, useState} = owl;
 
@@ -59,8 +59,7 @@ export class BusinessProjectSharingWebClient extends Component {
         if (
             ev.ctrlKey &&
             ((ev.target instanceof HTMLAnchorElement && ev.target.href) ||
-                (ev.target instanceof HTMLElement &&
-                    ev.target.closest("a[href]:not([href=''])")))
+                (ev.target instanceof HTMLElement && ev.target.closest("a[href]:not([href=''])")))
         ) {
             ev.stopImmediatePropagation();
             return;
@@ -69,5 +68,4 @@ export class BusinessProjectSharingWebClient extends Component {
 }
 
 BusinessProjectSharingWebClient.components = {ActionContainer, MainComponentsContainer};
-BusinessProjectSharingWebClient.template =
-    "deltatech_business_process.BusinessProjectSharingWebClient";
+BusinessProjectSharingWebClient.template = "deltatech_business_process.BusinessProjectSharingWebClient";

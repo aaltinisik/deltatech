@@ -12,10 +12,7 @@
                 t-if="page_name == 'business_projects'"
                 t-attf-class="breadcrumb-item #{'active ' if not business_projects else ''}"
             >
-                <a
-                    t-if="business_projects"
-                    t-attf-href="/my/business_projects?{{ keep_query() }}"
-                >Business Projects</a>
+                <a t-if="business_projects" t-attf-href="/my/business_projects?{{ keep_query() }}">Business Projects</a>
             </li>
         </xpath>
     </template>
@@ -117,10 +114,7 @@
         />
     </template>
 
-    <template
-        id="business_project_sharing_embed"
-        name="Business Project Sharing View Embed"
-    >
+    <template id="business_project_sharing_embed" name="Business Project Sharing View Embed">
         <t t-call="web.layout">
             <t t-set="head_business_project_sharing">
 
@@ -138,10 +132,7 @@
                 <t t-call="web.conditional_assets_tests" />
             </t>
             <t t-set="head" t-value="head_business_project_sharing + (head or '')" />
-            <t
-                t-set="body_classname"
-                t-value="'o_web_client o_business_project_sharing'"
-            />
+            <t t-set="body_classname" t-value="'o_web_client o_business_project_sharing'" />
         </t>
     </template>
 

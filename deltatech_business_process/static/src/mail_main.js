@@ -22,19 +22,10 @@ serviceRegistry.add("messaging", messagingService);
 serviceRegistry.add("messagingValues", messagingValuesService);
 serviceRegistry.add("systray_service", systrayService);
 
-serviceRegistry.add(
-    "messaging_service_to_legacy_env",
-    makeMessagingToLegacyEnv(owl.Component.env)
-);
+serviceRegistry.add("messaging_service_to_legacy_env", makeMessagingToLegacyEnv(owl.Component.env));
 
 registry.category("actions").add("mail.action_discuss", DiscussContainer);
 
-registry
-    .category("main_components")
-    .add("DialogManagerContainer", {Component: DialogManagerContainer});
-registry
-    .category("main_components")
-    .add("ChatWindowManagerContainer", {Component: ChatWindowManagerContainer});
-registry
-    .category("main_components")
-    .add("PopoverManagerContainer", {Component: PopoverManagerContainer});
+registry.category("main_components").add("DialogManagerContainer", {Component: DialogManagerContainer});
+registry.category("main_components").add("ChatWindowManagerContainer", {Component: ChatWindowManagerContainer});
+registry.category("main_components").add("PopoverManagerContainer", {Component: PopoverManagerContainer});

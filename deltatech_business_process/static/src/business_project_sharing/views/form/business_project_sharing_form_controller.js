@@ -17,12 +17,7 @@ export class BusinessProjectSharingFormController extends FormController {
         if (xmlDocChatter && xmlDocChatter.parentNode.nodeName === "form") {
             template.appendChild(xmlDocChatter.cloneNode(true));
         }
-        const mailTemplates = useViewCompiler(
-            BusinessProjectSharingChatterCompiler,
-            arch,
-            {Mail: template},
-            {}
-        );
+        const mailTemplates = useViewCompiler(BusinessProjectSharingChatterCompiler, arch, {Mail: template}, {});
         this.mailTemplate = mailTemplates.Mail;
     }
 

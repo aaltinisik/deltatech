@@ -3,19 +3,12 @@
 # (https://www.odoo.com/documentation/user/16.0/legal/licenses/licenses.html#).
 
 
-from collections import OrderedDict
-from operator import itemgetter
-from markupsafe import Markup
-
-from odoo import conf, http, _
-from odoo import api, fields, models
-from odoo.osv import expression
+from odoo import _, conf, http
 from odoo.exceptions import AccessError, MissingError
 from odoo.http import request
-from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
-from odoo.tools import groupby as groupbyelem
+from odoo.osv import expression
 
-from odoo.osv.expression import OR, AND
+from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
 
 class BusinessProcesssPortal(CustomerPortal):
@@ -23,18 +16,33 @@ class BusinessProcesssPortal(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super()._prepare_home_portal_values(counters)
 
-        if 'business_project_count' in counters:
-            values['business_project_count'] = request.env['business.project'].search_count([]) \
-                if request.env['business.project'].check_access_rights('read', raise_exception=False) else 0
+        if "business_project_count" in counters:
+            values["business_project_count"] = (
+                request.env["business.project"].search_count([])
+                if request.env["business.project"].check_access_rights("read", raise_exception=False)
+                else 0
+            )
         return values
 
-    def _business_project_get_page_view_values(self, business_project, access_token, page=1, date_begin=None, date_end=None, sortby=None, search=None, search_in='content', groupby=None, **kwargs):
+    def _business_project_get_page_view_values(
+        self,
+        business_project,
+        access_token,
+        page=1,
+        date_begin=None,
+        date_end=None,
+        sortby=None,
+        search=None,
+        search_in="content",
+        groupby=None,
+        **kwargs,
+    ):
         values = {
             "page_name": business_project.name,
             "business_project": business_project,
         }
         if not groupby:
-            values['groupby'] = 'none'
+            values["groupby"] = "none"
         res = self._get_page_view_values(
             business_project,
             access_token,
@@ -81,9 +89,7 @@ class BusinessProcesssPortal(CustomerPortal):
         search_in="content",
         **kw,
     ):
-        values = self._prepare_my_business_projects_values(
-            page, date_begin, date_end, sortby, filterby
-        )
+        values = self._prepare_my_business_projects_values(page, date_begin, date_end, sortby, filterby)
 
         # pager
         pager = portal_pager(**values["pager"])
@@ -162,35 +168,31 @@ class BusinessProcesssPortal(CustomerPortal):
         auth="public",
         website=True,
     )
-    def portal_my_business_project_detail(
-        self, business_project_id, access_token=None, **kw
-    ):
+    def portal_my_business_project_detail(self, business_project_id, access_token=None, **kw):
         try:
-            business_project_sudo = self._document_check_access(
-                "business.project", business_project_id, access_token
-            )
+            business_project_sudo = self._document_check_access("business.project", business_project_id, access_token)
         except (AccessError, MissingError):
             return request.redirect("/my")
         if not business_project_sudo.access_token:
             business_project_sudo._portal_ensure_token()
         # logo attachemnt
-        logo_attachment = request.env["ir.attachment"].sudo().search(
-            [
-                ('res_model', '=', business_project_sudo._name),
-                ('res_field', '=', "logo"),
-                ('res_id', 'in', business_project_sudo.ids),
-            ]
+        logo_attachment = (
+            request.env["ir.attachment"]
+            .sudo()
+            .search(
+                [
+                    ("res_model", "=", business_project_sudo._name),
+                    ("res_field", "=", "logo"),
+                    ("res_id", "in", business_project_sudo.ids),
+                ]
+            )
         )
         if logo_attachment:
             logo_attachment.generate_access_token()
         business_project_sudo.attachment_ids.generate_access_token()
-        values = {
-            "business_project_id": business_project_id
-        }
-        res = request.render(
-            "deltatech_business_process.business_project_sharing_portal", values
-        )
-        return res 
+        values = {"business_project_id": business_project_id}
+        res = request.render("deltatech_business_process.business_project_sharing_portal", values)
+        return res
 
     # incercare cu sharing
     def _prepare_business_project_sharing_session_info(self, business_project):
@@ -203,18 +205,15 @@ class BusinessProcesssPortal(CustomerPortal):
             # Update Cache
             user_context["lang"] = lang
         lang = user_context.get("lang")
-        translation_hash = request.env['ir.http'].get_web_translations_hash(mods, lang)
+        translation_hash = request.env["ir.http"].get_web_translations_hash(mods, lang)
         cache_hashes = {
             "translations": translation_hash,
         }
         current_company = request.env.company
-        act_name = (
-            "deltatech_business_process.action_business_project_sharing_form_action"
-        )
+        act_name = "deltatech_business_process.action_business_project_sharing_form_action"
         session_info.update(
             cache_hashes=cache_hashes,
             action_name=act_name,
-            
             active_id=business_project.id,
             business_project_id=business_project.id,
             user_companies={
@@ -229,10 +228,8 @@ class BusinessProcesssPortal(CustomerPortal):
             currencies=request.env["ir.http"].get_currencies(),
         )
         if business_project:
-            session_info[
-                "open_business_project_action"
-            ] = business_project.action_business_project_sharing_open()
-        
+            session_info["open_business_project_action"] = business_project.action_business_project_sharing_open()
+
         return session_info
 
     @http.route(
@@ -242,31 +239,31 @@ class BusinessProcesssPortal(CustomerPortal):
         methods=["GET"],
     )
     def render_business_project_backend_view(self, business_project_id):
-        
-        business_project_sudo = (
-            request.env["business.project"].sudo().browse(business_project_id)
-        )
+
+        business_project_sudo = request.env["business.project"].sudo().browse(business_project_id)
 
         if not business_project_sudo.exists():
             return request.not_found()
         if not business_project_sudo.access_token:
             business_project_sudo._portal_ensure_token()
         # logo attachemnt
-        logo_attachment = request.env["ir.attachment"].sudo().search(
-            [
-                ('res_model', '=', business_project_sudo._name),
-                ('res_field', '=', "logo"),
-                ('res_id', 'in', business_project_sudo.ids),
-            ]
+        logo_attachment = (
+            request.env["ir.attachment"]
+            .sudo()
+            .search(
+                [
+                    ("res_model", "=", business_project_sudo._name),
+                    ("res_field", "=", "logo"),
+                    ("res_id", "in", business_project_sudo.ids),
+                ]
+            )
         )
         if logo_attachment:
             logo_attachment.generate_access_token()
         business_project_sudo.attachment_ids.generate_access_token()
-        session_info = self._prepare_business_project_sharing_session_info(
-            business_project_sudo
-        )
+        session_info = self._prepare_business_project_sharing_session_info(business_project_sudo)
         result = request.render(
             "deltatech_business_process.business_project_sharing_embed",
             {"session_info": session_info},
         )
-        return result 
+        return result

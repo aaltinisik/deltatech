@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class BusinessProcess(models.Model):
     _name = "business.process"
     _description = "Business process"
-    _inherit = ['portal.mixin',"mail.thread", "mail.activity.mixin"]
+    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(
         string="Name",
@@ -169,14 +169,16 @@ class BusinessProcess(models.Model):
         [("standard", "Standard"), ("custom", "Custom"), ("implementor", "Implementor")], string="Module type"
     )
 
-    @api.model
-    def create(self, vals):
-        if not vals.get("code", False):
-            vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
-        result = super().create(vals)
-        if result.area_id.responsible_id and not result.responsible_id:
-            result.responsible_id = result.area_id.responsible_id
-        return result
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("code", False):
+                vals["code"] = self.env["ir.sequence"].sudo().next_by_code(self._name)
+        records = super().create(vals_list)
+        for record in records:
+            if record.area_id.responsible_id and not record.responsible_id:
+                record.responsible_id = record.area_id.responsible_id
+        return records
 
     def name_get(self):
         self.browse(self.ids).read(["name", "code"])
@@ -228,6 +230,7 @@ class BusinessProcess(models.Model):
         domain = [("process_id", "=", self.id)]
         context = {
             "default_process_id": self.id,
+            "default_scope": "internal",
         }
         action = self.env["ir.actions.actions"]._for_xml_id("deltatech_business_process.action_business_process_test")
         action.update({"domain": domain, "context": context})
@@ -239,6 +242,7 @@ class BusinessProcess(models.Model):
         domain = [("process_id", "=", self.id), ("scope", "=", "user_acceptance")]
         context = {
             "default_process_id": self.id,
+            "default_scope": "user_acceptance",
         }
         tests = self.env["business.process.test"].search(domain)
         if len(tests) == 1:

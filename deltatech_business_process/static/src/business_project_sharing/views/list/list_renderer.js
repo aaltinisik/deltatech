@@ -19,26 +19,12 @@ export class BusinessProjectSharingListRenderer extends ListRenderer {
             const allColumns = [];
             const firstRecord = this.props.list.records[0];
             for (const column of columns) {
-                if (
-                    column.modifiers.column_invisible &&
-                    column.modifiers.column_invisible instanceof Array
-                ) {
-                    const result = evalDomain(
-                        column.modifiers.column_invisible,
-                        firstRecord.evalContext
-                    );
-                    if (result) {
-                        continue;
-                    }
-                }
                 allColumns.push(column);
             }
             this.allColumns = allColumns;
         } else {
             this.allColumns = columns;
         }
-        this.state.columns = this.allColumns.filter(
-            (col) => !col.optional || this.optionalActiveFields[col.name]
-        );
+        this.state.columns = this.allColumns.filter((col) => !col.optional || this.optionalActiveFields[col.name]);
     }
 }

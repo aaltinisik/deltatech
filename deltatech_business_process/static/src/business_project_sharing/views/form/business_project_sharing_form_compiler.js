@@ -37,19 +37,12 @@ export class BusinessProjectSharingChatterCompiler extends ViewCompiler {
 
     compile(node, params) {
         const res = super.compile(node, params).children[0];
-        const chatterContainerHookXml = res.querySelector(
-            ".o_FormRenderer_chatterContainer"
-        );
+        const chatterContainerHookXml = res.querySelector(".o_FormRenderer_chatterContainer");
         if (chatterContainerHookXml) {
             setAttributes(chatterContainerHookXml, {
                 "t-if": `uiService.size >= ${SIZES.XXL}`,
             });
-            chatterContainerHookXml.classList.add(
-                "overflow-x-hidden",
-                "overflow-y-auto",
-                "o-aside",
-                "h-100"
-            );
+            chatterContainerHookXml.classList.add("overflow-x-hidden", "overflow-y-auto", "o-aside", "h-100");
         }
         return res;
     }
@@ -90,9 +83,7 @@ registry.category("form_compilers").add("portal_chatter_compiler", {
 patch(FormCompiler.prototype, "business_project_sharing_chatter", {
     compile(node, params) {
         const res = this._super(node, params);
-        const chatterContainerHookXml = res.querySelector(
-            ".o_FormRenderer_chatterContainer"
-        );
+        const chatterContainerHookXml = res.querySelector(".o_FormRenderer_chatterContainer");
         if (!chatterContainerHookXml) {
             return res; // No chatter, keep the result as it is
         }

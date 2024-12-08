@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 class BusinessProcessStep(models.Model):
     _name = "business.process.step"
-    _inherit = ['portal.mixin']
+    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
     _description = "Business process step"
     _order = "sequence, code, id"
 
@@ -80,11 +80,12 @@ class BusinessProcessStep(models.Model):
 
     details = fields.Html()
 
-    @api.model
-    def create(self, vals):
-        if not vals.get("code", False):
-            vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
-        result = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("code", False):
+                vals["code"] = self.env["ir.sequence"].sudo().next_by_code(self._name)
+        result = super().create(vals_list)
         return result
 
     def name_get(self):

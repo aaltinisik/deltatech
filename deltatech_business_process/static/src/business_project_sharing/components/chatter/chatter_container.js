@@ -45,10 +45,7 @@ export class ChatterContainer extends Component {
             ...this.defaultOptions,
             ...options,
             display_composer: Boolean(options.display_composer),
-            access_token:
-                typeof options.display_composer === "string"
-                    ? options.display_composer
-                    : "",
+            access_token: typeof options.display_composer === "string" ? options.display_composer : "",
         };
     }
 
@@ -94,10 +91,7 @@ export class ChatterContainer extends Component {
     }
 
     async fetchMessages() {
-        const result = await this.rpc(
-            "/mail/chatter_fetch",
-            this.messagesParams(this.props)
-        );
+        const result = await this.rpc("/mail/chatter_fetch", this.messagesParams(this.props));
         this.state.messages = this.preprocessMessages(result.messages);
         this.state.options.message_count = result.message_count;
         return result;
@@ -124,10 +118,7 @@ export class ChatterContainer extends Component {
     preprocessMessages(messages) {
         return messages.map((m) => ({
             ...m,
-            author_avatar_url: sprintf(
-                "/web/image/mail.message/%s/author_avatar/50x50",
-                m.id
-            ),
+            author_avatar_url: sprintf("/web/image/mail.message/%s/author_avatar/50x50", m.id),
             published_date_str: sprintf(
                 this.env._t("Published on %s"),
                 formatDateTime(parseDateTime(m.date, {format: "MM-dd-yyy HH:mm:ss"}))

@@ -23,9 +23,7 @@ export class ChatterComposer extends Component {
     onWillUpdateProps(nextProps) {
         this.clearErrors();
         this.state.message = "";
-        this.state.attachments = nextProps.attachments.map(
-            (file) => file.state === "done"
-        );
+        this.state.attachments = nextProps.attachments.map((file) => file.state === "done");
     }
 
     get discussionUrl() {
@@ -96,9 +94,7 @@ export class ChatterComposer extends Component {
             console.error(err);
             this.state.displayError = true;
         }
-        this.state.attachments = this.state.attachments.filter(
-            (a) => a.id !== attachment.id
-        );
+        this.state.attachments = this.state.attachments.filter((a) => a.id !== attachment.id);
     }
 }
 

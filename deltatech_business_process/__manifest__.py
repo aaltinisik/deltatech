@@ -5,7 +5,7 @@
 {
     "name": "Business process",
     "summary": "Business process",
-    "version": "16.0.1.3.0",
+    "version": "16.0.2.0.0",
     "author": "Terrabit, Dorin Hongu",
     "website": "https://www.terrabit.ro",
     "license": "OPL-1",
@@ -158,5 +158,5 @@
             "web/static/src/legacy/legacy_setup.js",
             "deltatech_business_process/static/src/business_project_sharing/search/favorite_menu/custom_favorite_item.xml",  # noqa: B950
         ],
-    }
+    },
 }
