@@ -30,7 +30,7 @@ class BusinessProject(models.Model):
     )
     date_start = fields.Date(string="Start date")
     date_go_live = fields.Date(string="Go live date")
-    process_ids = fields.One2many(string="Processes", comodel_name="business.process", inverse_name="project_id")
+    process_ids = fields.One2many(string="Processes", comodel_name="business.process", inverse_name="project_id", copy=True)
 
     issue_ids = fields.One2many(string="Issues", comodel_name="business.issue", inverse_name="project_id")
 
