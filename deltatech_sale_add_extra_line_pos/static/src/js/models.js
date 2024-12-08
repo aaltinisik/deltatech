@@ -10,7 +10,9 @@ odoo.define("deltatech_sale_add_extra_line_pos.models", function (require) {
                 var res = super.set_quantity(...arguments);
                 if (this.product.extra_product_id) {
                     var extra_product_id = this.pos.db.get_product_by_id(this.product.extra_product_id[0]);
-                    this.order.add_extra_product(extra_product_id);
+                    if (extra_product_id) {
+                        this.order.add_extra_product(extra_product_id);
+                    }
                 }
                 return res;
             }
@@ -24,7 +26,9 @@ odoo.define("deltatech_sale_add_extra_line_pos.models", function (require) {
                 var res = super.add_product(...arguments);
                 if (product.extra_product_id) {
                     var extra_product_id = this.pos.db.get_product_by_id(product.extra_product_id[0]);
-                    this.add_extra_product(extra_product_id);
+                    if (extra_product_id) {
+                        this.add_extra_product(extra_product_id);
+                    }
                 }
                 return res;
             }
@@ -36,7 +40,7 @@ odoo.define("deltatech_sale_add_extra_line_pos.models", function (require) {
                 for (const line of this.get_orderlines()) {
                     if (line.product.extra_product_id) {
                         if (line.product.extra_product_id[0] === extra_product_id.id) {
-                            qty += line.quantity;
+                            qty += line.quantity * line.product.extra_qty;
                         }
                     }
                     if (line.product.id === extra_product_id.id) {
