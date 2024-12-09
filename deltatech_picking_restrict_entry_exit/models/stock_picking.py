@@ -23,31 +23,32 @@ class StockPicking(models.Model):
     # self.env.user.has_group("deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit")
     def button_validate(self):
         for picking in self:
-            picking_type = picking.picking_type_id
-            for move in picking.move_ids:
-                if picking_type.code == "outgoing":
-                    if not move.sale_line_id:
+            if not self.return_id and not self.backorder_id:
+                picking_type = picking.picking_type_id
+                for move in picking.move_ids:
+                    if picking_type.code == "outgoing":
+                        if not move.sale_line_id:
+                            raise UserError(
+                                _(
+                                    "You cannot validate the picking because the product %s is not linked to a sale order line."
+                                )
+                                % move.product_id.display_name
+                            )
+                    elif picking_type.code == "incoming":
+                        if not move.purchase_line_id:
+                            raise UserError(
+                                _(
+                                    "You cannot validate the picking because the product %s is not linked to a purchase order line."
+                                )
+                                % move.product_id.display_name
+                            )
+                    if move.quantity > move.product_uom_qty:
                         raise UserError(
                             _(
-                                "You cannot validate the picking because the product %s is not linked to a sale order line."
+                                "You cannot validate the picking because the quantity done is greater than the quantity ordered for the product %s."
                             )
                             % move.product_id.display_name
                         )
-                elif picking_type.code == "incoming":
-                    if not move.purchase_line_id:
-                        raise UserError(
-                            _(
-                                "You cannot validate the picking because the product %s is not linked to a purchase order line."
-                            )
-                            % move.product_id.display_name
-                        )
-                if move.quantity > move.product_uom_qty:
-                    raise UserError(
-                        _(
-                            "You cannot validate the picking because the quantity done is greater than the quantity ordered for the product %s."
-                        )
-                        % move.product_id.display_name
-                    )
 
         return super().button_validate()
 
@@ -67,23 +68,24 @@ class StockPicking(models.Model):
                         )
 
         for picking in self:
-            picking_type = picking.picking_type_id
-            for move in picking.move_ids:
-                if picking_type.code == "outgoing":
-                    if not move.sale_line_id:
-                        raise UserError(
-                            _(
-                                "You cannot save the picking because the product %s is not linked to a sale order line."
+            if not self.return_id and not self.backorder_id:
+                picking_type = picking.picking_type_id
+                for move in picking.move_ids:
+                    if picking_type.code == "outgoing":
+                        if not move.sale_line_id:
+                            raise UserError(
+                                _(
+                                    "You cannot save the picking because the product %s is not linked to a sale order line."
+                                )
+                                % move.product_id.display_name
                             )
-                            % move.product_id.display_name
-                        )
-                elif picking_type.code == "incoming":
-                    if not move.purchase_line_id:
-                        raise UserError(
-                            _(
-                                "You cannot save the picking because the product %s is not linked to a purchase order line."
+                    elif picking_type.code == "incoming":
+                        if not move.purchase_line_id:
+                            raise UserError(
+                                _(
+                                    "You cannot save the picking because the product %s is not linked to a purchase order line."
+                                )
+                                % move.product_id.display_name
                             )
-                            % move.product_id.display_name
-                        )
 
         return super().write(vals)
