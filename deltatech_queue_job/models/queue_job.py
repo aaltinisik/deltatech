@@ -42,7 +42,7 @@ class QueueJob(models.Model):
         if limit_jobs:
             limit_jobs = int(limit_jobs)
         else:
-            limit_jobs = 10
+            limit_jobs = 100
 
         job_count = 0
         while job:
