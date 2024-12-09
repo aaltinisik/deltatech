@@ -18,7 +18,7 @@ class TestAgreementEquipment(TestAgreement, TestService):
             picking_type_for_service = self.env["stock.picking.type"].create(
                 {
                     "name": "Test Picking Type",
-                    "code": "outgoing",
+                    "code": "internal",
                     "sequence_code": "TEST",
                 }
             )
