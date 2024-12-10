@@ -109,7 +109,7 @@ class PropertyProperty(models.AbstractModel):
             "view_id": False,
             "view_mode": "kanban,tree,form",
             "limit": 80,
-            "context": "{'default_res_model': '%s','default_res_id': %d}" % (self._name, self.id),
+            "context": f"{'default_res_model': {self._name},'default_res_id': {self.id}}",
         }
 
     @api.model

@@ -26,7 +26,7 @@ publicWidget.registry.websiteSaleDelivery.include({
         // Data-acquirer-allowed-ids is a comma-separated list of acquirer ids : ex: "[1,2,3]"
         let acquirerAllowedIds = input.getAttribute("data-acquirer-allowed-ids");
         if (acquirerAllowedIds) {
-            acquirerAllowedIds = acquirerAllowedIds.replace(/[\[\] ]/g, "").split(",");
+            acquirerAllowedIds = acquirerAllowedIds.replace(/[[] ]/g, "").split(",");
         }
         for (const option of this.paymentOptions) {
             var isEnable = true;
