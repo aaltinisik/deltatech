@@ -6,9 +6,7 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     @api.model_create_multi
-    def create(
-        self, vals_list
-    ):
+    def create(self, vals_list):
         # this should restrict users from creating delivery/receipts manually, they should only be created from sale/purchase orders
         for vals in vals_list:
             # there are users that can create picking without sale/purchase order if they have the group

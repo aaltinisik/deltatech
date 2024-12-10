@@ -39,7 +39,7 @@ class ProductTemplate(models.Model):
         if not barcode or barcode == "/" or barcode == "auto":
             if categ.generate_barcode:
                 if not default_code or categ.barcode_random:
-                    default_code = "%0.10d" % random.randint(0, 999999999999)
+                    default_code = "%0.10d" % random.randint(0, 999999999999)  # noqa UP031
                 barcode = "".join([s for s in default_code if s.isdigit()])
                 barcode = categ.prefix_barcode[:2] + barcode.zfill(10) + "0"
                 barcode = self.env["barcode.nomenclature"].sanitize_ean(barcode)
