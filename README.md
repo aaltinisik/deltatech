@@ -171,7 +171,7 @@ addon | version | maintainers | summary | price
 [deltatech_stock_analytic](deltatech_stock_analytic/) | 16.0.1.0.1 | [![danila12](https://github.com/danila12.png?size=30px)](https://github.com/danila12) | Create analytic lines from stock moves | Free 
 [deltatech_stock_date](deltatech_stock_date/) | 16.0.1.0.9 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Set posting date for stock move | Free 
 [deltatech_stock_delivery](deltatech_stock_delivery/) | 16.0.1.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Adding button in invoice for display reception or delivery | Free 
-[deltatech_stock_inventory](deltatech_stock_inventory/) | 16.0.2.2.7 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Inventory Old Method | Free 
+[deltatech_stock_inventory](deltatech_stock_inventory/) | 16.0.2.2.8 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Inventory Old Method | Free 
 [deltatech_stock_location](deltatech_stock_location/) | 16.0.1.0.3 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Generate route, picking operation for location | Free 
 [deltatech_stock_negative](deltatech_stock_negative/) | 16.0.2.0.2 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Negative stocks are not allowed | Free 
 [deltatech_stock_report](deltatech_stock_report/) | 16.0.1.0.3 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Report with positions from picking lists | Free 
@@ -212,7 +212,7 @@ addon | version | maintainers | summary | price
 [deltatech_website_sale_wishlist](deltatech_website_sale_wishlist/) | 16.0.1.0.2 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | eCommerce wishlist | Free 
 [deltatech_website_short_description](deltatech_website_short_description/) | 16.0.1.0.1 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | eCommerce short description | Free 
 [deltatech_website_snippet_attribute_filter](deltatech_website_snippet_attribute_filter/) | 16.0.1.0.4 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | eCommerce Attribute Values Filter Snippet | Free 
-[deltatech_website_stock_availability](deltatech_website_stock_availability/) | 16.0.1.0.3 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | eCommerce Stock Availability and lead time | 10.0 EUR
+[deltatech_website_stock_availability](deltatech_website_stock_availability/) | 16.0.1.0.4 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | eCommerce Stock Availability and lead time | 10.0 EUR
 [deltatech_website_stock_location](deltatech_website_stock_location/) | 16.0.1.0.2 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Stock Availability From Location | 10.0 EUR
 [deltatech_website_texture_attributes](deltatech_website_texture_attributes/) | 16.0.1.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Attribute with image for texture | Free 
 [deltatech_widget_fontawesome](deltatech_widget_fontawesome/) | 16.0.1.0.0 | [![dhongu](https://github.com/dhongu.png?size=30px)](https://github.com/dhongu) | Font Awesome Widget | Free 

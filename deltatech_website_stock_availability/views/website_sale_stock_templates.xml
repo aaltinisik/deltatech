@@ -31,14 +31,15 @@
         active="False"
         customize_show="True"
         name="Product Available"
+        priority="500"
     >
-        <xpath expr="//div[@itemprop='offers']" position="after">
-            <div>
+        <xpath expr="//div[hasclass('o_wsale_product_sub')]" position="before">
+            <div class="flex-grow-1">
                 <t t-if="product.sudo().qty_available  &gt;   0">
-                    <span class="badge badge-success">Immediate delivery</span>
+                    <span class="badge bg-success">Immediate delivery</span>
                 </t>
                 <t t-else="">
-                    <span class="badge badge-warning">Subsequent delivery</span>
+                    <span class="badge bg-warning">Subsequent delivery</span>
                 </t>
             </div>
         </xpath>
@@ -57,10 +58,10 @@
             <xpath expr="//div" position="after">
                 <t t-if="line.product_id.qty_available  &gt;=   line.product_uom_qty">
 
-                    <span class="badge badge-success">Immediate delivery</span>
+                    <span class="badge bg-success">Immediate delivery</span>
                 </t>
                 <t t-else="">
-                    <span class="badge badge-warning">Subsequent delivery</span>
+                    <span class="badge bg-warning">Subsequent delivery</span>
                 </t>
             </xpath>
         </xpath>
@@ -75,10 +76,10 @@
     >
         <xpath expr="//div" position="after">
             <t t-if="line.product_id.free_qty  &gt;= line.product_uom_qty">
-                <span class="badge-pill badge-success">Immediate delivery</span>
+                <span class="badge-pill bg-success">Immediate delivery</span>
             </t>
             <t t-else="">
-                <span class="badge-pill badge-warning">Subsequent delivery</span>
+                <span class="badge-pill bg-warning">Subsequent delivery</span>
             </t>
         </xpath>
     </template>
