@@ -9,14 +9,7 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     def action_view_stock_valuation_layers(self):
-        res = super().action_view_stock_valuation_layers()
-        scraps = self.env["stock.scrap"].search([("picking_id", "=", self.id)])
-        domain = [
-            (
-                "id",
-                "in",
-                (self.with_context(active_test=False).move_ids + scraps.move_id).stock_valuation_layer_ids.ids,
-            )
-        ]
-        res["domain"] = domain
-        return res
+        self = self.with_context(active_test=False)
+        return super().action_view_stock_valuation_layers()
+
+
