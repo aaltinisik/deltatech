@@ -27,7 +27,9 @@ class BusinessProject(models.Model):
     )
     date_start = fields.Date(string="Start date")
     date_go_live = fields.Date(string="Go live date")
-    process_ids = fields.One2many(string="Processes", comodel_name="business.process", inverse_name="project_id")
+    process_ids = fields.One2many(
+        string="Processes", comodel_name="business.process", inverse_name="project_id", copy=True
+    )
 
     issue_ids = fields.One2many(string="Issues", comodel_name="business.issue", inverse_name="project_id")
 
@@ -52,11 +54,44 @@ class BusinessProject(models.Model):
     )
     project_type = fields.Selection([("remote", "Remote"), ("local", "Local")], string="Project Type", default="remote")
 
+    attachment_ids = fields.One2many(
+        "ir.attachment",
+        compute="_compute_attachment_ids",
+        string="Main Attachments",
+        help="Attachments that don't come from a message.",
+    )
+
     @api.model
-    def create(self, vals):
-        if not vals.get("code", False):
-            vals["code"] = self.env["ir.sequence"].next_by_code(self._name)
-        result = super().create(vals)
+    def _get_attachments_search_domain(self, model, res_ids):
+        return [("res_id", "in", res_ids), ("res_model", "=", model)]
+
+    def _compute_attachment_ids(self):
+        for project in self:
+            domain = project._get_attachments_search_domain(project._name, project.ids)
+            attachments = self.env["ir.attachment"].search(domain)
+            attachments |= project.mapped("message_ids.attachment_ids")
+            field_name = [
+                "process_ids",
+                "process_ids.step_ids",
+                "process_ids.test_ids",
+                "process_ids.development_ids",
+                "process_ids.step_ids.development_ids",
+                "process_ids.test_ids.test_step_ids",
+                "process_ids.test_ids.test_step_ids.issue_ids",
+            ]
+            for field in field_name:
+                if "attachment_ids" in project.mapped(field):
+                    attachments |= project.mapped(field).mapped("attachment_ids")
+                if "message_ids" in project.mapped(field):
+                    attachments |= project.mapped(field).mapped("message_ids.attachment_ids")
+            project.attachment_ids = attachments
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("code", False):
+                vals["code"] = self.env["ir.sequence"].sudo().next_by_code(self._name)
+        result = super().create(vals_list)
         return result
 
     def name_get(self):
@@ -111,7 +146,7 @@ class BusinessProject(models.Model):
     def _compute_attached_docs_count(self):
         for order in self:
             domain = order.get_attachment_domain()
-            order.doc_count = self.env["ir.attachment"].search_count(domain)
+            order.doc_count = self.env["ir.attachment"].sudo().search_count(domain)
 
     def attachment_tree_view(self):
         domain = self.get_attachment_domain()
