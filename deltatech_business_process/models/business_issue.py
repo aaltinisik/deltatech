@@ -144,11 +144,11 @@ class BusinessIssue(models.Model):
         return records
 
     def send_mail(self):
-        self.ensure_one()
-        today = date.today().strftime("%Y-%m-%d")
-        self.sudo().message_post(body=f"Date of approval: {today}")
-        template = self.env.ref("deltatech_business_process.email_template_issue_submitted")
-        self.env["mail.template"].browse(template.id).send_mail(self.id, force_send=True)
+        for item in self:
+            today = date.today().strftime("%Y-%m-%d")
+            item.sudo().message_post(body=f"Date of approval: {today}")
+            template = self.env.ref("deltatech_business_process.email_template_issue_submitted")
+            self.env["mail.template"].browse(template.id).send_mail(item.id, force_send=True)
 
     def name_get(self):
         self.browse(self.ids).read(["name", "code"])
@@ -219,7 +219,11 @@ class BusinessIssue(models.Model):
 
             # mai sunt alte issue deschise
             if issue.step_test_id:
-                domain = [("id", "!=", issue), ("step_test_id", "=", issue.step_test_id.id), ("state", "!=", "closed")]
+                domain = [
+                    ("id", "!=", issue.id),
+                    ("step_test_id", "=", issue.step_test_id.id),
+                    ("state", "!=", "closed"),
+                ]
                 other_open_issues = self.search(domain)
                 if not other_open_issues:
                     issue.step_test_id.write({"result": "passed"})

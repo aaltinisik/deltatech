@@ -19,7 +19,13 @@ class BusinessDevelopment(models.Model):
 
     project_id = fields.Many2one(string="Project", comodel_name="business.project")
     approved = fields.Selection(
-        [("draft", "Draft"), ("approved", "Approved"), ("rejected", "Rejected"), ("pending", "Pending")],
+        [
+            ("draft", "Draft"),
+            ("approved", "Approved"),
+            ("rejected", "Rejected"),
+            ("pending", "Pending"),
+            ("awaiting_approval", "Awaiting Approval"),
+        ],
         string="Approved",
         default="draft",
         tracking=True,
