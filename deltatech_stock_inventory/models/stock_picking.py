@@ -11,5 +11,3 @@ class StockPicking(models.Model):
     def action_view_stock_valuation_layers(self):
         self = self.with_context(active_test=False)
         return super().action_view_stock_valuation_layers()
-
-

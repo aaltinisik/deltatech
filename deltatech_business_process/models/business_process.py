@@ -230,6 +230,7 @@ class BusinessProcess(models.Model):
         domain = [("process_id", "=", self.id)]
         context = {
             "default_process_id": self.id,
+            "default_scope": "internal",
         }
         action = self.env["ir.actions.actions"]._for_xml_id("deltatech_business_process.action_business_process_test")
         action.update({"domain": domain, "context": context})
@@ -241,6 +242,7 @@ class BusinessProcess(models.Model):
         domain = [("process_id", "=", self.id), ("scope", "=", "user_acceptance")]
         context = {
             "default_process_id": self.id,
+            "default_scope": "user_acceptance",
         }
         tests = self.env["business.process.test"].search(domain)
         if len(tests) == 1:
