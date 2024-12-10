@@ -46,7 +46,8 @@ class StockPicking(models.Model):
                 message = _("Transfer %s was generated.") % new_picking.name
 
                 picking.message_post(body=message)
-
+                picking.write({"partner_id" : picking_type_id.warehouse_id.partner_id.id})
+                new_picking.write({"partner_id" : picking.picking_type_id.warehouse_id.partner_id.id})
                 return new_picking
 
     def copy_move_lines(self, source_picking, target_picking):
