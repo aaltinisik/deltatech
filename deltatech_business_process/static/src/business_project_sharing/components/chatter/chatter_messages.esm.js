@@ -32,6 +32,8 @@ ChatterMessages.props = {
     update: {type: Function, optional: true},
 };
 ChatterMessages.defaultProps = {
-    update: (message_id, changes) => {},
+    update: () => {
+        return true;
+    },
 };
 ChatterMessages.components = {ChatterAttachmentsViewer};

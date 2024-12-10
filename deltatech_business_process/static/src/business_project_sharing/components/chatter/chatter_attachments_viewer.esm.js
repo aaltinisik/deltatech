@@ -11,5 +11,7 @@ ChatterAttachmentsViewer.props = {
     delete: {type: Function, optional: true},
 };
 ChatterAttachmentsViewer.defaultProps = {
-    delete: async () => {},
+    delete: async () => {
+        return true;
+    },
 };

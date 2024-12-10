@@ -27,7 +27,9 @@ PortalAttachDocument.props = {
 };
 PortalAttachDocument.defaultProps = {
     acceptedFileExtensions: "*",
-    onUpload: () => {},
+    onUpload: () => {
+        return true;
+    },
     route: "/portal/attachment/add",
     beforeOpen: async () => true,
 };

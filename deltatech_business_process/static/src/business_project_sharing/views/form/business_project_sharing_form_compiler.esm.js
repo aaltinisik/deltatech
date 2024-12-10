@@ -1,12 +1,11 @@
 /** @odoo-module */
 
 import {append, createElement, setAttributes} from "@web/core/utils/xml";
-import {registry} from "@web/core/registry";
-import {SIZES} from "@web/core/ui/ui_service";
+import {FormCompiler} from "@web/views/form/form_compiler";
 import {ViewCompiler, getModifier} from "@web/views/view_compiler";
 import {patch} from "@web/core/utils/patch";
-import {FormCompiler} from "@web/views/form/form_compiler";
-
+import {registry} from "@web/core/registry";
+import {SIZES} from "@web/core/ui/ui_service";
 /**
  * Compiler the portal chatter in project sharing.
  *

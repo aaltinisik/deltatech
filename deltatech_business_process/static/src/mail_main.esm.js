@@ -4,12 +4,11 @@ import {ChatWindowManagerContainer} from "@mail/components/chat_window_manager_c
 import {DialogManagerContainer} from "@mail/components/dialog_manager_container/dialog_manager_container";
 import {DiscussContainer} from "@mail/components/discuss_container/discuss_container";
 import {PopoverManagerContainer} from "@mail/components/popover_manager_container/popover_manager_container";
+import {makeMessagingToLegacyEnv} from "@mail/utils/make_messaging_to_legacy_env";
 import {messagingService} from "@mail/services/messaging_service";
 import {systrayService} from "@mail/services/systray_service";
-import {makeMessagingToLegacyEnv} from "@mail/utils/make_messaging_to_legacy_env";
-import "@web/legacy/legacy_setup";
-
 import {registry} from "@web/core/registry";
+import "@web/legacy/legacy_setup";
 
 const messagingValuesService = {
     start() {

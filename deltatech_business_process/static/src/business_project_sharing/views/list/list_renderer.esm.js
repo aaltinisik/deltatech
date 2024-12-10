@@ -1,7 +1,7 @@
 /** @odoo-module */
 
 import {ListRenderer} from "@web/views/list/list_renderer";
-import {evalDomain} from "@web/views/utils";
+// Import {evalDomain} from "@web/views/utils";
 
 const {onWillUpdateProps} = owl;
 
@@ -17,7 +17,7 @@ export class BusinessProjectSharingListRenderer extends ListRenderer {
     setColumns(columns) {
         if (this.props.list.records.length) {
             const allColumns = [];
-            const firstRecord = this.props.list.records[0];
+            // Const firstRecord = this.props.list.records[0];
             for (const column of columns) {
                 allColumns.push(column);
             }
