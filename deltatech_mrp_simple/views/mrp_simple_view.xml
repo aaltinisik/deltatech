@@ -12,7 +12,7 @@
         <field name="arch" type="xml">
             <form string="Transfer">
                 <header>
-                    <field name="consume_id" invisible="1"/>
+                    <field name="consume_id" invisible="1" />
                     <button
                         name="do_transfer"
                         type="object"
@@ -26,8 +26,8 @@
                         string="Recompute prices"
                         invvisible="state!='draft'"
                     />
-                    <button type="object" name="add_multiple_lines" string="Add lines"/>
-                    <field name="state" widget="statusbar"/>
+                    <button type="object" name="add_multiple_lines" string="Add lines" />
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -54,20 +54,20 @@
                     </div>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="date" readonly="state!='draft'"/>
-                            <field name="sale_order_id" readonly="state!='draft'"/>
+                            <field name="name" />
+                            <field name="date" readonly="state!='draft'" />
+                            <field name="sale_order_id" readonly="state!='draft'" />
                         </group>
                         <group>
-                            <field name="validation_consume" readonly="state!='draft'"/>
-                            <field name="validation_receipt" readonly="state!='draft'"/>
+                            <field name="validation_consume" readonly="state!='draft'" />
+                            <field name="validation_receipt" readonly="state!='draft'" />
                         </group>
                         <group>
-                            <field name="picking_type_consume" readonly="state!='draft'"/>
-                            <field name="picking_type_receipt_production" readonly="state!='draft'"/>
+                            <field name="picking_type_consume" readonly="state!='draft'" />
+                            <field name="picking_type_receipt_production" readonly="state!='draft'" />
                         </group>
                         <group groups="deltatech_mrp_simple.group_sale_simple_production">
-                            <field name="auto_create_sale"/>
+                            <field name="auto_create_sale" />
                             <field
                                 name="partner_id"
                                 invisible="auto_create_sale==False"
@@ -98,27 +98,27 @@
 
                     <div class="o_row">
                         <div class="o_col-6">
-                            <label for="product_out_ids" string="Consume"/>
+                            <label for="product_out_ids" string="Consume" />
                             <field name="product_out_ids" nolabel="1" readonly="state!='draft'">
                                 <tree editable="bottom">
-                                    <field name="product_id"/>
-                                    <field name="stock"/>
-                                    <field name="quantity" sum="1"/>
-                                    <field name="price_unit" readonly="1" force_save="1"/>
-                                    <field name="uom_id"/>
-                                    <field name="value" sum="1"/>
+                                    <field name="product_id" />
+                                    <field name="stock" />
+                                    <field name="quantity" sum="1" />
+                                    <field name="price_unit" readonly="1" force_save="1" />
+                                    <field name="uom_id" />
+                                    <field name="value" sum="1" />
                                 </tree>
                             </field>
                         </div>
                         <div class="o_col-6">
-                            <label for="product_in_ids" string="Receipt"/>
+                            <label for="product_in_ids" string="Receipt" />
                             <field name="product_in_ids" nolabel="1" readonly="state!='draft'">
                                 <tree editable="bottom">
-                                    <field name="product_id"/>
-                                    <field name="quantity" sum="1"/>
-                                    <field name="uom_id"/>
-                                    <field name="price_unit"/>
-                                    <field name="value" sum="1"/>
+                                    <field name="product_id" />
+                                    <field name="quantity" sum="1" />
+                                    <field name="uom_id" />
+                                    <field name="price_unit" />
+                                    <field name="value" sum="1" />
                                 </tree>
                             </field>
                         </div>
@@ -135,8 +135,8 @@
         <field name="model">mrp.simple</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="date"/>
+                <field name="name" />
+                <field name="date" />
             </tree>
         </field>
     </record>

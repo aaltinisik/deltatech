@@ -31,23 +31,35 @@ class StockPicking(models.Model):
                     "deltatech_picking_restrict_entry_exit.group_picking_restrict_entry_exit"
                 ):
                     picking_type = picking.picking_type_id
-                    if picking_type and picking_type.code == "internal":# if the picking is internal and the locations are in the same warehouse we don't need to check the lines
-                        warehouse_source = self.env['stock.warehouse'].search([('view_location_id', 'parent_of', picking.location_id.id)])
-                         # apparently a location can have 2 warehouses (configuration for online shop warehouse
+                    if (
+                        picking_type and picking_type.code == "internal"
+                    ):  # if the picking is internal and the locations are in the same warehouse we don't need to check the lines
+                        warehouse_source = self.env["stock.warehouse"].search(
+                            [("view_location_id", "parent_of", picking.location_id.id)]
+                        )
+                        # apparently a location can have 2 warehouses (configuration for online shop warehouse
                         if warehouse_source:
-                            warehouse_source = sorted(warehouse_source, key=lambda w: w.view_location_id.parent_path.count('/'),
-                                                reverse=True)
+                            warehouse_source = sorted(
+                                warehouse_source, key=lambda w: w.view_location_id.parent_path.count("/"), reverse=True
+                            )
 
                             warehouse_source = warehouse_source[0]
-                        warehouse_destination= self.env['stock.warehouse'].search([('view_location_id', 'parent_of', picking.location_dest_id.id)])
+                        warehouse_destination = self.env["stock.warehouse"].search(
+                            [("view_location_id", "parent_of", picking.location_dest_id.id)]
+                        )
                         if warehouse_destination:
-                            warehouse_destination = sorted(warehouse_destination, key=lambda w: w.view_location_id.parent_path.count('/'),
-                                                reverse=True)
+                            warehouse_destination = sorted(
+                                warehouse_destination,
+                                key=lambda w: w.view_location_id.parent_path.count("/"),
+                                reverse=True,
+                            )
                             warehouse_destination = warehouse_destination[0]
                         if warehouse_source and warehouse_destination and warehouse_source == warehouse_destination:
                             continue
                     for move in picking.move_ids:
-                        if move.quantity or move.product_uom_qty: # in barcode app if you add and delete a line it will have quantity 0 and product_uom_qty 0 on the picking
+                        if (
+                            move.quantity or move.product_uom_qty
+                        ):  # in barcode app if you add and delete a line it will have quantity 0 and product_uom_qty 0 on the picking
                             if picking_type.code == "outgoing":
                                 if not move.sale_line_id:
                                     raise UserError(
@@ -75,7 +87,6 @@ class StockPicking(models.Model):
         return super().button_validate()
 
     def write(self, vals):
-
         if "move_ids_without_package" in vals:  # client wanted the same check on validation to be done on saving too
             for move_data in vals["move_ids_without_package"]:  # we check if the lines were touched
                 if len(move_data) > 2 and "quantity" in move_data[2]:
@@ -83,24 +94,34 @@ class StockPicking(models.Model):
                     if (
                         isinstance(move_id, str) and "virtual" in move_id
                     ):  # if the line contains virtual, it means it's a new line and we check it differently
-                        picking_type=self.env['stock.picking.type'].search([("id","=",move_data[2]["picking_type_id"])])
+                        picking_type = self.env["stock.picking.type"].search(
+                            [("id", "=", move_data[2]["picking_type_id"])]
+                        )
                         if picking_type.code == "internal":
-                            location_id=self.env['stock.location'].search([("id","=",move_data[2]["location_id"])])
-                            location_dest_id=self.env['stock.location'].search([("id","=",move_data[2]["location_dest_id"])])
-                            warehouse_source = self.env['stock.warehouse'].search(
-                                [('view_location_id', 'parent_of', location_id.id)])
+                            location_id = self.env["stock.location"].search([("id", "=", move_data[2]["location_id"])])
+                            location_dest_id = self.env["stock.location"].search(
+                                [("id", "=", move_data[2]["location_dest_id"])]
+                            )
+                            warehouse_source = self.env["stock.warehouse"].search(
+                                [("view_location_id", "parent_of", location_id.id)]
+                            )
                             # apparently a location can have 2 warehouses (configuration for online shop warehouse
                             if warehouse_source:
-                                warehouse_source = sorted(warehouse_source,
-                                                          key=lambda w: w.view_location_id.parent_path.count('/'),
-                                                          reverse=True)
+                                warehouse_source = sorted(
+                                    warehouse_source,
+                                    key=lambda w: w.view_location_id.parent_path.count("/"),
+                                    reverse=True,
+                                )
                                 warehouse_source = warehouse_source[0]
-                            warehouse_destination = self.env['stock.warehouse'].search(
-                                [('view_location_id', 'parent_of', location_dest_id.id)])
+                            warehouse_destination = self.env["stock.warehouse"].search(
+                                [("view_location_id", "parent_of", location_dest_id.id)]
+                            )
                             if warehouse_destination:
-                                warehouse_destination = sorted(warehouse_destination,
-                                                               key=lambda w: w.view_location_id.parent_path.count('/'),
-                                                               reverse=True)
+                                warehouse_destination = sorted(
+                                    warehouse_destination,
+                                    key=lambda w: w.view_location_id.parent_path.count("/"),
+                                    reverse=True,
+                                )
                                 warehouse_destination = warehouse_destination[0]
                             if warehouse_source and warehouse_destination and warehouse_source == warehouse_destination:
                                 continue
@@ -109,7 +130,6 @@ class StockPicking(models.Model):
                         ):  # we check if the picking is incoming/outgoing, if yes we restrict creation
                             raise UserError(_("You can't manually add moves to an incoming/outgoing picking"))
                         else:  # if it is not incoming/outgoing, we check if the quantity is greater than the ordered quantity
-
                             if move_data[2]["quantity"] > move_data[2]["product_uom_qty"]:
                                 raise UserError(
                                     _(
@@ -119,22 +139,30 @@ class StockPicking(models.Model):
                     else:  # this is for existing lines and we do the same check as in the validation
                         quantity = move_data[2]["quantity"]
                         move = self.env["stock.move"].browse(move_id)
-                        picking=move.picking_id
-                        if picking.picking_type_id and picking.picking_type_id.code == "internal":  # if the picking is internal and the locations are in the same warehouse we don't need to check the lines
-                            warehouse_source = self.env['stock.warehouse'].search(
-                                [('view_location_id', 'parent_of', picking.location_id.id)])
+                        picking = move.picking_id
+                        if (
+                            picking.picking_type_id and picking.picking_type_id.code == "internal"
+                        ):  # if the picking is internal and the locations are in the same warehouse we don't need to check the lines
+                            warehouse_source = self.env["stock.warehouse"].search(
+                                [("view_location_id", "parent_of", picking.location_id.id)]
+                            )
                             # apparently a location can have 2 warehouses (configuration for online shop warehouse
                             if warehouse_source:
-                                warehouse_source = sorted(warehouse_source,
-                                                          key=lambda w: w.view_location_id.parent_path.count('/'),
-                                                          reverse=True)
+                                warehouse_source = sorted(
+                                    warehouse_source,
+                                    key=lambda w: w.view_location_id.parent_path.count("/"),
+                                    reverse=True,
+                                )
                                 warehouse_source = warehouse_source[0]
-                            warehouse_destination = self.env['stock.warehouse'].search(
-                                [('view_location_id', 'parent_of', picking.location_dest_id.id)])
+                            warehouse_destination = self.env["stock.warehouse"].search(
+                                [("view_location_id", "parent_of", picking.location_dest_id.id)]
+                            )
                             if warehouse_destination:
-                                warehouse_destination = sorted(warehouse_destination,
-                                                               key=lambda w: w.view_location_id.parent_path.count('/'),
-                                                               reverse=True)
+                                warehouse_destination = sorted(
+                                    warehouse_destination,
+                                    key=lambda w: w.view_location_id.parent_path.count("/"),
+                                    reverse=True,
+                                )
                                 warehouse_destination = warehouse_destination[0]
                             if warehouse_source and warehouse_destination and warehouse_source == warehouse_destination:
                                 continue
