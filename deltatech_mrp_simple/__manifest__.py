@@ -3,7 +3,7 @@
 {
     "name": "Simple MRP",
     "summary": "Simple production",
-    "version": "17.0.1.0.9",
+    "version": "17.0.1.1.0",
     "author": "Terrabit, Dorin Hongu, Dan Stoica",
     "website": "https://www.terrabit.ro",
     "category": "Manufacturing",
