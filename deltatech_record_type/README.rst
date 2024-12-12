@@ -46,10 +46,18 @@ Authors
 -------
 
 * Terrabit
-* Dan Stoica
+* Voicu Stefan
 
 Maintainers
 -----------
+
+.. |maintainer-VoicuStefan2001| image:: https://github.com/VoicuStefan2001.png?size=40px
+    :target: https://github.com/VoicuStefan2001
+    :alt: VoicuStefan2001
+
+Current maintainer:
+
+|maintainer-VoicuStefan2001| 
 
 This module is part of the `dhongu/deltatech <https://github.com/dhongu/deltatech/tree/17.0/deltatech_record_type>`_ project on GitHub.
 

@@ -8,7 +8,7 @@ from odoo.tools.safe_eval import safe_eval
 class SaleOrder(models.Model):
     _inherit = "purchase.order"
 
-    po_type = fields.Many2one("record.type", string="Type", tracking=True)
+    po_type = fields.Many2one("record.type", string="Order Type", tracking=True)
 
     @api.onchange("po_type")
     def _onchange_po_type(self):

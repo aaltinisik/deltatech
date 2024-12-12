@@ -66,6 +66,12 @@ msgid "Name"
 msgstr "Nume"
 
 #. module: deltatech_saleorder_type
+#: model:ir.model.fields,field_description:deltatech_saleorder_type.field_sale_order__so_type
+#: model_terms:ir.ui.view,arch_db:deltatech_saleorder_type.view_saleorder_type_saleorder_filter
+msgid "Order Type"
+msgstr "Tip comandă"
+
+#. module: deltatech_saleorder_type
 #: model_terms:ir.ui.view,arch_db:deltatech_saleorder_type.view_saleorder_type_form
 #: model_terms:ir.ui.view,arch_db:deltatech_saleorder_type.view_saleorder_type_tree
 msgid "Sale Order Type"
@@ -86,12 +92,6 @@ msgstr "Factura Vânzare cu Plată în Avans"
 #: model:ir.model,name:deltatech_saleorder_type.model_sale_order
 msgid "Sales Order"
 msgstr "Comandă de vânzare"
-
-#. module: deltatech_saleorder_type
-#: model:ir.model.fields,field_description:deltatech_saleorder_type.field_sale_order__so_type
-#: model_terms:ir.ui.view,arch_db:deltatech_saleorder_type.view_saleorder_type_saleorder_filter
-msgid "Type"
-msgstr ""
 
 #. module: deltatech_saleorder_type
 #. odoo-python
