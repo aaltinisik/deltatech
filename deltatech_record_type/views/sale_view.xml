@@ -9,9 +9,12 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//sheet/group/group" position="inside">
-                <field name="so_type"
-                       readonly="state in ['cancel', 'sale']"
-                       options="{'no_create':True}" domain="[('model', '=', 'sale.order')]" />
+                <field
+                    name="so_type"
+                    readonly="state in ['cancel', 'sale']"
+                    options="{'no_create':True}"
+                    domain="[('model', '=', 'sale.order')]"
+                />
             </xpath>
             <xpath expr="//field[@name='journal_id']" position="attributes">
                 <attribute name="invisible">0</attribute>
