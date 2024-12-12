@@ -3,6 +3,7 @@ from odoo import _, api, fields, models
 
 class Ledger(models.Model):
     _name = "ledger.ledger"
+    _description = 'Ledger'
 
     name = fields.Char(string="Number of Record", default=lambda self: _("New"))
     record_date = fields.Date(string="Record Date")
