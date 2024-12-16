@@ -10,7 +10,7 @@ from odoo.exceptions import UserError
 class BusinessProcessTest(models.Model):
     _name = "business.process.test"
     _description = "Business process Test"
-    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="Name", required=True, readonly=False, states={"done": [("readonly", True)]})
     process_id = fields.Many2one(

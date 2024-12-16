@@ -101,7 +101,7 @@
             <!-- To add the class on div#wrapwrap to remove the overflow -->
             <t t-set="pageName" t-value="'o_business_project_sharing_container'" />
             <t t-set="no_footer" t-value="true" />
-            <t t-call="deltatech_business_process.business_project_sharing" />
+            <t t-call="deltatech_business_process_portal.business_project_sharing" />
         </t>
     </template>
 
@@ -126,9 +126,9 @@
                 </script>
                 <base target="_parent" />
                 <t t-call-assets="web.assets_common" t-js="false" />
-                <t t-call-assets="deltatech_business_process.webclient" t-js="false" />
+                <t t-call-assets="deltatech_business_process_portal.webclient" t-js="false" />
                 <t t-call-assets="web.assets_common" t-css="false" />
-                <t t-call-assets="deltatech_business_process.webclient" t-css="false" />
+                <t t-call-assets="deltatech_business_process_portal.webclient" t-css="false" />
                 <t t-call="web.conditional_assets_tests" />
             </t>
             <t t-set="head" t-value="head_business_project_sharing + (head or '')" />

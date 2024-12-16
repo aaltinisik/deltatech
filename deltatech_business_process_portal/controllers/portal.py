@@ -104,7 +104,7 @@ class BusinessProcesssPortal(CustomerPortal):
                 "pager": pager,
             }
         )
-        res = request.render("deltatech_business_process.portal_my_business_projects", values)
+        res = request.render("deltatech_business_process_portal.portal_my_business_projects", values)
         return res
 
     def _prepare_my_business_projects_values(
@@ -191,7 +191,7 @@ class BusinessProcesssPortal(CustomerPortal):
             logo_attachment.generate_access_token()
         business_project_sudo.attachment_ids.generate_access_token()
         values = {"business_project_id": business_project_id}
-        res = request.render("deltatech_business_process.business_project_sharing_portal", values)
+        res = request.render("deltatech_business_process_portal.business_project_sharing_portal", values)
         return res
 
     # incercare cu sharing
@@ -210,7 +210,7 @@ class BusinessProcesssPortal(CustomerPortal):
             "translations": translation_hash,
         }
         current_company = request.env.company
-        act_name = "deltatech_business_process.action_business_project_sharing_form_action"
+        act_name = "deltatech_business_process_portal.action_business_project_sharing_form_action"
         session_info.update(
             cache_hashes=cache_hashes,
             action_name=act_name,
@@ -263,7 +263,7 @@ class BusinessProcesssPortal(CustomerPortal):
         business_project_sudo.attachment_ids.generate_access_token()
         session_info = self._prepare_business_project_sharing_session_info(business_project_sudo)
         result = request.render(
-            "deltatech_business_process.business_project_sharing_embed",
+            "deltatech_business_process_portal.business_project_sharing_embed",
             {"session_info": session_info},
         )
         return result

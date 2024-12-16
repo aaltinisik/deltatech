@@ -8,7 +8,7 @@ from odoo.exceptions import UserError
 class BusinessProcess(models.Model):
     _name = "business.process"
     _description = "Business process"
-    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(
         string="Name",
@@ -78,7 +78,14 @@ class BusinessProcess(models.Model):
         states={"draft": [("readonly", False)], "design": [("readonly", False)]},
     )
     state = fields.Selection(
-        [("draft", "Draft"), ("design", "Design"), ("test", "Test"), ("ready", "Ready"), ("production", "Production")],
+        [
+            ("draft", "Draft"),
+            ("design", "Design"),
+            ("test", "Test"),
+            ("ready", "Ready"),
+            ("production", "Production"),
+            ("abandoned", "Abandoned"),
+        ],
         string="State",
         default="draft",
         tracking=True,
@@ -398,6 +405,9 @@ class BusinessProcess(models.Model):
 
     def button_draft(self):
         self.write({"state": "draft"})
+
+    def button_abandon(self):
+        self.write({"state": "abandoned"})
 
     def start_internal_test(self):
         self._start_test("internal")

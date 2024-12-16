@@ -7,7 +7,7 @@ from odoo import _, api, fields, models
 class BusinessProject(models.Model):
     _name = "business.project"
     _description = "Business project"
-    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     code = fields.Char(string="Code")
     name = fields.Char(string="Name", required=True)
@@ -196,27 +196,3 @@ class BusinessProject(models.Model):
                 [("project_id", "=", project.id), ("approved", "not in", ("draft", "rejected"))]
             ):
                 project.total_project_duration += development.development_duration
-
-    # pentru portal
-    def action_open_bp(self):
-        context = self._context.copy()
-        if "binary_field_real_user" in context:
-            del context["binary_field_real_user"]
-        return {
-            "view_mode": "form",
-            "res_model": "business.project",
-            "res_id": self.id,
-            "type": "ir.actions.act_window",
-            "context": context,
-        }
-
-    def action_business_project_sharing_open(self):
-        action = self.action_open_bp()
-
-        action["views"] = [
-            [
-                self.env.ref("deltatech_business_process.view_business_project_form").id,
-                "form",
-            ]
-        ]
-        return action

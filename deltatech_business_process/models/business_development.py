@@ -9,7 +9,7 @@ from odoo import api, fields, models
 class BusinessDevelopment(models.Model):
     _name = "business.development"
     _description = "Business Development"
-    _inherit = ["portal.mixin", "mail.thread", "mail.activity.mixin"]
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code")
@@ -19,7 +19,13 @@ class BusinessDevelopment(models.Model):
 
     project_id = fields.Many2one(string="Project", comodel_name="business.project")
     approved = fields.Selection(
-        [("draft", "Draft"), ("approved", "Approved"), ("rejected", "Rejected"), ("pending", "Pending")],
+        [
+            ("draft", "Draft"),
+            ("approved", "Approved"),
+            ("rejected", "Rejected"),
+            ("pending", "Pending"),
+            ("awaiting_approval", "Awaiting Approval"),
+        ],
         string="Approved",
         default="draft",
         tracking=True,
