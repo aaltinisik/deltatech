@@ -105,7 +105,10 @@
         </record>
 
         <!-- Define the menu -->
-        <menuitem id="menu_ledger_model" name="Ledger" action="action_ledger_model"
-                web_icon="deltatech_ledger,static/description/icon.png"
-        />
+        <menuitem
+        id="menu_ledger_model"
+        name="Ledger"
+        action="action_ledger_model"
+        web_icon="deltatech_ledger,static/description/icon.png"
+    />
 </odoo>
