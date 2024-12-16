@@ -7,4 +7,4 @@ export class ChatterMessageCounter extends Component {}
 ChatterMessageCounter.props = {
     count: Number,
 };
-ChatterMessageCounter.template = "deltatech_business_process.ChatterMessageCounter";
+ChatterMessageCounter.template = "deltatech_business_process_portal.ChatterMessageCounter";

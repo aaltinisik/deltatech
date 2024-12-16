@@ -4,8 +4,8 @@ import {useService} from "@web/core/utils/hooks";
 import {createElement} from "@web/core/utils/xml";
 import {FormController} from "@web/views/form/form_controller";
 import {useViewCompiler} from "@web/views/view_compiler";
-import {BusinessProjectSharingChatterCompiler} from "./business_project_sharing_form_compiler";
-import {ChatterContainer} from "../../components/chatter/chatter_container";
+import {BusinessProjectSharingChatterCompiler} from "./business_project_sharing_form_compiler.esm";
+import {ChatterContainer} from "../../components/chatter/chatter_container.esm";
 
 export class BusinessProjectSharingFormController extends FormController {
     setup() {

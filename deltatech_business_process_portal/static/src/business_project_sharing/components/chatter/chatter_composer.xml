@@ -4,7 +4,7 @@
 
         required many options: token, res_model, res_id, ...
     -->
-    <t t-name="deltatech_business_process.ChatterComposer" owl="1">
+    <t t-name="deltatech_business_process_portal.ChatterComposer" owl="1">
         <div t-if="props.allowComposer" class="o_portal_chatter_composer">
             <t t-if="props.displayComposer">
                 <div

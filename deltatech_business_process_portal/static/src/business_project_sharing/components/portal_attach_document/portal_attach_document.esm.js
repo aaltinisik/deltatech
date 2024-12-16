@@ -1,12 +1,12 @@
 /** @odoo-module */
 
-import {PortalFileInput} from "../portal_file_input/portal_file_input";
+import {PortalFileInput} from "../portal_file_input/portal_file_input.esm";
 
 const {Component} = owl;
 
 export class PortalAttachDocument extends Component {}
 
-PortalAttachDocument.template = "deltatech_business_process.PortalAttachDocument";
+PortalAttachDocument.template = "deltatech_business_process_portal.PortalAttachDocument";
 PortalAttachDocument.components = {PortalFileInput};
 PortalAttachDocument.props = {
     highlight: {type: Boolean, optional: true},

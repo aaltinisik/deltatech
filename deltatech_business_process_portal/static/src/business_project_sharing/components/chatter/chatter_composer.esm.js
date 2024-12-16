@@ -2,8 +2,8 @@
 
 import {useService} from "@web/core/utils/hooks";
 import {TextField} from "@web/views/fields/text/text_field";
-import {PortalAttachDocument} from "../portal_attach_document/portal_attach_document";
-import {ChatterAttachmentsViewer} from "./chatter_attachments_viewer";
+import {PortalAttachDocument} from "../portal_attach_document/portal_attach_document.esm";
+import {ChatterAttachmentsViewer} from "./chatter_attachments_viewer.esm";
 
 const {Component, useState, onWillUpdateProps} = owl;
 
@@ -125,4 +125,4 @@ ChatterComposer.defaultProps = {
     attachments: [],
 };
 
-ChatterComposer.template = "deltatech_business_process.ChatterComposer";
+ChatterComposer.template = "deltatech_business_process_portal.ChatterComposer";

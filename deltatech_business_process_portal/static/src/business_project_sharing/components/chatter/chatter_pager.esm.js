@@ -61,4 +61,4 @@ ChatterPager.props = {
     changePage: Function,
 };
 
-ChatterPager.template = "deltatech_business_process.ChatterPager";
+ChatterPager.template = "deltatech_business_process_portal.ChatterPager";

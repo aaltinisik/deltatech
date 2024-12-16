@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t t-name="deltatech_business_process.MessageList" t-inherit="mail.MessageList" t-inherit-mode="extension" owl="1">
+    <t
+        t-name="deltatech_business_process_portal.MessageList"
+        t-inherit="mail.MessageList"
+        t-inherit-mode="extension"
+        owl="1"
+    >
         <xpath expr="//t[@t-if='!messageListViewItem.message.isEmpty']" position="replace">
             <t
                 t-if="!messageListViewItem.message.isEmpty and messageListViewItem.message.message_type !== 'notification' and !messageListViewItem.message.daredigital_portal"

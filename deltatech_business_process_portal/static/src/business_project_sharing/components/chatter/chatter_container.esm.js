@@ -3,10 +3,10 @@
 import {formatDateTime, parseDateTime} from "@web/core/l10n/dates";
 import {useService} from "@web/core/utils/hooks";
 import {sprintf} from "@web/core/utils/strings";
-import {ChatterComposer} from "./chatter_composer";
-import {ChatterMessageCounter} from "./chatter_message_counter";
-import {ChatterMessages} from "./chatter_messages";
-import {ChatterPager} from "./chatter_pager";
+import {ChatterComposer} from "./chatter_composer.esm";
+import {ChatterMessageCounter} from "./chatter_message_counter.esm";
+import {ChatterMessages} from "./chatter_messages.esm";
+import {ChatterPager} from "./chatter_pager.esm";
 
 const {Component, markup, onWillStart, useState, onWillUpdateProps} = owl;
 
@@ -158,4 +158,4 @@ ChatterContainer.defaultProps = {
     hash: "",
     pagerStart: 1,
 };
-ChatterContainer.template = "deltatech_business_process.ChatterContainer";
+ChatterContainer.template = "deltatech_business_process_portal.ChatterContainer";

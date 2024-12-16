@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <templates xml:space="preserve">
 
-    <t t-name="deltatech_business_process.BusinessProjectSharingWebClient" owl="1">
+    <t t-name="deltatech_business_process_portal.BusinessProjectSharingWebClient" owl="1">
         <ActionContainer />
         <MainComponentsContainer />
     </t>

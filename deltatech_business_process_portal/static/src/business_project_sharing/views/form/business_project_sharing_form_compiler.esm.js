@@ -6,6 +6,7 @@ import {ViewCompiler, getModifier} from "@web/views/view_compiler";
 import {patch} from "@web/core/utils/patch";
 import {registry} from "@web/core/registry";
 import {SIZES} from "@web/core/ui/ui_service";
+
 /**
  * Compiler the portal chatter in project sharing.
  *

@@ -1,6 +1,6 @@
 <templates id="template" xml:space="preserve">
 
-    <t t-name="deltatech_business_process.ChatterPager" owl="1">
+    <t t-name="deltatech_business_process_portal.ChatterPager" owl="1">
         <div class="d-flex justify-content-center">
             <ul class="pagination mb-0 pb-4" t-if="state.pages.length &gt; 1">
                 <li

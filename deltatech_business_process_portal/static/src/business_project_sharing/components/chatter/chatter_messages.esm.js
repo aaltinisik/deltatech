@@ -2,7 +2,7 @@
 
 import {useService} from "@web/core/utils/hooks";
 
-import {ChatterAttachmentsViewer} from "./chatter_attachments_viewer";
+import {ChatterAttachmentsViewer} from "./chatter_attachments_viewer.esm";
 
 const {Component} = owl;
 
@@ -25,7 +25,7 @@ export class ChatterMessages extends Component {
     }
 }
 
-ChatterMessages.template = "deltatech_business_process.ChatterMessages";
+ChatterMessages.template = "deltatech_business_process_portal.ChatterMessages";
 ChatterMessages.props = {
     messages: Array,
     isUserEmployee: {type: Boolean, optional: true},

@@ -4,7 +4,7 @@ const {Component} = owl;
 
 export class ChatterAttachmentsViewer extends Component {}
 
-ChatterAttachmentsViewer.template = "deltatech_business_process.ChatterAttachmentsViewer";
+ChatterAttachmentsViewer.template = "deltatech_business_process_portal.ChatterAttachmentsViewer";
 ChatterAttachmentsViewer.props = {
     attachments: Array,
     canDelete: {type: Boolean, optional: true},

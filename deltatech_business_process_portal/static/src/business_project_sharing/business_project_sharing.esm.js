@@ -68,4 +68,4 @@ export class BusinessProjectSharingWebClient extends Component {
 }
 
 BusinessProjectSharingWebClient.components = {ActionContainer, MainComponentsContainer};
-BusinessProjectSharingWebClient.template = "deltatech_business_process.BusinessProjectSharingWebClient";
+BusinessProjectSharingWebClient.template = "deltatech_business_process_portal.BusinessProjectSharingWebClient";
