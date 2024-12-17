@@ -14,7 +14,7 @@
         "views/account_invoice_view.xml",
         "views/purchase_order_view.xml",
         "views/sale_order_view.xml",
-        "views/invoice_report/xml",
+        "views/invoice_report.xml",
     ],
     "images": ["images/main_screenshot.png"],
     "installable": True,
