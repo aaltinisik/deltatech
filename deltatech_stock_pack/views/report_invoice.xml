@@ -176,9 +176,9 @@
                <t t-set="so_date_year" t-value="o.sale_id.date_order[0:4]"/>
                <t t-set="so_date_month" t-value="o.sale_id.date_order[5:7]"/>
                <t t-set="so_date_day" t-value="o.sale_id.date_order[8:10]"/>
-               <t t-set="delivery_date_year" t-value="o.min_date[0:4]"/>
-               <t t-set="delivery_date_month" t-value="o.min_date[5:7]"/>
-               <t t-set="delivery_date_day" t-value="o.min_date[8:10]"/>
+               <t t-set="delivery_date_year" t-value="o.pack_date[0:4]"/>
+               <t t-set="delivery_date_month" t-value="o.pack_date[5:7]"/>
+               <t t-set="delivery_date_day" t-value="o.pack_date[8:10]"/>
                <t t-set="margin" t-value="20" />
                <t t-foreach="o.pack_operation_ids" t-as="pack_operation">
                    <t t-translation="off">
