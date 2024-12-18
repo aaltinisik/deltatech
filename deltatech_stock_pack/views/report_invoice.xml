@@ -203,57 +203,64 @@ POS:
 ^FS
 
 ^FO<t t-esc="margin" />,260^FD
-QUANTITY:
+PACCHETTI DA 100:
 ^FS
-^FO<t t-esc="margin+340" />,260^FD
-NR  <t t-esc="pack_operation.product_qty"/>
+^FO<t t-esc="margin+420" />,260^FD
+<t t-esc="pack_operation.product_qty/100"/>
 ^FS
 
 ^FO<t t-esc="margin" />,340^FD
-GROSS WEIGHT:
+QUANTITY:
 ^FS
 ^FO<t t-esc="margin+340" />,340^FD
-KG  <t t-esc="pack_operation.product_id.pack_weight"/>
+NR  <t t-esc="pack_operation.product_qty"/>
 ^FS
 
 ^FO<t t-esc="margin" />,420^FD
-NET WEIGHT:
+GROSS WEIGHT:
 ^FS
 ^FO<t t-esc="margin+340" />,420^FD
+KG  <t t-esc="pack_operation.product_id.pack_weight"/>
+^FS
+
+^FO<t t-esc="margin" />,500^FD
+NET WEIGHT:
+^FS
+^FO<t t-esc="margin+340" />,500^FD
 KG  <t t-esc="pack_operation.product_id.pack_weight_neto"/>
 ^FS
 
 ^CF0,40
-^FO<t t-esc="margin" />,500^FD
+^FO<t t-esc="margin" />,580^FD
 <t t-esc="pack_operation.product_id.name" />
 ^FS
 
 ^CF0,50
-^FO<t t-esc="margin" />,580^FD
+^FO<t t-esc="margin" />,660^FD
 DATE:
 ^FS
-^FO<t t-esc="margin+340" />,580^FD
+^FO<t t-esc="margin+340" />,660^FD
 <t t-esc="delivery_date_day"/>.<t t-esc="delivery_date_month"/>.<t t-esc="delivery_date_year"/>
 ^FS
 
-^FO<t t-esc="margin" />,660^FD
+^FO<t t-esc="margin" />,740^FD
 No. ORDER:
 ^FS
-^FO<t t-esc="margin+246" />,660^FD
+^FO<t t-esc="margin+246" />,740^FD
 <t t-esc="o.sale_id.client_order_ref"/> / <t t-esc="so_date_day"/>.<t t-esc="so_date_month"/>.<t t-esc="so_date_year"/>
 ^FS
 
-^FO<t t-esc="margin" />,740^FD
+^FO<t t-esc="margin" />,820^FD
 No. OF BOX FROM ORDER:
 ^FS
-^FO<t t-esc="margin+560" />,740^FD
+^FO<t t-esc="margin+560" />,820^FD
 <t t-esc="box_nr"/>
 ^FS
 
-^FO<t t-esc="margin" />,820^FD
+^FO<t t-esc="margin" />,900^FD
 No. OF BOX:
 ^FS
-^FO<t t-esc="margin+260" />,820^FD
+^FO<t t-esc="margin+260" />,900^FD
 <t t-esc="pack_operation.label_sequence"/>
 ^FS
 
