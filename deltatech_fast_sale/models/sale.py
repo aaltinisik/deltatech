@@ -24,11 +24,10 @@ class SaleOrder(models.Model):
         self._prepare_pickings()
         for picking in self.picking_ids:
             if picking.state not in ["done", "cancel"]:
-                for move_line in picking.move_ids:
-                    if move_line.product_uom_qty > 0 and move_line.product_qty == 0:
-                        move_line.write({"product_qty": move_line.product_uom_qty})
-                    else:
-                        move_line.unlink()
+                for move in picking.move_ids:
+                    if move.product_uom_qty > 0 and move.product_qty == 0:
+                        move._set_quantity_done(move.product_uom_qty)
+                picking.move_ids.picked = True
                 picking.with_context(force_period_date=self.date_order)._action_done()
 
         action = self.env["ir.actions.actions"]._for_xml_id("sale.action_view_sale_advance_payment_inv")
