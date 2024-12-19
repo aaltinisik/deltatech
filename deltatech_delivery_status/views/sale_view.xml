@@ -11,14 +11,14 @@
                     name="postpone_delivery"
                     type="object"
                     groups="stock.group_stock_user"
-                    invisible="delivery_count==0 or postponed_delivery==True"
+                    invisible="delivery_count and postponed_delivery"
                     string="Postpone delivery"
                 />
                      <button
                     name="release_delivery"
                     type="object"
                     groups="stock.group_stock_user"
-                    invisible="delivery_count!=0 and postponed_delivery==False"
+                    invisible="delivery_count and not postponed_delivery"
                     string="Release delivery"
                 />
                 </xpath>
