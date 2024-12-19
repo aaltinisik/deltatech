@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
 
-    <t t-name="deltatech_website_stock_availability.lead_time">
-        <div t-attf-class="lead_time_#{product_template} ">
+    <t t-name="deltatech_website_stock_availability.lead_time_availability">
+        <div t-attf-class="lead_time_availability_#{product_template} ">
 
 
             <div
                 id="in_of_stock_message"
                 t-if="free_qty gt 0"
-                style="font-size: medium;"
-                t-attf-class="availability_message_#{product_template} text-success mt16 fw-bold"
+
+                t-attf-class="availability_message_#{product_template} o_stock_available badge bg-success mt16 fw-bold"
             >
 
                 In stock
@@ -19,7 +19,7 @@
             <div
                 id="in_of_stock_message"
                 t-if="free_qty lte 0 and availability_vendor == 0"
-                t-attf-class="availability_message_#{product_template}  text-danger fw-bold"
+                t-attf-class="availability_message_#{product_template}   badge bg-danger fw-bold"
             >
                 <i class="fa fa-times me-1" />
                 Out of stock
@@ -29,14 +29,16 @@
             <div
                 id="in_of_stock_message"
                 t-if="free_qty lte 0 and availability_vendor gt 0"
-                style="font-size: medium;"
-                t-attf-class="availability_message_#{product_template} text-warning fw-bold"
+
+                t-attf-class="availability_message_#{product_template} o_subsequent_delivery badge bg-warning fw-bold"
             >
                 In stock at vendor
             </div>
-
-
-            <i class="fa fa-calendar" />
+        </div>
+    </t>
+    <t t-name="deltatech_website_stock_availability.lead_time_interval">
+        <div t-attf-class="lead_time_interval_#{product_template} ">
+            <i class="fa fa-calendar me-5" />
             <t t-set="po" t-value="0" />
             <t t-if="free_qty lte 0">
                 <t t-if="availability_vendor and purchase_lead_time">

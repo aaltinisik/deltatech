@@ -29,13 +29,13 @@ msgstr "<span class=\"badge bg-warning\">Livrare ulterioară</span>"
 
 #. module: deltatech_website_stock_availability
 #: model_terms:ir.ui.view,arch_db:deltatech_website_stock_availability.cart_line_description_following_lines
-msgid "<span class=\"badge-pill bg-success\">Immediate delivery</span>"
-msgstr "<span class=\"badge-pill bg-success\">Livrare imediată</span>"
+msgid "<span class=\"badge bg-success\">Immediate delivery</span>"
+msgstr "<span class=\"badge bg-success\">Livrare imediată</span>"
 
 #. module: deltatech_website_stock_availability
 #: model_terms:ir.ui.view,arch_db:deltatech_website_stock_availability.cart_line_description_following_lines
-msgid "<span class=\"badge-pill bg-warning\">Subsequent delivery</span>"
-msgstr "<span class=\"badge-pill bg-warning\">Livrare ulterioară</span>"
+msgid "<span class=\"badge bg-warning\">Subsequent delivery</span>"
+msgstr "<span class=\"badge bg-warning\">Livrare ulterioară</span>"
 
 #. module: deltatech_website_stock_availability
 #: model:ir.model.fields,field_description:deltatech_website_stock_availability.field_product_product__sale_delay_safety
