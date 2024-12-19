@@ -23,7 +23,7 @@ class ProductReplenish(models.TransientModel):
 
         values = {
             "warehouse_id": self.warehouse_id,
-            "route_ids": self.route_ids,
+            "route_ids": self.route_id,
             "date_planned": self.date_planned,
             "group_id": self.group_id,
         }
