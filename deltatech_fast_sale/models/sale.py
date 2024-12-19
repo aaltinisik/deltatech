@@ -53,7 +53,6 @@ class SaleOrder(models.Model):
 
         action = self.env["ir.actions.actions"]._for_xml_id("stock.action_picking_tree_all")
 
-
         action["context"] = {}
 
         pick_ids = picking_ids.ids

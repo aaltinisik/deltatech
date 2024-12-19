@@ -173,5 +173,4 @@ class ProductTemplate(models.Model):
         # pretul fata TVA
         combination_info["list_price_without_tax"] = combination_info["list_price"] / 1.19
 
-
         return combination_info

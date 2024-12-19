@@ -25,7 +25,7 @@ VariantMixin._onChangeLeadTimeMessage = function (ev, $parent, combination) {
     const $addQtyInput = $parent.find('input[name="add_qty"]');
     const qty = $addQtyInput.val();
     combination.selected_qty = qty;
-    let $message = '';
+    let $message = "";
     $(".oe_website_sale")
         .find(".lead_time_availability_" + combination.product_template)
         .remove();

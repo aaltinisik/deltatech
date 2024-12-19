@@ -8,7 +8,6 @@
             <div
                 id="in_of_stock_message"
                 t-if="free_qty gt 0"
-
                 t-attf-class="availability_message_#{product_template} o_stock_available badge bg-success mt16 fw-bold"
             >
 
@@ -29,7 +28,6 @@
             <div
                 id="in_of_stock_message"
                 t-if="free_qty lte 0 and availability_vendor gt 0"
-
                 t-attf-class="availability_message_#{product_template} o_subsequent_delivery badge bg-warning fw-bold"
             >
                 In stock at vendor

@@ -102,7 +102,7 @@
             </t>
             <t t-else="">
                 <t t-if="line.product_id.free_qty">
-                    <span class="badge bg-success" t-esc="line.product_id.free_qty"/>
+                    <span class="badge bg-success" t-esc="line.product_id.free_qty" />
                     <span class="badge bg-success">Immediate delivery</span>
                 </t>
                 <span class="badge bg-warning">Subsequent delivery</span>
