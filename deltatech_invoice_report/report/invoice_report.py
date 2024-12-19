@@ -9,6 +9,7 @@ class AccountInvoiceReport(models.Model):
 
     state_id = fields.Many2one("res.country.state", string="Region", readonly=True)
     supplier_id = fields.Many2one("res.partner", string="Default Supplier", readonly=True)
+    product_tmpl_id = fields.Many2one("product.template", string="Product Template", readonly=True)
 
     def _select(self):
         return (

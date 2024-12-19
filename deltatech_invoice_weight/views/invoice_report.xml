@@ -4,10 +4,10 @@
         <xpath expr="//p[@name='payment_communication']" position="after">
             <div t-if="o.weight">
                 <strong>Gross weight:</strong>
-                <span t-field="o.weight"/>
-                <br/>
+                <span t-field="o.weight" />
+                <br />
                 <strong>New weight:</strong>
-                <span t-field="o.weight_net"/>
+                <span t-field="o.weight_net" />
             </div>
         </xpath>
     </template>
