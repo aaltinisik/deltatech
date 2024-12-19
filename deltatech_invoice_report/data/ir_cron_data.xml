@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<odoo  noupdate="1">
+<odoo noupdate="1">
     <record id="ir_cron_update_product_invoice_history_by_year" model="ir.cron">
         <field name="name">Update Product Invoice History by Year</field>
         <field name="model_id" ref="model_product_template" />
