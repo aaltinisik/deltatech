@@ -74,7 +74,12 @@
                     <attribute name="readonly">1</attribute>
                 </t>
             </xpath>
-
+            <xpath expr="//field[@name='margin']" position="attributes">
+                <attribute name="groups">deltatech_sale_margin.group_sale_margin</attribute>
+            </xpath>
+            <xpath expr="//field[@name='margin_percent']" position="attributes">
+                <attribute name="groups">deltatech_sale_margin.group_sale_margin</attribute>
+            </xpath>
         </field>
     </record>
 
