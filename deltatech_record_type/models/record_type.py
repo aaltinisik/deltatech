@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 
-class SaleOrderType(models.Model):
+class RecordType(models.Model):
     _name = "record.type"
 
     name = fields.Char(required=True)
@@ -17,25 +17,25 @@ class SaleOrderType(models.Model):
 
     default_values_ids = fields.One2many("record.type.default.values", "record_type_id", string="Default Values")
 
-    def write(self, vals):
-        if "is_default" in vals and vals.get("is_default", False):
-            other_types = self.env["record.type"].search(
-                [("is_default", "=", True), ("id", "!=", self.id), ("model", "=", self.model)]
-            )
-            if other_types:
-                raise UserError(_("You cannot have more than one default type."))
-        return super().write(vals)
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if "is_default" in vals and vals.get("is_default", False):
-                other_types = self.env["record.type"].search(
-                    [("is_default", "=", True), ("id", "!=", self.id), ("model", "=", vals.get("model"))]
-                )
-                if other_types:
-                    raise UserError(_("You cannot have more than one default type."))
-        return super().create(vals_list)
+    # def write(self, vals):
+    #     if "is_default" in vals and vals.get("is_default", False):
+    #         other_types = self.env["record.type"].search(
+    #             [("is_default", "=", True), ("id", "!=", self.id), ("model", "=", self.model)]
+    #         )
+    #         if other_types:
+    #             raise UserError(_("You cannot have more than one default type."))
+    #     return super().write(vals)
+    #
+    # @api.model_create_multi
+    # def create(self, vals_list):
+    #     for vals in vals_list:
+    #         if "is_default" in vals and vals.get("is_default", False):
+    #             other_types = self.env["record.type"].search(
+    #                 [("is_default", "=", True), ("id", "!=", self.id), ("model", "=", vals.get("model"))]
+    #             )
+    #             if other_types:
+    #                 raise UserError(_("You cannot have more than one default type."))
+    #     return super().create(vals_list)
 
 
 class SaleOrderTypeDefaultValues(models.Model):
