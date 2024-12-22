@@ -19,10 +19,9 @@ class RecordType(models.Model):
         string="Model",
     )
 
-    default_values_ids = fields.One2many("record.type.default.values",
-                                         "record_type_id", string="Default Values", copy=True)
-
-
+    default_values_ids = fields.One2many(
+        "record.type.default.values", "record_type_id", string="Default Values", copy=True
+    )
 
 
 class SaleOrderTypeDefaultValues(models.Model):
