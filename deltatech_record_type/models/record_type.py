@@ -48,7 +48,7 @@ class SaleOrderTypeDefaultValues(models.Model):
     field_type = fields.Selection(
         [("char", "Char"), ("id", "Id"), ("boolean", "Boolean")], string="Field Type", required=True
     )
-    record_type_id = fields.Many2one("record.type", ondelete="cascade", invisible=True)
+    record_type_id = fields.Many2one("record.type", ondelete="cascade")
     model_id = fields.Many2one("ir.model", compute="_compute_model_id", compute_sudo=True)
     value_ref = fields.Reference(
         "_selection_target_model",
@@ -84,7 +84,7 @@ class SaleOrderTypeDefaultValues(models.Model):
     @api.depends("record_type_id")
     def _compute_model_id(self):
         for record in self:
-            record.model_id = self.env["ir.model"].search([("model", "=", record.record_type_id.model)])
+            record.model_id = self.env["ir.model"].sudo().search([("model", "=", record.record_type_id.model)])
 
     @api.onchange("field_id")
     def _onchange_field_id(self):
