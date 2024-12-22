@@ -1,7 +1,11 @@
+# ©  2024 Terrabit Solutions
+#              Dan Stoica <danila(@)terrabit(.)ro
+# See README.rst file on addons root folder for license details
+
+
 import logging
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -46,7 +50,7 @@ class SaleOrderTypeDefaultValues(models.Model):
     field_name = fields.Char(string="Field Name", required=True)
     field_value = fields.Char(string="Field Value", required=True)
     field_type = fields.Selection(
-        [("char", "Char"), ("id", "Id"), ("boolean", "Boolean")], string="Field Type", required=True
+        [("char", "Char"), ("id", "Id"), ("boolean", "Boolean")], string="Field Type", required=True, default="char"
     )
     record_type_id = fields.Many2one("record.type", ondelete="cascade")
     model_id = fields.Many2one("ir.model", compute="_compute_model_id", compute_sudo=True)
@@ -84,7 +88,8 @@ class SaleOrderTypeDefaultValues(models.Model):
     @api.depends("record_type_id")
     def _compute_model_id(self):
         for record in self:
-            record.model_id = self.env["ir.model"].sudo().search([("model", "=", record.record_type_id.model)])
+            # record.model_id = self.env["ir.model"].sudo().search([("model", "=", record.record_type_id.model)])
+            record.model_id = self.env["ir.model"]._get(record.record_type_id.model)
 
     @api.onchange("field_id")
     def _onchange_field_id(self):

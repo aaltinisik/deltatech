@@ -12,7 +12,6 @@
     "category": "Generic Modules/Other",
     "depends": [
         "sale",
-        # "deltatech_select_journal",
         "purchase",
     ],
     "license": "OPL-1",
@@ -21,6 +20,9 @@
         "views/purchase_view.xml",
         "views/sale_view.xml",
         "security/ir.model.access.csv",
+    ],
+    "demo": [
+        "data/demo_data.xml",
     ],
     "development_status": "Beta",
     "images": ["static/description/main_screenshot.png"],

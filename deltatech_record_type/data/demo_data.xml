@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <record id="demo_sale_order_type_standard" model="record.type">
+        <field name="name">Type Standard</field>
+        <field name="model">sale.order</field>
+        <field
+            name="default_values_ids"
+            eval="[(0, 0, {'field_name': 'journal_id', 'field_value': ref('account.journal_sale'), 'field_type': 'id'}) ]"
+        />
+    </record>
+
+
+</odoo>
