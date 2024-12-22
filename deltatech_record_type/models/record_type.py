@@ -12,6 +12,7 @@ _logger = logging.getLogger(__name__)
 
 class RecordType(models.Model):
     _name = "record.type"
+    _description = "Record Type"
 
     name = fields.Char(required=True)
     model = fields.Selection(
