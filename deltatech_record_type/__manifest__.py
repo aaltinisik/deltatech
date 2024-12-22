@@ -21,9 +21,9 @@
         "views/sale_view.xml",
         "security/ir.model.access.csv",
     ],
-    "demo": [
-        "data/demo_data.xml",
-    ],
+    # "demo": [
+    #     "data/demo_data.xml",
+    # ],
     "development_status": "Beta",
     "images": ["static/description/main_screenshot.png"],
     "maintainers": ["VoicuStefan2001"],
