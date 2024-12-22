@@ -19,27 +19,10 @@ class RecordType(models.Model):
         string="Model",
     )
 
-    default_values_ids = fields.One2many("record.type.default.values", "record_type_id", string="Default Values")
+    default_values_ids = fields.One2many("record.type.default.values",
+                                         "record_type_id", string="Default Values", copy=True)
 
-    # def write(self, vals):
-    #     if "is_default" in vals and vals.get("is_default", False):
-    #         other_types = self.env["record.type"].search(
-    #             [("is_default", "=", True), ("id", "!=", self.id), ("model", "=", self.model)]
-    #         )
-    #         if other_types:
-    #             raise UserError(_("You cannot have more than one default type."))
-    #     return super().write(vals)
-    #
-    # @api.model_create_multi
-    # def create(self, vals_list):
-    #     for vals in vals_list:
-    #         if "is_default" in vals and vals.get("is_default", False):
-    #             other_types = self.env["record.type"].search(
-    #                 [("is_default", "=", True), ("id", "!=", self.id), ("model", "=", vals.get("model"))]
-    #             )
-    #             if other_types:
-    #                 raise UserError(_("You cannot have more than one default type."))
-    #     return super().create(vals_list)
+
 
 
 class SaleOrderTypeDefaultValues(models.Model):
