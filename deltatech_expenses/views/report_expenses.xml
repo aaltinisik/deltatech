@@ -50,8 +50,8 @@
                             <t t-if="o.total_diem">
                                 <div>
                                     Din care diurna <span t-field="o.days" /> * <span t-field="o.diem" /> = <span
-                                        t-field="o.total_diem"
-                                    />
+                                    t-field="o.total_diem"
+                                />
                                 </div>
                             </t>
                             <br />
