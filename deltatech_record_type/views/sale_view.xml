@@ -8,9 +8,9 @@
         <field eval="500" name="priority" />
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//sheet/group/group" position="inside">
+            <xpath expr="//field[@name='partner_id']" position="before">
                 <field
-                    name="so_type"
+                    name="so_type" widget="selection"
                     readonly="state in ['cancel', 'sale']"
                     options="{'no_create':True}"
                     domain="[('model', '=', 'sale.order')]"
