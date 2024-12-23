@@ -2,7 +2,6 @@ from odoo.tests.common import TransactionCase
 
 
 class TestAccountPaymentMethod(TransactionCase):
-
     def setUp(self):
         super().setUp()
 
