@@ -57,13 +57,17 @@ class DeltatechExpensesDeduction(models.Model):
     date_expense = fields.Date(
         string="Expense Date",
         readonly=True,
-        states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
+
+        # states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
         index=True,
     )
     date_advance = fields.Date(
-        string="Advance Date", required=True, readonly=True, states={"draft": [("readonly", False)]}
+        string="Advance Date", required=True, readonly=True,
+        # states={"draft": [("readonly", False)]}
     )
-    travel_order = fields.Char(string="Travel Order", readonly=True, states={"draft": [("readonly", False)]})
+    travel_order = fields.Char(string="Travel Order", readonly=True,
+                               # states={"draft": [("readonly", False)]}
+                               )
 
     company_id = fields.Many2one("res.company", required=True, default=lambda self: self.env.company)
 
@@ -72,7 +76,7 @@ class DeltatechExpensesDeduction(models.Model):
         string="Employee",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
+        # states={"draft": [("readonly", False)]},
         domain=[("is_company", "=", False)],
     )
 
@@ -81,7 +85,7 @@ class DeltatechExpensesDeduction(models.Model):
         "expenses_deduction_id",
         string="Expenses",
         readonly=True,
-        states={"advance": [("readonly", False)]},
+        # states={"advance": [("readonly", False)]},
     )
 
     voucher_ids = fields.One2many(
@@ -91,7 +95,7 @@ class DeltatechExpensesDeduction(models.Model):
         domain=[("move_type", "=", "in_receipt")],
         context={"default_move_type": "in_receipt"},
         readonly=True,
-        states={"draft": [("readonly", False)]},
+        # states={"draft": [("readonly", False)]},
     )
 
     payment_ids = fields.One2many(
@@ -106,7 +110,9 @@ class DeltatechExpensesDeduction(models.Model):
     note = fields.Text(string="Note")
     amount = fields.Monetary(string="Total Amount", compute="_compute_amount")
     amount_vouchers = fields.Monetary(string="Vouchers Amount", compute="_compute_amount")
-    advance = fields.Monetary(string="Advance", readonly=True, states={"draft": [("readonly", False)]})
+    advance = fields.Monetary(string="Advance", readonly=True,
+                              # states={"draft": [("readonly", False)]}
+                              )
 
     difference = fields.Monetary(string="Difference", compute="_compute_amount")
 
@@ -124,7 +130,7 @@ class DeltatechExpensesDeduction(models.Model):
         string="Cash Journal",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)]},
+        # states={"draft": [("readonly", False)]},
         default=_default_journal,
     )
 
@@ -133,7 +139,7 @@ class DeltatechExpensesDeduction(models.Model):
         string="Account",
         required=True,
         readonly=True,
-        states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
+        # states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
         default=_default_account_diem,
     )
 
@@ -144,13 +150,13 @@ class DeltatechExpensesDeduction(models.Model):
     diem = fields.Monetary(
         string="Diem",
         readonly=True,
-        states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
+        # states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
         default=42.5,
     )
     days = fields.Integer(
         string="Days",
         readonly=True,
-        states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
+        # states={"draft": [("readonly", False)], "advance": [("readonly", False)]},
     )
 
     total_diem = fields.Monetary(string="Total Diem", compute="_compute_amount")
